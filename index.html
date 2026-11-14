@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#203a30">
+<meta name="description" content="從孩子的 Freestyle 表現出發，理解可能原因、選擇引導方法，再一起探索。">
+<title>探索能力發展模型｜Hip-hop Freestyle</title>
+<style>
+:root{color-scheme:light;--paper:#f8f5ed;--light:#fffcf6;--ink:#1b3229;--muted:#4b5b52;--edge:#d8dcd0;--forest:#203a30;--mint:#dfebd7;--sun:#f8d275;--rust:#a34434;--serif:"Noto Serif CJK TC","Songti TC","PMingLiU",serif;--sans:"Noto Sans CJK TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:1rem}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.75}h1,h2,h3,p{margin:0}button,input,select{font:inherit}button,summary,select{cursor:pointer}a{color:inherit;text-underline-offset:.22em}button:focus-visible,a:focus-visible,summary:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #a34434;outline-offset:4px}[hidden]{display:none!important}.wrap{width:min(1120px,calc(100% - 64px));margin-inline:auto}
+header{color:#fcf9ed;background:var(--forest)}.top{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:17px 0;border-bottom:1px solid #597268}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-size:.85rem;font-weight:800;letter-spacing:.065em}.mark{display:inline-grid;place-items:center;width:26px;height:26px;border:1px solid var(--sun);border-radius:50%;color:var(--sun);font-size:.9rem}.top nav{display:flex;gap:20px;font-size:.84rem;color:#e7eedd;flex-wrap:wrap}.top nav a{text-decoration:none}.top nav a:hover{text-decoration:underline}.hero{display:grid;grid-template-columns:1.32fr .8fr;align-items:center;gap:30px;padding:55px 0 62px}.kicker{color:var(--sun);letter-spacing:.11em;font-size:.74rem;font-weight:800}.hero h1{font-family:var(--serif);font-size:clamp(2.25rem,5.6vw,4.8rem);line-height:1.22;letter-spacing:-.055em;margin:11px 0 16px}.hero p{color:#e3eddc;max-width:34em;font-size:clamp(1rem,1.7vw,1.15rem)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.cta,.quiet{display:inline-flex;align-items:center;justify-content:center;gap:.6em;border-radius:7px;padding:.63em 1em;text-decoration:none;border:1px solid transparent;font-weight:750;font-size:.88rem;line-height:1.5}.cta{background:var(--sun);color:var(--ink)}.cta:hover{background:#fce3a8}.quiet{border-color:#8ba096;color:inherit;background:transparent}.hero :focus-visible{outline-color:var(--sun)}
+.record{width:min(100%,328px);aspect-ratio:1;justify-self:center;position:relative;display:grid;place-items:center;border-radius:50%;border:1px solid #82958a;background:repeating-radial-gradient(circle at center,#172d25 0 5px,#2c483c 6px 7px,#1c342a 8px 12px);box-shadow:10px 11px 0 #192e26}.record::before{content:"";position:absolute;inset:10%;border-radius:50%;border:1px dashed #688378}.record::after{content:"";position:absolute;inset:20%;border-radius:50%;border:1px solid #9db3a5}.label{z-index:1;width:51%;aspect-ratio:1;border-radius:50%;background:var(--sun);color:var(--ink);display:grid;place-content:center;text-align:center;font-weight:850;font-size:clamp(.85rem,1.9vw,1.25rem);line-height:1.4;box-shadow:0 0 0 7px #1c342a,0 0 0 8px #f8d275}.label small{display:block;font-weight:650;font-size:.62em;letter-spacing:.115em;margin-top:8px}.orbit{position:absolute;z-index:2;right:12%;top:13%;width:14px;height:14px;border-radius:50%;background:#d58b75;box-shadow:0 0 0 4px var(--forest)}
+main{padding:42px 0 60px}section+section{margin-top:58px}.heading{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:16px}.heading h2{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.35rem);letter-spacing:-.035em;line-height:1.35}.heading p,.section-intro{color:var(--muted);font-size:.9rem}.section-intro{max-width:48em;margin:-5px 0 18px}
+.choices,.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.choice{position:relative;text-align:left;min-width:0;min-height:114px;border-radius:10px;color:var(--ink);background:var(--light);border:1px solid var(--edge);display:grid;gap:4px;align-content:center;padding:14px 37px 14px 17px}.choice:hover{border-color:#64806f}.choice[aria-pressed=true]{border-color:#355844;box-shadow:inset 0 0 0 1px #355844;background:var(--mint)}.choice[data-route=music][aria-pressed=true]{background:#f9e6ae}.choice b{font-size:1rem;line-height:1.45}.choice small{font-size:.81rem;color:var(--muted);line-height:1.5}.choice .arrow{position:absolute;right:13px;top:14px;font-size:1.1rem}.path{margin-top:12px;border:1px solid var(--edge);border-radius:10px;background:var(--light);padding:17px 19px}.path p{color:var(--muted);font-size:.9rem}.path .path-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px}.path h3{font-size:1.08rem}.music-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 15px;margin-top:13px}.file-picker{font-size:.83rem;max-width:100%;color:var(--ink)}.file-picker::file-selector-button{background:var(--paper);color:var(--ink);border:1px solid #9aa99c;border-radius:6px;padding:4px 9px;font:inherit;margin-right:8px;cursor:pointer}audio{width:min(100%,370px);height:44px}.music-tip{margin-top:7px}.inline-link{display:inline-flex;font-size:.84rem;font-weight:750;white-space:nowrap}
+.tracks article{background:var(--light);border:1px solid var(--edge);border-radius:10px;padding:16px 17px 18px;border-top:4px solid #64806e}.tracks article:nth-child(2){border-top-color:#cfaa52}.tracks article:nth-child(3){border-top-color:#a75946}.tracks h3{font-size:1.02rem;margin-bottom:5px}.tracks p{font-size:.87rem;color:var(--muted)}.tracks .question{font-weight:700;color:var(--ink);margin-top:9px}
+.methods details a{display:inline-block;margin:0 15px 14px;font-size:.84rem;font-weight:750}.cycle{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;margin:0;padding:0;list-style:none;background:#cad5c7;border:1px solid #cad5c7;border-radius:10px;overflow:hidden}.cycle li{background:var(--light);padding:13px 12px}.cycle strong{display:block;font-size:.91rem}.cycle span{display:block;font-size:.78rem;color:var(--muted);margin-top:4px}.cycle-note{display:flex;gap:8px 22px;justify-content:space-between;flex-wrap:wrap;margin-top:10px;color:var(--muted);font-size:.85rem}.cycle-note a{color:var(--ink);font-weight:750}
+.capabilities{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.capabilities details,.adult details{background:var(--light);border:1px solid var(--edge);border-radius:9px}.capabilities summary,.adult summary{padding:13px 15px;font-weight:750}.capabilities summary span{font-weight:550;font-size:.76rem;color:var(--muted);margin-left:.55em;display:inline-block}.capabilities details p,.adult details p{padding:0 15px 14px;color:var(--muted);font-size:.88rem}
+.case{background:var(--forest);color:#fcf9ed;border-radius:13px;padding:23px 24px}.case .heading{margin-bottom:10px}.case .heading p{color:#dbe7d6}.case .section-intro{color:#e5edde;margin:0 0 14px}.case :focus-visible{outline-color:var(--sun)}.case-picker{border:1px solid #a6bca8;background:#f8f5ed;border-radius:7px;padding:6px 9px;color:var(--ink);width:min(100%,480px);font-size:.9rem}.case-panel{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.case-panel div{padding:12px 14px;background:#2a473a;border:1px solid #547263;border-radius:8px}.case-panel h3{font-size:.91rem;color:var(--sun);margin-bottom:4px}.case-panel p{font-size:.86rem;color:#f1f3e8}.case-panel div:first-child{grid-column:1/-1}.case-fallback{color:#f1f3e8;margin-top:15px}.case-fallback p+p{margin-top:6px}
+.adult{display:grid;grid-template-columns:1fr 1fr;gap:10px}.adult details p+p{padding-top:0}.link-back{margin-top:16px;font-size:.85rem}.footer{border-top:1px solid var(--edge);color:var(--muted);padding:18px 0 26px;font-size:.79rem}
+@media(max-width:740px){.wrap{width:calc(100% - 34px)}.hero{gap:20px;padding:36px 0 40px;grid-template-columns:1fr .46fr}.hero h1{font-size:clamp(2rem,6vw,3.3rem)}.heading{display:block}.heading p{margin-top:5px}.choices,.three{gap:8px}.choice{padding:11px 23px 11px 10px}.choice .arrow{right:7px;top:10px}.cycle{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:500px){.top{align-items:flex-start;flex-direction:column;gap:8px;padding:12px 0}.top nav{gap:16px}.hero{grid-template-columns:1fr;position:relative;overflow:hidden;padding:28px 0 30px}.hero-text{position:relative;z-index:1}.hero h1{font-size:clamp(1.85rem,8.25vw,2.8rem)}.hero p{max-width:24em}.record{display:none}main{padding:29px 0 36px}section+section{margin-top:38px}.choices,.three,.adult,.capabilities,.case-panel{grid-template-columns:1fr}.choice{min-height:0;padding:10px 28px 10px 13px;gap:2px}.cycle li{padding:9px 8px}.case{padding:17px}.case-panel div:first-child{grid-column:auto}.music-actions{align-items:flex-start}}
+.diagnosis-wrap{overflow-x:auto;border:1px solid var(--edge);border-radius:10px;background:var(--light)}
+.diagnosis{border-collapse:collapse;width:100%;font-size:.87rem;text-align:left}
+.diagnosis th,.diagnosis td{padding:12px 14px;vertical-align:top;border-bottom:1px solid var(--edge)}
+.diagnosis thead th{background:var(--mint);font-weight:800}
+.diagnosis tbody th{width:24%;font-weight:750}
+.diagnosis td{color:var(--muted)}
+.diagnosis tbody tr:last-child>*{border-bottom:0}
+.constraint-demo{margin-top:22px;padding:18px 19px;background:var(--light);border:1px solid var(--edge);border-radius:10px}
+.constraint-demo h3{font-size:1.12rem;margin-bottom:5px}
+.constraint-demo p,.constraint-demo li{font-size:.89rem;color:var(--muted)}
+.constraint-demo ol{margin:10px 0;padding-left:1.5em}
+.constraint-demo li{padding-left:.25em;margin:5px 0}
+.constraint-demo strong{color:var(--ink)}
+.constraint-list{margin-top:16px}
+.constraint-list h3{font-size:1.04rem;margin-bottom:8px}
+.constraint-list .music-note{margin-top:10px;font-size:.86rem;color:var(--muted)}
+@media(max-width:640px){.diagnosis{min-width:620px}}
+.scenario-links{gap:12px;grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:900px){.scenario-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:500px){.scenario-links{grid-template-columns:1fr}}
+.practice-links{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:9px;font-size:.86rem}
+.practice-links a{font-weight:750;padding-block:5px}
+.guidance details{border:1px solid var(--edge);border-radius:7px;padding:9px 12px;margin-top:9px}
+.guidance summary{font-weight:750}
+.guidance details p{margin-top:6px}
+.practice-choice{display:grid;gap:5px;margin:12px 0}
+.practice-choice select{max-width:100%;padding:7px;color:var(--ink);background:var(--paper);border:1px solid #8ba096;border-radius:7px}
+.practice-choice p{min-height:2.5em}
+.practice-dialog-heading{margin-bottom:6px}
+.scenario-link{display:grid;align-content:start;gap:5px;padding:17px;border:1px solid var(--edge);border-top:4px solid #66816e;border-radius:9px;background:var(--light);text-decoration:none}
+.scenario-link:nth-child(2){border-top-color:#a75946}
+.scenario-link:nth-child(3){border-top-color:#bf9845}
+.scenario-link:hover{background:var(--mint)}
+.scenario-link strong{font-size:1rem}
+.scenario-link span{font-size:.87rem;color:var(--muted)}
+.guide-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:13px;font-size:.87rem}
+.guide-links a{padding-block:5px}
+.case-actions{margin-top:13px}
+.guidance{margin-top:14px;background:var(--light);color:var(--ink);border-radius:8px;padding:17px 19px}
+.guidance h3{font-size:1rem;margin-bottom:4px}
+.guidance p,.branches{font-size:.89rem;color:var(--muted)}
+.guidance :focus-visible{outline-color:var(--rust)}
+.branches{padding-left:1.3em;margin:10px 0 14px}
+.branches li+li{margin-top:6px}
+.branches strong{color:var(--ink)}
+.guidance p+h3{margin-top:12px}
+.case-lenses{margin-top:12px}
+.case-lenses summary{width:fit-content;padding:7px 0;font-size:.88rem}
+.music-controls{display:flex;align-items:center;flex-wrap:wrap;gap:9px 14px;min-width:0}
+.practice{padding:clamp(17px,4vw,32px);width:min(610px,calc(100% - 24px));max-height:calc(100% - 24px);border:1px solid var(--edge);border-radius:14px;background:var(--light);color:var(--ink);overscroll-behavior:contain}
+.practice::backdrop{background:#14271ee0}
+body:has(.practice[open]){overflow:hidden}
+.practice-top{display:flex;justify-content:flex-end;margin-bottom:8px}
+.plain-button{background:transparent;border:1px solid #8ba096;color:var(--ink);border-radius:7px;padding:5px 12px;font-size:.88rem;min-height:44px}
+.practice h2{font-family:var(--serif);font-size:clamp(1.45rem,4vw,2rem);line-height:1.4}
+.practice ol{padding-left:1.4em;margin:13px 0 9px}
+.practice li+li{margin-top:6px}
+.practice article p{color:var(--muted);font-size:.92rem}
+.practice-audio{margin:16px 0 13px;padding:9px 11px;border:1px solid var(--edge);border-radius:7px;font-size:.86rem}
+.practice-audio p{margin:6px 0;color:var(--muted)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{body,header,.case,.case-panel div{background:white;color:#151515}.top nav,.actions,.music-actions,.record,.cycle-note a,.link-back{display:none}.hero{padding:14px 0;display:block}.hero p,.case .heading p,.case .section-intro,.case-panel p,.case-panel h3,.kicker{color:#151515}.hero h1{font-size:2.2rem}.wrap{width:100%}section{break-inside:avoid}section+section{margin-top:24px}}
+
+.resource-card{scroll-margin-top:20px}
+.resource-body{padding:0 15px 15px;font-size:.9rem}
+.resource-body h3{font-size:1rem}
+.resource-body p{padding:0!important;margin:8px 0}
+.resource-body ol{padding-left:1.3em}
+.resource-body li+li{margin-top:7px}
+.resource-return{display:inline-block;margin-top:9px;font-weight:750}
+</style>
+</head>
+<body id="top">
+<header>
+<div class="wrap">
+  <div class="top"><a class="brand" href="#top"><span class="mark" aria-hidden="true">♪</span>HIP-HOP FREESTYLE</a><nav aria-label="頁面導覽"><a href="#scenarios">觀察情況</a><a href="#abilities">理解能力</a><a href="#bottlenecks">瓶頸與限制</a><a href="#technical">動作練習</a><a href="#concepts">概念用語</a><a href="#entry">陪孩子探索</a></nav></div>
+  <div class="hero">
+    <div class="hero-text">
+      <div class="kicker">舞蹈實踐 × 教育心理 × Hip-hop 文化</div>
+      <h1>探索能力發展模型</h1>
+      <p>從孩子的 Freestyle 表現出發，找出值得試的下一步，再把選擇慢慢交還給孩子。</p>
+      <div class="actions"><a class="cta" href="#scenarios">從觀察到的情況開始 <span aria-hidden="true">↓</span></a><a class="quiet" href="#entry" data-choose="music">只想享受音樂 <span aria-hidden="true">♪</span></a></div>
+    </div>
+    <div class="record" aria-hidden="true"><div class="label">聽見・感受<br>選擇・改變<small>FREESTYLE</small></div><span class="orbit"></span></div>
+  </div>
+</div>
+</header>
+
+<main class="wrap">
+<section id="scenarios" aria-labelledby="scenarios-title">
+  <div class="heading"><h2 id="scenarios-title">我觀察到的情況</h2><a class="inline-link" href="#example">瀏覽全部案例 <span aria-hidden="true">↓</span></a></div>
+  <div class="three scenario-links">
+    <a class="scenario-link" href="#example" data-case="habit"><strong>一即興就用熟悉組合</strong><span>跟跳很順，自由跳卻常用同一組動作開場。</span></a>
+    <a class="scenario-link" href="#example" data-case="confidence"><strong>有人看時就收起變化</strong><span>自己跳願意試，輪到展示時回到熟悉做法。</span></a>
+    <a class="scenario-link" href="#example" data-case="plateau"><strong>熟悉的歌跳得順，換歌就卡住</strong><span>換一首歌後，孩子停下來等提示。</span></a>
+    <a class="scenario-link" href="#example" data-case="initiative"><strong>我想鼓勵孩子更 aggressive</strong><span>我想看到她更主動、把動作做充分，還是有更鮮明的表達？</span></a>
+  </div>
+  <nav class="guide-links" aria-label="準備引導"><a href="#abilities">理解能力</a><a href="#methods">找練習方法</a><a href="#guide">找陪伴方式</a><a href="#entry">陪孩子選擇</a><a href="#technical" data-resource="technical">全部動作練習</a><a href="#possibilities">一個元素，多種可能</a></nav>
+</section>
+
+<section id="entry" aria-labelledby="entry-title">
+  <div class="heading"><h2 id="entry-title">陪孩子選擇</h2><p>今天想聽歌、試一個變化，還是和別人交流？</p></div>
+  <div class="choices" role="group" aria-label="參與方式">
+    <button type="button" class="choice" data-route="music" aria-pressed="false" aria-controls="music-panel"><span class="arrow" aria-hidden="true">♪</span><b>只想享受音樂</b><small>播一首喜歡的歌，按自己的方式聽。</small></button>
+    <button type="button" class="choice" data-route="explore" aria-pressed="false" aria-controls="explore-panel"><span class="arrow" aria-hidden="true">↗</span><b>想試一個變化</b><small>選一個聲音或動作，試試兩種做法。</small></button>
+    <button type="button" class="choice" data-route="share" aria-pressed="false" aria-controls="share-panel"><span class="arrow" aria-hidden="true">↔</span><b>想和別人交流</b><small>可以旁觀，也可以用動作回應。</small></button>
+  </div>
+  <noscript><p class="path">啟用 JavaScript 即可切換參與方式與案例。你也可以直接用喜歡的播放器聽歌，或閱讀下方的能力模型。</p></noscript>
+  <div class="path" id="music-panel" hidden>
+    <div class="path-head"><h3>這段時間，你可以只聽歌。</h3></div>
+    <p>坐著聽、點頭、隨意動一動都可以。不用找拍子、練動作、分享感受或留下紀錄。聽到想停的時候就停。</p>
+    <div class="music-actions" id="music-home"><div id="music-controls" class="music-controls"><input class="file-picker" type="file" accept="audio/*" id="song" aria-label="選擇本機音樂檔"><audio id="player" controls hidden aria-label="音樂播放器"></audio></div></div>
+    <p class="music-tip" id="music-status" role="status">可選本機音樂檔播放，檔案留在裝置上。也可以照常用自己喜歡的播放器。</p>
+  </div>
+  <div class="path" id="explore-panel" hidden>
+    <div class="path-head"><h3>選一件你想改變的事。</h3><a class="inline-link" href="#example" data-case="texture">看聲音與質感案例 ↓</a></div>
+    <p>用同一個熟悉的 Groove 跳兩次。你可以改停頓、方向或力道，選一項就夠。試完由你決定保留、再試或停下來。</p>
+  </div>
+  <div class="path" id="share-panel" hidden>
+    <div class="path-head"><h3>看看動作可以怎樣接下去。</h3><a class="inline-link" href="#example" data-case="cypher">看交流案例 ↓</a></div>
+    <p>跟同伴輪流跳。你可以接住對方的一個停頓或節奏，再用自己的動作回應。也可以先在旁邊聽和看。</p>
+  </div>
+</section>
+
+<section id="model" aria-labelledby="model-title">
+  <div class="heading"><h2 id="model-title">三條主軸，一次探索</h2></div>
+  <div class="three tracks">
+    <article><h3>舞蹈實踐</h3><p>建立 Groove、音樂感知與身體控制。用動作的重量、停頓、方向或質感表達感受。</p><p class="question">我聽到什麼？我想怎樣回應？</p></article>
+    <article><h3>教育心理</h3><p>從可見行為提出假設，調整難度、回饋與被觀看的情境，給孩子實際的選擇。</p><p class="question">什麼條件讓我願意試？我需要什麼支持？</p></article>
+    <article><h3>Hip-hop 文化</h3><p>從舞者、DJ、音樂與場合理解作品。透過觀看、致意、輪流和回應，體會 Freestyle 的交流。</p><p class="question">這段舞發生在哪裡？舞者在回應誰或什麼？</p></article>
+  </div>
+</section>
+
+<section id="loop" aria-labelledby="loop-title">
+  <div class="heading"><h2 id="loop-title">探索如何發展</h2><p>可以從任何一環開始。</p></div>
+  <ol class="cycle">
+    <li><strong>感知</strong><span>聽聲音，感受身體，觀察同伴。</span></li>
+    <li><strong>選擇</strong><span>決定想回應的聲音，或想改變的動作。</span></li>
+    <li><strong>實驗</strong><span>試兩種做法，比較它們帶來的感受。</span></li>
+    <li><strong>回看與交流</strong><span>看自己的變化，或聽同伴看見了什麼。</span></li>
+    <li><strong>調整與遷移</strong><span>保留、改變或放下。想再試時，可以換歌、換動作或換情境。</span></li>
+  </ol>
+  <div class="cycle-note"><span>卡住時，可以回到熟悉的動作，縮小任務，或改變環境再試。</span><a href="#entry" data-choose="music">回去只聽音樂 ↑</a></div>
+</section>
+
+<section id="growth" aria-labelledby="growth-title">
+  <div class="heading"><h2 id="growth-title">怎樣看見能力在發展</h2></div>
+  <p class="section-intro">同一個孩子在熟悉的歌裡可能能自行探索，換歌或進入新環境時又需要提示。看她在什麼條件下能做出自己想要的選擇。</p>
+  <div class="three tracks">
+    <article><h3>有提示時能試</h3><p>「你播兩次給我聽，我想試用同一個 Bounce 跟不同聲音。」</p><p class="question">給一個清楚起點，讓孩子知道可以怎樣開始。</p></article>
+    <article><h3>能自己比較和調整</h3><p>「我想留第二種跳法。換另一首歌，也許要把停頓縮短一點。」</p><p class="question">讓孩子挑選比較條件，再問她留意到什麼。</p></article>
+    <article><h3>能提出新的探索方向</h3><p>「我想知道同一個動作，換成回應同伴會變成什麼樣。」</p><p class="question">讓孩子發起下一次嘗試，也由她決定何時告一段落。</p></article>
+  </div>
+</section>
+
+<section id="abilities" aria-labelledby="abilities-title"><div class="heading"><h2 id="abilities-title">能力地圖</h2></div><p class="section-intro">選一項打開概念、例子與可以嘗試的方法。</p><div class="capabilities"><details><summary>音樂理解 <span>Musicality</span></summary><p><strong>我現在回應哪個聲音？</strong></p><p>聽穩定拍子，也聽鼓、低音、人聲和旋律；留意段落、情緒與能量如何變化。不同曲風是探索材料。</p><p>同一段音樂播兩次：第一次只用肩膀跟鼓；第二次試著回應人聲。</p><p>曲風：Funk、Hip-hop、R&amp;B、House；Boom bap 可放在 Hip-hop 之下。Chill 另作氛圍標籤。</p></details><details><summary>身體控制 <span>Body Control</span></summary><p><strong>身體能完成我的選擇嗎？</strong></p><p>讓支撐、移動和轉向有控制；時機安排也會影響能否順利接下一步。單腳 sliding 是應用練習，不只是平衡分類。</p><p>先不加手，只練踏步接四分之一轉，看看結束時能否穩定接下一步。</p><p>力量在身體部位之間傳遞的 energy flow，可在這裏觀察。</p></details><details><summary>基礎律動與動作 <span>Foundations &amp; Vocabulary</span></summary><p><strong>我有哪些熟悉的材料？</strong></p><p>保留老師教過的基本律動、步法與風格背景。Bounce、rock、skate、roll 先作你課堂中的用語，不強行分成互斥類別。</p><p>選一個熟悉步伐，先跳得舒服，再換一首歌，感受重心與動作感覺如何改變。</p><p>基礎動作是能反覆運用的材料；會很多名稱不等於能自然運用。</p></details><details><summary>變化與連接 <span>Variation &amp; Transitions</span></summary><p><strong>同一個動作，能有不同說法嗎？</strong></p><p>改變原有動作的節奏、力度或質感；也練習動作如何進入、完成和退出。</p><p>固定腳步，用同一個手部動作試出輕、重、延伸三種感覺；一次只改一項。</p><p>Change of rhythm 在這裏指動作節奏的改變；texture 在這裏指身體呈現的質感。</p></details><details><summary>即興選擇與發展 <span>Freestyle Choices</span></summary><p><strong>如何把幾個動作變成一段？</strong></p><p>從音樂中選一個想法，再發展它。可以重複、轉向、縮小或停住，不必每一步都換新招。</p><p>只用三個熟悉動作跳 20 秒，安排一次重複、一次變化和一個結尾。</p><p>一段舞由平靜推向強烈的 energy flow，可放在這裏；不必預編整段。</p></details><details><summary>表達與交流 <span>Expression &amp; Connection</span></summary><p><strong>我想讓別人感受到什麼？</strong></p><p>把動作選擇清楚地傳給人。對比、速度和力度是可用的表達方法，觀眾的反應也能成為下一個選擇。</p><p>對一個人跳 20 秒，讓他說最記得哪一刻，再比對自己原本想表達的重點。</p><p>舞台感染力不只靠大動作；安靜、停頓和清楚的方向也可以吸引注意。</p></details></div></section>
+
+<section class="case" id="example" aria-labelledby="case-title">
+  <div class="heading"><h2 id="case-title">把模型用在真實情境</h2><p>從一個看得見或聽得到的現象開始。</p></div>
+  <label for="case-select" class="section-intro" style="display:block">選擇案例</label>
+  <select class="case-picker" id="case-select">
+    <optgroup label="音樂、身體與交流"><option value="texture">同一個 Groove，怎樣改變重量感？</option>
+    <option value="pulse">聽到鼓聲，為什麼踏步仍容易亂？</option>
+    <option value="balance">如何讓人感到快要移動，同時保持平衡？</option>
+    <option value="pose">同一個 Pose，換視線會改變觀眾感受嗎？</option>
+    <option value="cypher">看見同伴的動作，可以怎樣接下去？</option></optgroup>
+    <optgroup label="自主探索、動機與回饋">
+      <option value="habit">跟跳很熟，一即興就回到同一組動作</option>
+      <option value="initiative">想鼓勵孩子更 aggressive，具體想看到什麼？</option>
+      <option value="confidence">自己跳會試，別人看時就收起變化</option>
+      <option value="plateau">熟悉音樂跳得順，換歌就找不到入口</option>
+      <option value="choice">等大人安排，輪到自己選就說「都可以」</option>
+      <option value="daily">怎樣把日常感受變成一個動作想法？</option>
+    </optgroup>
+  </select>
+  <div id="case-guidance" hidden>
+    <div class="case-actions"><button class="cta" id="open-practice" type="button">一起試</button></div>
+    <article class="guidance" id="guidance-habit" aria-label="熟悉組合：引導判斷" hidden>
+      <h3>先確認孩子想保留什麼</h3>
+      <p>問「這個開場是你特別喜歡的嗎？如果想改一點，你會想改哪裡？」</p>
+      <ul class="branches">
+        <li><strong>想變，但一時想不到做法。</strong> 用她已熟悉的兩個動作示範一次不同的連接，再請她選擇試停頓、換方向或自己想一個做法。</li>
+        <li><strong>單做會變，回到即興時用不上。</strong> 用同一段歌，保留兩個動作，只改第二個動作的開始時機。熟悉的動作讓她把注意力放在怎樣連接。</li>
+        <li><strong>打算用原版回應某個聲音。</strong> 請她指給你聽。若她喜歡這個選擇，可以保留它。</li>
+      </ul>
+      <h3>你可以怎樣示範</h3>
+      <p>用同一個 Bounce 接一步。第一次照常接，第二次稍等一下再接，讓孩子挑一個版本或提出第三個。</p>
+      <h3>怎樣調整</h3>
+      <p>如果等待時 Groove 散掉，先縮短停頓，或只用踏步。能做出變化後，撤掉規則，觀察她會在哪裡主動使用、改寫或放下這個連接。</p>
+      <h3>想練這一步</h3>
+      <p>若孩子想換接法，可以先保留原本的腳步，拿兩個熟悉的手部動作試三種連接。</p>
+      <div class="practice-links">
+        <a href="#drill-hand-transitions" data-resource="drill-hand-transitions">練習卡：手部連接</a><a href="#possibilities">一個元素，多種可能</a>
+      </div>
+    </article>
+
+    <article class="guidance" id="guidance-confidence" aria-label="被觀看時收起變化：引導判斷" hidden>
+      <h3>先問孩子想怎樣被陪伴</h3>
+      <p>問「你想自己跳、和我並排跳，還是先看？」讓她選擇這次怎樣參與，以及完成後要不要分享。</p>
+      <ul class="branches">
+        <li><strong>獨跳會變，一輪到展示就收起來。</strong> 若她願意比較，用同一段歌和同一個 Groove，由她同意後只改觀看方式。看看自己的選擇會不會回來。</li>
+        <li><strong>獨跳也難做出這個變化。</strong> 先一起拆小動作，例如踏步時只加一次停頓。難度降下來後，再由她決定練習方式。</li>
+        <li><strong>她今天想看或聽。</strong> 直接按她選的方式參與。有同伴等候時，簡單告訴對方可以先跳。</li>
+      </ul>
+      <h3>你可以怎樣示範</h3>
+      <p>站在她旁邊，兩人朝同一方向跳熟悉的 Groove。你可以做一次很小的停頓，給她留出自己選擇跳法的空間。</p>
+      <h3>怎樣調整</h3>
+      <p>如果並排跳仍讓她感到受注視，可以拉開距離或讓她獨跳。孩子想交換看法時，先描述「我看到你在第二步之前停了一下」，再問她自己怎樣感受。</p>
+      <h3>想練這一步</h3>
+      <p>孩子自己想試另一種表達時，可以用眼神或朝向突顯一個片刻。她可以選擇是否讓人觀看。</p>
+      <div class="practice-links">
+        <a href="#drill-expression" data-resource="drill-expression">練習卡：表情與眼神</a>
+        <a href="#initiative-and-expression" data-resource="initiative-and-expression">概念：主動性、投入程度與表達方式</a>
+      </div>
+    </article>
+
+    <article class="guidance" id="guidance-plateau" aria-label="換歌就卡住：引導判斷" hidden>
+      <h3>找出換歌後卡在哪一步</h3>
+      <p>先請她選一段熟悉的歌，再選一段較陌生的歌。用同一個簡單 Groove 比較兩段音樂，先聽和點頭，再試小幅動作。</p>
+      <ul class="branches">
+        <li><strong>換歌後，點頭也找不到規律。</strong> 先聽一小段，選一個容易追蹤的聲音，試著點頭或輕敲看能否維持規律。</li>
+        <li><strong>點頭有規律，踏步或 Bounce 時開始亂。</strong> 縮小幅度，只保留一個動作。這能幫你了解困難是否跟同時聽和動有關。</li>
+        <li><strong>Groove 跳得穩，卻一直等你的提示。</strong> 請她選一個聲音或一次停頓，由她決定何時加入變化，試過後撤掉提示看看。</li>
+      </ul>
+      <h3>你可以怎樣示範</h3>
+      <p>用同一段新歌，先只點頭，再做小幅 Bounce。讓她看看動作可以變小，也可以中途回到聆聽。</p>
+      <h3>怎樣調整</h3>
+      <p>若兩首歌差異太大，先換一段脈動較易聽清的音樂。下次比較時只改一項，看看她能否自己選一個入口，以及是否少用了一次提示。</p>
+      <h3>想練這一步</h3>
+      <p>如果失拍發生在轉身，先找出是哪一步開始趕拍。若基本 Groove 已穩定，可以保留同一個動作去比較兩首歌。</p>
+      <div class="practice-links">
+        <a href="#drill-turns-on-beat" data-resource="drill-turns-on-beat">練習卡：左右急轉跟不到拍</a>
+        <a href="#drill-same-move-new-song" data-resource="drill-same-move-new-song">練習卡：換歌，保留同一動作</a>
+        <a href="#beat-rhythm-timing" data-resource="beat-rhythm-timing">概念：拍子、節奏、時機</a>
+      </div>
+    </article>
+    <article class="guidance" id="guidance-initiative" aria-label="想鼓勵孩子更 aggressive：引導判斷" hidden>
+      <h3>先說出你想看見的行為</h3>
+      <p>「她在重點動作前把手收回了」是觀察。「她不敢做」是猜測。先問「剛才那一下，你想讓它輕輕過去，還是想讓它更突出？」再按她的回答選一小步。</p>
+      <details open><summary>想讓她把動作做充分</summary>
+        <p>若她想突出那一下，先單做一次。單做到了、連起來就收回，可以縮短組合。若她是刻意做小，請她指出想保留的細節，再讓她決定要不要試另一版。</p>
+      </details>
+      <details><summary>想讓她更主動作決定</summary>
+        <p>如果她一直等提示，先把一個決定交給她，例如在哪一拍做變化。她已有想法時，給她時間試。看看撤掉提示後，她還會怎樣選。</p>
+      </details>
+      <details><summary>想讓她試新的用力方式</summary>
+        <p>用同一個熟悉動作試兩版，例如放鬆或帶一點彈性。幅度先維持相近，讓孩子比較身體哪個地方的感覺有變。</p>
+      </details>
+      <details><summary>想讓她在別人面前清楚表達</summary>
+        <p>若她自己跳時做得到，人前才縮回去，可以讓她選獨跳、並排跳或旁觀。她想分享時，請她指定一個你可以留意的片刻。</p>
+      </details>
+      <details><summary>想讓她主動發起交流</summary>
+        <p>讓她先做一個容易被接住的動作或停頓。你用動作回應，然後等她決定要延續、變化，還是讓給你。</p>
+      </details>
+      <details><summary>想表現強勢、直接的感覺</summary>
+        <p>用同一小段音樂和熟悉動作，比較冷靜與直接兩版。可以用清楚的視線、方向或停頓表達，讓孩子選更接近她意圖的一版。</p>
+      </details>
+      <h3>試完怎樣判斷</h3>
+      <p>請她選一個想回應的聲音，再放回自由跳。觀察她能否自己決定何時把動作做大、做小、停住或接下去。先問她做出來的感覺是否接近原本的想法，再描述你看到的差異。</p>
+      <h3>想練這一步</h3>
+      <p>想比較力道可選 Funk steps。單做可以但接不起來，就試手部連接。想突出一個片刻，可以試表情與眼神。</p>
+      <div class="practice-links">
+        <a href="#drill-relaxed-funk" data-resource="drill-relaxed-funk">練習卡：鬆弛的 Funk steps</a>
+        <a href="#drill-hand-transitions" data-resource="drill-hand-transitions">練習卡：手部連接</a>
+        <a href="#drill-expression" data-resource="drill-expression">練習卡：表情與眼神</a>
+        <a href="#initiative-and-expression" data-resource="initiative-and-expression">概念：主動性、投入程度與表達方式</a>
+      </div>
+    </article>
+    <details class="case-lenses" id="case-lenses"><summary>展開舞蹈實踐、教育心理、文化與回饋</summary></details>
+  </div>
+
+  <div class="case-panel" id="case-panel" aria-live="polite" aria-atomic="true">
+    <div><h3>觀察起點</h3><p id="case-observe"></p></div>
+    <div><h3>舞蹈實踐</h3><p id="case-dance"></p></div>
+    <div><h3>教育心理</h3><p id="case-psych"></p></div>
+    <div><h3>Hip-hop 文化</h3><p id="case-culture"></p></div>
+    <div><h3>可用的回饋</h3><p id="case-feedback"></p></div>
+  </div>
+  <noscript><div class="case-fallback"><p>用一個熟悉的 Groove 試兩種質感，每次只改變一項，例如停頓的長度。自己比較哪種感覺接近音樂，或請同伴描述他看見的變化。</p></div></noscript>
+</section>
+
+<section id="bottlenecks" aria-labelledby="bottlenecks-title">
+  <div class="heading"><h2 id="bottlenecks-title">卡住時，先判斷原因</h2></div>
+  <p class="section-intro">同一個現象可能有不同原因。先聽孩子怎麼說，再改一個條件看看。回饋適合用來釐清差異，有時孩子更需要技術支持、選擇空間，或一段休息。</p>
+  <div class="diagnosis-wrap" role="region" aria-label="瓶頸觀察表，窄螢幕可橫向捲動" tabindex="0">
+    <table class="diagnosis">
+      <thead><tr><th scope="col">表面現象</th><th scope="col">可能原因</th><th scope="col">怎樣分辨與介入</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">聽見音樂，卻接不出動作</th><td>想回應的聲音尚未聽清，或動作詞彙、身體控制還不夠熟。</td><td>先讓她用手指或點頭回應。如果能跟上聲音、換成全身動作就卡住，試一個熟悉的小 Groove，或單練需要的重心轉移。</td></tr>
+        <tr><th scope="row">一直重複熟悉組合</th><td>可能暫時想不到其他跳法，也可能就是喜歡這段組合。</td><td>先問她想不想變化。想試時，保留原本動作，只給一條限制，例如整段只改一次停頓，再回到自由跳。</td></tr>
+        <tr><th scope="row">有能力，卻不敢嘗試</th><td>可能擔心失敗、被評價，或當下不想展示。</td><td>讓她選獨跳、與一人並排跳或先旁觀。如果換了情境就願意試，保留有效的安排，再由她決定要不要分享。</td></tr>
+        <tr><th scope="row">嘗試很多，卻不知道怎樣改善</th><td>每次改了太多條件，或缺乏明確的觀察焦點。</td><td>用同一段歌做 A／B 兩次，只改一項。先憑感受或請同伴描述，也可自願回看片段。用具體差異決定下一次要改什麼。</td></tr>
+        <tr><th scope="row">知道問題，卻沒有動力</th><td>大人想改善的事，可能和孩子當下在意的事不同。</td><td>問她想改什麼、換什麼歌，或今天想不想探索。她也可以選「只想享受音樂」。</td></tr>
+        <tr><th scope="row">一段時間沒有明顯進步</th><td>可能疲勞、仍在適應新技能，或目前的觀察方式看不見細微變化。</td><td>疲勞時可減量或休息。狀態合適時用同一首歌和動作比較，例如停頓是否更可控，或是否少了一次提示。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="constraint-demo" id="constraints">
+    <h3>用一條限制，打開新的跳法</h3>
+    <p>以「每次都用同一組合開場」為例。先由孩子選歌和想保留的動作，再邀請她試一次。</p>
+    <ol>
+      <li><strong>照平常跳。</strong> 用同一小段歌，留意她通常在哪裡接第二個動作。</li>
+      <li><strong>只改時機。</strong> 保留兩個動作和同一小段歌，開始第二個動作前多留一拍。只試一輪就可以停。</li>
+      <li><strong>撤掉限制，再自由跳一次。</strong> 讓她決定何時接第二個動作。若她想保留停頓，可以自己選用在哪裡。若停頓讓她失去 Groove，可縮短成半拍，或先回到原本跳法。</li>
+    </ol>
+    <p>只有孩子想繼續，而且單一變化已能做得舒服時，再邀請她從另一項限制選一個。先前那條可以撤掉。</p>
+  </div>
+
+  <div class="constraint-list">
+    <h3>下一輪可以選哪一條？</h3>
+    <div class="capabilities methods">
+      <details><summary>音樂</summary><p>用同一個 Bounce，只跟低音回應一小段。想比較時，下一次換成鼓聲，保留歌曲和動作。</p></details>
+      <details><summary>動作</summary><p>只用兩個熟悉的動作，讓孩子決定用哪兩個，以及用什麼方式接起來。</p></details>
+      <details><summary>空間</summary><p>同一組動作只換一次朝向，保留速度和原本的腳步。由孩子選何時轉向。</p></details>
+      <details><summary>質感</summary><p>同一個動作維持相近的幅度，只改停住前放慢的程度。比較哪一種讓她感覺更輕或更沉。</p></details>
+      <details><summary>交流</summary><p>輪到自己時，接住同伴的一個節奏或停頓。由孩子決定接哪個，以及怎樣回應。也可以先旁觀。</p></details>
+    </div>
+    <p class="music-note">如果今天只想聽歌，<a href="#entry" data-choose="music">回到「只想享受音樂」</a>。</p>
+  </div>
+</section>
+
+<section id="methods" aria-labelledby="methods-title">
+  <div class="heading"><h2 id="methods-title">練習方法</h2><a href="#drill-relaxed-funk" data-resource="drill-relaxed-funk">瀏覽全部動作練習 ↓</a></div>
+  <div class="capabilities methods">
+    <details><summary>一個動作，三種聲音</summary><p>用同一個 Bounce，分別回應鼓、低音或旋律。每次只選一層聲音。可以跟隨它，也可以用延遲、反差或停頓作回應。想再探索時，換一首歌，看看你會改選哪一層。</p><a href="#example" data-case="pulse">看脈動與鼓聲案例 ↑</a></details>
+    <details><summary>只用兩個動作跳一段</summary><p>用兩個熟悉的動作跳一小段。第二次只改一項，例如方向、大小、速度或連接方式。比較哪一下值得保留，再回到自由跳，看看你會不會自己用到它。</p><a href="#example" data-case="habit">看熟悉組合案例 ↑</a><a href="#constraints">看怎樣加一條限制 ↑</a></details>
+    <details><summary>熟悉歌與陌生歌的比較</summary><p>先預測自己換歌後哪一部分仍做得到，再用同一個 Groove 試兩段歌。若陌生歌卡住，可分別試聽、點頭和踏步。找出目前能穩定做到的條件，再決定要加哪一點挑戰。</p><a href="#example" data-case="plateau">看換歌與自檢案例 ↑</a></details>
+    <details><summary>接住、發展、發起</summary><p>輪到你時，可以先回應同伴的一個節奏，再保留它並加一處變化。想發起時，送出一個動作想法或一個停頓，留空間讓對方接。今天想看或聽，也可以。</p><a href="#example" data-case="cypher">看 Cypher 案例 ↑</a></details>
+    <details><summary>把生活片刻變成動作</summary><p>如果有個聲音、畫面或對話留在心裡，可以選它的速度、重量或停頓，用一個熟悉的動作做兩個版本。看哪個版本更貼近自己的感受，或哪個帶來意外的想法。</p><a href="#example" data-case="daily">看日常感受案例 ↑</a></details>
+    <details><summary>回看一次，決定下一個問題</summary><p>跳完後，可憑身體感受回想、請同伴描述，或自願比較兩段短片。問自己「我預期會發生什麼？實際有什麼不同？下次想改哪一項？」也可以就此結束。</p><a href="#example" data-case="confidence">看回饋與被觀看案例 ↑</a></details>
+  </div>
+</section>
+
+<section id="possibilities"><h2>一個元素，多種可能</h2><p>屬於「變化與連接」與「即興選擇」。先找三種不同做法，再逐步收集十種；今天也可以只留下一種。</p><div class="resource-grid"><article class="resource-card"><h3>轉圈的多種可能</h3><p>我可以怎樣開始、轉動和結束？</p><p>先用小幅轉向，保持平衡，暈眩就停下。</p><button class="cta explore-start" data-element="turn">一起試</button></article><article class="resource-card"><h3>手部流動的多種可能</h3><p>同一條路徑，可以有不同感覺嗎？</p><p>保持腳步簡單，讓注意力留在手部。</p><button class="cta explore-start" data-element="hands">一起試</button></article><article class="resource-card"><h3>用頭部回應節奏</h3><p>同一段節奏，可以怎樣回應？</p><p>保持小幅舒適，避免快速甩頭或勉強轉頸。無音樂時可先自己哼節奏。</p><button class="cta explore-start" data-element="head">一起試</button></article></div><details><summary>給引導者的介入理由與調整</summary><p>當孩子想變化卻想不到其他做法，先增加可選的動作可能性。每輪只改一個條件，讓她比較差別。若已有想法卻擔心被看見，先處理觀看方式與安全感。</p><p>卡住時減至兩種、縮小動作或由你示範一種；容易時才加另一個條件。最後撤掉限制，讓她選擇是否用進 freestyle。無音樂時留意身體感覺；有音樂時只選一個聲音回應。</p><p>可以問「哪兩種差別最大？」再把喜歡的一種接進熟悉動作，或換歌試試。無須完成紀錄或湊滿十種。</p></details><a href="#example">返回案例</a></section>
+<section id="technical" aria-labelledby="technical-title"><div class="heading"><h2 id="technical-title">動作練習</h2></div><p class="section-intro">從已熟悉的動作開始，選一個想探索的細節。</p><div class="capabilities"><details id="drill-relaxed-funk" class="resource-card"><summary>鬆弛的 funk steps</summary><div class="resource-body"><p>基礎律動 × 動作質感</p><h3>同一個步伐，能否有較放鬆的感覺？</h3><ol><li>選一個老師教過、已熟悉的步伐，用舒服的速度做。</li><li>同一小段分別用較收緊、較放鬆的方式跳，觀察肩膀、膝蓋和呼吸的差別。</li><li>換回原本音樂，保留你喜歡的感覺，不必增加新動作。</li></ol><p><strong>可以觀察</strong>　能說出身體哪個部位的感覺改變了。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-floor-transitions" class="resource-card"><summary>地面動作與連接</summary><div class="resource-body"><p>動作材料 × 過渡</p><h3>能否自然進入，也順利離開？</h3><ol><li>只選老師已教過的一個地面動作。</li><li>分開練一個進入方式和一個退出方式，先放慢。</li><li>接回熟悉的站姿步伐，觀察前後是否仍有律動。</li></ol><p><strong>可以觀察</strong>　進入和退出都有清楚路徑，不需要臨時找支撐。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-hand-transitions" class="resource-card"><summary>手部連接</summary><div class="resource-body"><p>協調 × 變化</p><h3>手部動作之間，還有其他路徑嗎？</h3><ol><li>固定一個簡單腳步，選兩個手部動作。</li><li>分別試直接、繞行、停一下再接三種方式。</li><li>配同一段音樂，選最符合聲音感覺的一種。</li></ol><p><strong>可以觀察</strong>　能指出自己選擇這條連接路徑的原因。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-turn-balance" class="resource-card"><summary>轉圈重心不穩</summary><div class="resource-body"><p>重心 × 轉向</p><h3>先把轉向的結束位置找清楚。</h3><ol><li>從四分之一圈開始，留意支撐腳與結束方向。</li><li>穩定後再試半圈，不急著加速度或圈數。</li><li>結束後接一個簡單步伐，看看是否需要額外小步才能站穩。</li></ol><p><strong>可以觀察</strong>　可以較穩定地結束轉向並接下一步。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-turns-on-beat" class="resource-card"><summary>左右急轉跟不到拍</summary><div class="resource-body"><p>時機 × 重心 × 節奏</p><h3>失拍是在哪個轉換發生的？</h3><ol><li>去掉手部動作，只保留踏步與左右轉向。</li><li>用較慢速度做同一小段，找出哪一步開始趕拍。</li><li>先練那個轉換，再放回音樂；必要時請老師檢查步法和重心。</li></ol><p><strong>可以觀察</strong>　能找到具體卡住的一步，而非只覺得整段很亂。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-expression" class="resource-card"><summary>表情與眼神</summary><div class="resource-body"><p>表演態度 × 交流</p><h3>我希望對方感受到什麼？</h3><ol><li>選俏皮、冷靜或強勢其中一種意圖。</li><li>用相同的熟悉動作跳 20 秒，讓眼神與朝向支持這個意圖。</li><li>請觀看者描述感受；不先告訴他標準答案。</li></ol><p><strong>可以觀察</strong>　觀看者能描述一個與你意圖接近的感覺。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-sharp-turns" class="resource-card"><summary>急轉的完成與銜接</summary><div class="resource-body"><p>身體控制 × 連接</p><h3>轉得清楚，比一開始就轉得快更重要。</h3><ol><li>選一個熟悉步伐，接一次小角度轉向。</li><li>先確認轉前與轉後的支撐位置，再逐步回到舒服速度。</li><li>加入下一個動作，觀察轉向是否打斷整段律動。</li></ol><p><strong>可以觀察</strong>　能完成轉向並接下一步，不只追求速度。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-single-foot-slide" class="resource-card"><summary>單腳 sliding</summary><div class="resource-body"><p>支撐 × 移動 × 控制</p><h3>支撐腳和移動腳的工作清楚嗎？</h3><ol><li>先請老師確認所練 sliding 的方式與適合地面。</li><li>依老師方法，分清承重與移動，先做小幅度。</li><li>接入一個熟悉步伐，觀察重心轉移是否清楚。</li></ol><p><strong>可以觀察</strong>　知道哪隻腳承重，並能有控制地轉換。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-same-move-new-song" class="resource-card"><summary>換歌，保留同一動作</summary><div class="resource-body"><p>音樂理解 × 即興選擇</p><h3>音樂換了，身體的感覺有沒有變？</h3><ol><li>選一個熟悉動作，配兩首感覺不同的歌曲。</li><li>每次只改一項：大小、重心高低或用力方式。</li><li>說出你聽到的差別，以及你選擇改變什麼。</li></ol><p><strong>可以觀察</strong>　能說明一個音樂差別和相應的動作選擇。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details></div></section><section id="concepts" aria-labelledby="concepts-title"><div class="heading"><h2 id="concepts-title">概念與用語</h2></div><div class="capabilities"><details id="beat-rhythm-timing" class="resource-card"><summary>拍子、節奏、時機</summary><div class="resource-body"><p>拍子是規律的時間參照；節奏是長短與疏密的安排；時機是你選擇何時開始、到位或停住。偏離某個鼓點不一定是錯，可能是另一種選擇。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="genre-mood" class="resource-card"><summary>曲風與氛圍</summary><div class="resource-body"><p>Funk、Hip-hop、R&amp;B、House 是探索入口；Boom bap 可歸在 Hip-hop 下。Chill 比較像氣氛描述。同一曲風也有不同速度、密度和情緒。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="sound-texture" class="resource-card"><summary>聲音質感 → 動作質感</summary><div class="resource-body"><p>Texture of sounds 是聽到的性質；movement texture 是身體呈現的性質。短促聲音可以用停頓回應，綿長聲音可以用延伸回應，但不是固定配對。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="energy-flow" class="resource-card"><summary>Energy flow 的兩個意思</summary><div class="resource-body"><p>身體內：力量和動作如何從腿傳到軀幹與手。整段舞：能量如何鋪墊、推高、回落。先說清自己要觀察哪一種。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="foundation-names" class="resource-card"><summary>Bounce / rock / skate / roll</summary><div class="resource-body"><p>保留老師的叫法，放在基礎律動與動作旁，各配一個示範或自己的描述。不同教學語境可能有不同用法，不必硬分成四種互斥的 state。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="dynamics" class="resource-card"><summary>Dynamics、力度與對比</summary><div class="resource-body"><p>Dynamics 可用來談動作的力度與能量質感。對比則是把不同選擇放在一起，例如輕與重、大與小、連續與停頓；速度只是其中一個維度。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="initiative-and-expression" class="resource-card"><summary>主動性、投入程度與表達方式</summary><div class="resource-body"><p>孩子可以主動選一項變化、把想做的動作做充分，或在交流中先出一個想法。強勢是可以選的表達方式，俏皮、冷靜和細小的動作也能有清楚的意圖。說到 aggressive 時，先問自己想看到哪種行為。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="fluency" class="resource-card"><summary>流暢與即興</summary><div class="resource-body"><p>流暢不是一直動，也不是沒有停頓；它可以包含有意識的停止與重新開始。即興也能重複一個想法，再發展它，不必不停換新招。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details></div></section>
+<section id="guide" aria-labelledby="guide-title">
+  <div class="heading"><h2 id="guide-title">大人怎樣陪伴探索</h2></div>
+  <div class="adult">
+    <details open><summary>先描述當下發生了什麼</summary><p>「換歌後，你又用了同一個開場。」她可能喜歡這個開場，也可能在陌生歌曲或有人看時想找穩定感。先聽她怎樣看，再決定要不要試另一種條件。</p></details>
+    <details open><summary>把選擇權和責任交還孩子</summary><p>孩子可以選音樂、回應方式、獨跳或邀請同伴，也能改變主意。兩人約好要輪流時，如果她只想看，可以告訴同伴，讓對方知道怎樣繼續。</p></details>
+    <details><summary>卡住時調整練習條件</summary><p>如果她能點頭跟上，做大幅度 Bounce 就亂，先用小一點的動作試同一段音樂。如果自己跳時願意變化，有人看時只用熟悉招式，可以讓她選擇獨跳、並排跳或旁觀。</p></details>
+    <details><summary>用自檢與回饋支持下一個選擇</summary><p>可問「你剛才做了哪個選擇？」或「換一首歌時，那個方法還適用嗎？」同伴先說看到的停頓、方向或重心變化，再分享自己的感受。孩子可以選擇是否聽回饋、分享或錄影。</p></details>
+  </div>
+  <p class="link-back"><a href="#entry">返回參與方式 ↑</a></p>
+</section>
+</main>
+
+<dialog class="practice" id="practice" aria-label="一起試">
+  <form method="dialog" class="practice-top"><button type="submit" class="plain-button">回到案例</button></form>
+  <article id="practice-habit" hidden>
+    <h2 id="practice-habit-title" tabindex="-1">同一組動作，換個接法</h2>
+    <ol>
+      <li>選一首歌和兩個你熟悉的動作，先照平常跳。</li>
+      <li>第二次用同一段歌，試在第二個動作前稍等一下。停多久，由你決定。</li>
+      <li>想再跳時，自由選擇何時接下一個動作。</li>
+    </ol>
+    <p>你想保留哪個接法？也可以回到原本的跳法。</p>
+  </article>
+  <article id="practice-confidence" hidden>
+    <h2 id="practice-confidence-title" tabindex="-1">選一種舒服的跳法</h2>
+    <ol>
+      <li>你可以自己跳、和我並排跳，或先看看。</li>
+      <li>想跳的話，選一個熟悉的 Groove。你可以留一下空白，或照你原來的方式跳。</li>
+      <li>想做多一次時，可以用同樣的方式，也可以換一種陪伴方式。</li>
+    </ol>
+    <p>你可以自己決定要不要分享。</p>
+  </article>
+  <article id="practice-plateau" hidden>
+    <h2 id="practice-plateau-title" tabindex="-1">換首歌，找一個入口</h2>
+    <ol>
+      <li>選一段熟悉的歌，再選一段較陌生的歌。</li>
+      <li>用同一個簡單動作試兩段歌。新歌可以先聽，再點點頭。</li>
+      <li>想動多一點時，試一個小小的 Bounce 或踏步。</li>
+    </ol>
+    <p>哪種方式讓你比較容易開始？</p>
+  </article>
+  <article id="practice-initiative" hidden>
+    <h2 id="practice-initiative-title" class="practice-dialog-heading" tabindex="-1">你想怎樣跳這一下？</h2>
+    <p>選一首喜歡的歌和一個熟悉動作。想試變化時，只選一個就好。</p>
+    <div class="practice-choice">
+      <label for="initiative-choice">我想試</label>
+      <select id="initiative-choice">
+        <option value="">選一個想法</option>
+        <option value="timing">自己選哪一拍</option>
+        <option value="size">把動作做完整</option>
+        <option value="texture">換一種用力方式</option>
+        <option value="focus">讓一個片刻更清楚</option>
+        <option value="exchange">先跳一個想法給你接</option>
+        <option value="attitude">試試冷靜或直接的感覺</option>
+      </select>
+      <p id="initiative-prompt" aria-live="polite"></p>
+    </div>
+    <p>想再跳一次嗎？你可以用喜歡的做法，也可以只聽歌。</p>
+  </article>
+  <details class="practice-audio">
+    <summary>選音樂</summary>
+    <p>可以選本機音樂檔，或用自己喜歡的播放器。</p>
+    <div id="practice-music"></div>
+  </details>
+  <a class="cta" href="#entry" id="practice-listen">只想享受音樂</a>
+</dialog>
+
+<footer class="wrap footer">探索能力發展模型 · Hip-hop Freestyle 學習框架</footer>
+
+<script>
+const cases = {
+  texture: [
+    "同一段音樂裡，孩子的 Groove 很流暢，但想跳得更沉時，常只是把動作做大。",
+    "同一段音樂、同一個 Groove、相近幅度。試兩次，一次停頓短，一次停頓長。再比較身體的重量感。",
+    "讓孩子選擇先自己試或跟你並排跳。兩個版本跳完後，她可以挑喜歡的一個，也可以提出第三種做法。",
+    "看一小段有舞者與場合資訊的 Freestyle。留意舞者是跟隨聲音的質感，還是用反差作出回應。",
+    "問「哪一下有你要的感覺？」若兩個版本的差異不清楚，下次可先放慢速度或只留一個部位。"
+  ],
+  pulse: [
+    "孩子跟某些鼓聲點頭，做成踏步時腳步開始忽快忽慢。",
+    "先試節奏清楚的一小段。腳踏均勻的脈動，再試用手拍一類鼓聲，觀察加上手拍後腳步怎樣改變。",
+    "讓孩子選點頭、手指輕敲或踏步作為起點。一次加一項動作，卡住時回到已能維持的條件。",
+    "試聽熟悉的 Hip-hop 音樂，換一段由孩子選的歌，觀察 Groove 怎樣隨聲音層次或樂句而改變。",
+    "比較點頭、踏步與加手拍三種情況。哪個條件下脈動最穩？可把那個方法帶到另一首歌試試。"
+  ],
+  balance: [
+    "孩子做靜止 Pose 時很穩定，但一開始轉向，腳步就急著補位。",
+    "在小幅度的重心轉移裡，試一次停穩後再跨步，再試一次先蓄勢才跨步。留意哪隻腳在支撐。",
+    "讓孩子選方向和幅度。需要時減少轉身角度，先找到可以控制的重心變化。",
+    "看一段舞者在 Groove 中停住又移動的片段，記下停頓、朝向和音樂的關係。",
+    "旁觀者說出他從哪一刻開始預期移動。舞者說出自己何時把重量移到另一隻腳。"
+  ],
+  pose: [
+    "一個 Pose 引起兩種解讀，有人感覺是在邀請，有人感覺是在等待。",
+    "保留同一個 Pose，先看向同伴，再看向地面。感受視線如何改變你對這個姿勢的理解。",
+    "孩子可以先保留自己的意圖。讓同伴描述看見的細節，再由孩子決定要不要分享自己在想什麼。",
+    "觀看一段 Battle 或 Cypher，留意同一個停頓或眼神，如何隨音樂、對象與場合而被理解。",
+    "把「我看見她轉向同伴」和「我覺得她在邀請」分開。再試一次，看看改了哪個細節會讓感受不同。"
+  ],
+  cypher: [
+    "孩子能持續 Freestyle，兩人輪流跳時，各自完成一段，動作之間很少接續。",
+    "選同伴上一段的一個停頓、方向或節奏。可以借用它再加一個變化，也可以用另一種質感回應。",
+    "先讓孩子選擇觀看、並排試或輪流跳。開跳前可以一起約定怎樣進出和何時換人。",
+    "看一小段有脈絡的 Cypher。留意圈內外的人怎樣接住音樂、讓出空間，以及用身體回應彼此。",
+    "彼此說出接到的是哪個動作或聲音。若想再試，可以用同一首歌交換先後順序。"
+  ],
+  initiative: [
+    "孩子跳到一個重點動作前，把原本要伸出的手收回來。先問她想要輕輕帶過，還是想讓那一下更突出。",
+    "同一首歌、同一個熟悉動作，試一個變化。可以選幅度、質感、時機或視線。",
+    "讓孩子自己選要試什麼，以及想不想分享。觀察她是在單做、連起來，還是在被觀看時改變做法。",
+    "輪流跳時，可以用小動作、停頓或清楚的方向先提出一個想法，看看同伴怎麼接。",
+    "先問她做出來的感覺是否接近想法，再說你看到的細節。下一輪讓她自己決定是否使用這個變化。"
+  ],
+  habit: [
+    "她能把編排跳得很順，轉到自由跳就幾次用同一組動作開場。可先問她是否喜歡這個開場，以及如果想改，她最想改哪一拍。",
+    "保留兩個熟悉動作。第一遍照平常跳，第二遍只改一項，例如推遲第二個動作或換方向。再試一次自由跳，看是否想把變化留下。",
+    "提供一個可開始的限制，讓她決定改哪一項。她也能保留原版，說明它適合什麼音樂或情境。",
+    "選一段 Freestyle，看看舞者如何在不同聲音或與人輪流時，再用一次相近的動作，或讓相同動作在下一次出現時有變化。",
+    "先比較兩版哪裡不同。下一次換一段歌，由她自己找一處可以保留、重組或改變的地方。"
+  ],
+  confidence: [
+    "她自己跳時願意試不同質感，有同伴看時就縮回熟悉的做法。也可能是環境、注意力或她對展示的意願有變化。",
+    "用同一段歌和同一個 Groove，試兩個低負擔的選擇，例如加一次停頓，或縮小動作但把重心轉清楚。",
+    "讓她自己選獨跳、並排跳或小組輪流。問哪個條件讓她想嘗試，不用把第二次安排成必須展示。",
+    "跟她一起看一段交流片段，找一個很小但讓對方接得住的停頓、眼神或動作，留意不同表達方式如何被接住。",
+    "先描述她做了什麼選擇，再由她自己說感受。用她願意嘗試和能自主作決定的情境理解進展。"
+  ],
+  plateau: [
+    "她在熟悉的歌裡能維持 Groove，換歌時先等提示。可以分開看看，她能否找到規律、維持動作，以及同時作選擇。",
+    "用同一個 Groove 比較熟悉與陌生的片段。若換歌就亂，先試點頭，再做小幅 Bounce。每次只改歌、動作幅度或一項任務。",
+    "讓她先猜會卡在哪裡，再試看看。能穩定時可自行加一個變化，卡住時可調低難度或暫停。",
+    "帶同一個 Groove 到另一種音樂情境，留意聲音層次怎樣改變你想接的節奏或質感。",
+    "記下哪個條件做得穩、哪個仍要提示。用「換歌後我還能做什麼」和「我能自己調整什麼」決定下一步。"
+  ],
+  choice: [
+    "可以自己練的時候，她常等大人指定歌曲和動作。問她今天更想聽歌、試變化，還是跟人交流。",
+    "她若想探索，可以選熟悉動作加一個變化，或把一個新動作拆成容易做的小部分。試完由她決定要不要再做一次。",
+    "大人提供可行的選項和場地界線。孩子可以改變主意。若已跟同伴約好輪流，告訴同伴自己想改成觀看，讓對方安排下一輪。",
+    "在同伴交流時，可以選觀看、回應或發起。一起約好等待、讓出空間和換人的方式。",
+    "如果她願意回顧，可以問「哪個決定是你自己想做的？下次想怎樣安排？」只聽音樂時可以直接享受，不需要回顧。"
+  ],
+  daily: [
+    "一段對話、一個環境聲音或當天的心情，讓孩子想到某種速度、重量或節奏。",
+    "選一個熟悉的 Groove，用快慢、力道或停頓中的一項做兩個短版本。可以只留一個片刻，不必構成完整舞段。",
+    "由她挑選想探索的感受，也可以跳完就讓它過去。若想分享，可邀請同伴說看到哪個動作細節。",
+    "把這個動作想法帶到一首喜歡的歌中，看看哪些聲音或段落能接住它。也可以在輪流跳時試它如何被回應。",
+    "先問她跳出來的感受是否接近原本的想法。若別人讀到其他意思，可以比較他們是從哪些細節看出來的。"
+  ]
+};
+
+const routes = [...document.querySelectorAll("[data-route]")];
+const player = document.querySelector("#player");
+const song = document.querySelector("#song");
+const musicStatus = document.querySelector("#music-status");
+let audioUrl;
+
+function chooseRoute(name) {
+  for (const button of routes) {
+    const selected = button.dataset.route === name;
+    button.setAttribute("aria-pressed", String(selected));
+    document.getElementById(button.getAttribute("aria-controls")).hidden = !selected;
+  }
+  if (name !== "music") player.pause();
+}
+
+for (const button of routes) button.addEventListener("click", () => chooseRoute(button.dataset.route));
+for (const link of document.querySelectorAll("[data-choose]")) {
+  link.addEventListener("click", () => chooseRoute(link.dataset.choose));
+}
+
+song.addEventListener("change", () => {
+  const file = song.files[0];
+  if (!file) return;
+  player.pause();
+  if (audioUrl) URL.revokeObjectURL(audioUrl);
+  audioUrl = URL.createObjectURL(file);
+  player.src = audioUrl;
+  player.hidden = false;
+  musicStatus.textContent = "已選擇音樂。想聽的時候按播放。";
+});
+player.addEventListener("error", () => {
+  musicStatus.textContent = "瀏覽器無法播放這個檔案。可以換另一個音樂檔，或用你喜歡的播放器。";
+});
+
+const caseSelect = document.querySelector("#case-select");
+const casePanel = document.querySelector("#case-panel");
+const caseGuidance = document.querySelector("#case-guidance");
+const caseLenses = document.querySelector("#case-lenses");
+const guidanceArticles = [...caseGuidance.querySelectorAll(".guidance")];
+const practice = document.querySelector("#practice");
+const practiceArticles = [...practice.querySelectorAll("article")];
+const musicControls = document.querySelector("#music-controls");
+const musicHome = document.querySelector("#music-home");
+const practiceMusic = document.querySelector("#practice-music");
+const practiceAudio = document.querySelector(".practice-audio");
+const practiceListen = document.querySelector("#practice-listen");
+const openPractice = document.querySelector("#open-practice");
+const initiativeChoice = document.querySelector("#initiative-choice");
+const initiativePrompt = document.querySelector("#initiative-prompt");
+const initiativePrompts = {
+  timing: "照平常跳一次。第二次由你選在哪一拍開始。",
+  size: "想做大一點還是小一點？試著做到你原本想停的位置。",
+  texture: "用同一個動作試兩次。一次放鬆，一次試試帶一點彈性。",
+  focus: "挑一個你想讓我留意的片刻。可以停一下，也可以選一個方向。",
+  exchange: "由你先出一個動作，我用動作回應。然後你決定要怎樣接下去。",
+  attitude: "用同一個動作試兩種感覺。一次冷靜，一次直接。你想用哪一版？"
+};
+
+initiativeChoice.addEventListener("change", () => {
+  initiativePrompt.textContent = initiativePrompts[initiativeChoice.value] ?? "";
+});
+
+openPractice.addEventListener("click", () => {
+  const practiceArticle = document.getElementById("practice-" + caseSelect.value);
+  if (!practiceArticle) return;
+
+  for (const article of practiceArticles) article.hidden = article !== practiceArticle;
+  const title = practiceArticle.querySelector("h2");
+  practice.setAttribute("aria-labelledby", title.id);
+  practiceMusic.append(musicControls);
+  practiceAudio.open = Boolean(audioUrl);
+  practice.showModal();
+  title.focus();
+});
+
+practiceListen.addEventListener("click", event => {
+  event.preventDefault();
+  practice.close("listen");
+});
+
+practice.addEventListener("close", () => {
+  musicHome.append(musicControls);
+  if (practice.returnValue === "listen") {
+    chooseRoute("music");
+    document.querySelector("#entry").scrollIntoView();
+    document.querySelector('[data-route="music"]').focus({ preventScroll: true });
+  } else {
+    player.pause();
+    openPractice.focus({ preventScroll: true });
+  }
+  practice.returnValue = "";
+});
+const caseFields = ["observe", "dance", "psych", "culture", "feedback"].map(name => document.getElementById("case-" + name));
+function showCase(name) {
+  const current = cases[name];
+  caseSelect.value = name;
+  caseFields.forEach((field, index) => { field.textContent = current[index]; });
+
+  const selectedGuidance = document.getElementById("guidance-" + name);
+  caseGuidance.hidden = !selectedGuidance;
+  for (const article of guidanceArticles) article.hidden = article !== selectedGuidance;
+  if (selectedGuidance) {
+    caseLenses.open = false;
+    caseLenses.append(casePanel);
+  } else {
+    caseGuidance.after(casePanel);
+  }
+}
+caseSelect.addEventListener("change", () => showCase(caseSelect.value));
+for (const link of document.querySelectorAll("[data-case]")) {
+  link.addEventListener("click", () => showCase(link.dataset.case));
+}
+const requestedCase = new URLSearchParams(location.search).get("case");
+if (Object.hasOwn(cases, requestedCase)) {
+  showCase(requestedCase);
+  if (!location.hash) {
+    document.querySelector("#example").scrollIntoView();
+  }
+} else {
+  showCase(caseSelect.value);
+}
+
+let resourceOrigin = null;
+function revealResource(id) {
+  const target = document.getElementById(id);
+  if (!target) return;
+  if (target.tagName === "DETAILS") target.open = true;
+  target.querySelectorAll(".resource-return").forEach(link => { link.hidden = !resourceOrigin; });
+}
+document.querySelectorAll("[data-resource]").forEach(link => {
+  link.addEventListener("click", () => {
+    resourceOrigin = link.closest(".guidance") ? caseSelect.value : null;
+    revealResource(link.dataset.resource);
+  });
+});
+document.querySelectorAll(".resource-return").forEach(link => {
+  link.addEventListener("click", () => {
+    if (resourceOrigin) showCase(resourceOrigin);
+  });
+});
+window.addEventListener("hashchange", () => revealResource(location.hash.slice(1)));
+revealResource(location.hash.slice(1));
+</script>
+<dialog class="practice" id="explore-dialog" aria-labelledby="explore-title"><form method="dialog" class="practice-top"><button class="plain-button">今天到這裡</button></form><h2 id="explore-title"></h2><p id="explore-question"></p><label>今天的情境 <select id="explore-mode"><option value="silent">無音樂探索</option><option value="music">跟音樂探索</option></select></label><p id="explore-context">先留意身體的感覺，找三種不同做法。</p><p id="explore-hint" aria-live="polite"></p><button id="explore-next" class="cta">換一個提示，再試</button><p id="explore-note"></p><details><summary>想再往前一步</summary><p>選兩種比較差別，把喜歡的一種接進熟悉動作。也可以換歌試試，逐步收集十種，不必一次完成。</p></details><button class="plain-button" id="explore-listen">只想享受音樂</button></dialog>
+<script>
+const explorationData=[["turn", "轉圈的多種可能", "我可以怎樣開始、轉動和結束？", ["改變轉動方向", "改變起始姿勢與結束姿勢", "用不同部位帶動", "加入一次停頓"], "先用小幅轉向，保持平衡，暈眩就停下。"], ["hands", "手部流動的多種可能", "同一條路徑，可以有不同感覺嗎？", ["直線換成曲線", "單手換成雙手", "連續換成斷續", "輕柔換成有重量"], "保持腳步簡單，讓注意力留在手部。"], ["head", "用頭部回應節奏", "同一段節奏，可以怎樣回應？", ["點頭或輕微側傾", "加入停頓", "只回應其中一個拍點", "用同一動作選不同拍點"], "保持小幅舒適，避免快速甩頭或勉強轉頸。無音樂時可先自己哼節奏。"]];
+const explorationDialog=document.getElementById('explore-dialog');let explorationCurrent, explorationIndex=0;
+document.querySelectorAll('.explore-start').forEach(button=>button.addEventListener('click',()=>{explorationCurrent=explorationData.find(c=>c[0]===button.dataset.element);explorationIndex=0;document.getElementById('explore-title').textContent=explorationCurrent[1];document.getElementById('explore-question').textContent=explorationCurrent[2];document.getElementById('explore-hint').textContent=explorationCurrent[3][0];document.getElementById('explore-note').textContent=explorationCurrent[4];explorationDialog.showModal();}));
+document.getElementById('explore-next').addEventListener('click',()=>{explorationIndex=(explorationIndex+1)%explorationCurrent[3].length;document.getElementById('explore-hint').textContent=explorationCurrent[3][explorationIndex];});
+document.getElementById('explore-mode').addEventListener('change',event=>{document.getElementById('explore-context').textContent=event.target.value==='music'?'播放你選的音樂，挑一個聲音回應。也可用同一做法回應兩種聲音。':'先留意身體的感覺，找三種不同做法。';});
+document.getElementById('explore-listen').addEventListener('click',()=>{explorationDialog.close();location.hash='entry';});
+</script></body>
+</html>
