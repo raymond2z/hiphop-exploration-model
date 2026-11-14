@@ -90,12 +90,92 @@ body:has(.practice[open]){overflow:hidden}
 .resource-body ol{padding-left:1.3em}
 .resource-body li+li{margin-top:7px}
 .resource-return{display:inline-block;margin-top:9px;font-weight:750}
+
+/* Shared spacing and mobile layouts */
+.hero {
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding-block: clamp(28px, 4vw, 48px);
+}
+.record { width: clamp(145px, 21vw, 235px); }
+.hero h1 { font-size: clamp(2rem, 5.6vw, 4rem); }
+main { padding-block: clamp(24px, 4vw, 44px) 56px; }
+main > section + section { margin-top: clamp(30px, 5vw, 54px); }
+.heading { row-gap: 5px; }
+.heading h2 { font-size: clamp(1.5rem, 3vw, 2.15rem); }
+.actions .cta, .actions .quiet, .explore-card .cta { min-height: 44px; }
+.scenario-link { padding: 14px 16px; }
+.path:focus-within { border-color: #809788; }
+
+.exploration-group { margin-block: 22px 26px; }
+.exploration-group > h3, .drill-heading { font-size: 1.15rem; }
+.exploration-intro { color: var(--muted); font-size: .91rem; margin-block: 4px 14px; }
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.explore-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  background: var(--light);
+  padding: 16px;
+}
+.explore-card h4 { margin: 0; font-size: 1rem; line-height: 1.4; }
+.explore-card p { color: var(--muted); font-size: .88rem; }
+.explore-card .cta { margin-top: auto; }
+.exploration-guide {
+  padding: 10px 14px;
+  margin-top: 12px;
+  border: 1px solid var(--edge);
+  background: var(--light);
+  border-radius: 8px;
+}
+.exploration-guide p { margin-top: 8px; font-size: .92rem; }
+.drill-heading { margin-bottom: 9px; }
+#explore-dialog { margin: auto; }
+#explore-dialog > p, #explore-dialog > details { margin-block: 8px 12px; }
+#explore-dialog label { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+#explore-mode {
+  min-height: 44px;
+  max-width: 100%;
+  padding: 5px 8px;
+  border: 1px solid #8ba096;
+  border-radius: 7px;
+  color: var(--ink);
+  background: var(--paper);
+}
+#explore-hint {
+  border-inline-start: 3px solid #9d7a2e;
+  border-radius: 4px;
+  background: #f9eed0;
+  padding: 9px 12px;
+  font-weight: 700;
+}
+#explore-listen { margin-top: 4px; }
+
+@media (max-width: 640px) {
+  .resource-grid { grid-template-columns: 1fr; gap: 8px; }
+  .explore-card { padding: 13px; }
+  .explore-card .cta { margin-top: 2px; }
+}
+@media (max-width: 500px) {
+  .top nav { column-gap: 14px; row-gap: 2px; }
+  .top nav a { display: flex; min-height: 38px; align-items: center; }
+  .hero { grid-template-columns: 1fr; padding-block: 20px 24px; }
+  .hero h1 { font-size: clamp(1.65rem, 7.6vw, 2.5rem); }
+  .hero .actions { margin-top: 14px; }
+  .scenario-link { padding: 10px 12px; }
+}
 </style>
 </head>
 <body id="top">
 <header>
 <div class="wrap">
-  <div class="top"><a class="brand" href="#top"><span class="mark" aria-hidden="true">♪</span>HIP-HOP FREESTYLE</a><nav aria-label="頁面導覽"><a href="#scenarios">觀察情況</a><a href="#abilities">理解能力</a><a href="#bottlenecks">瓶頸與限制</a><a href="#technical">動作練習</a><a href="#concepts">概念用語</a><a href="#entry">陪孩子探索</a></nav></div>
+  <div class="top"><a class="brand" href="#top"><span class="mark" aria-hidden="true">♪</span>HIP-HOP FREESTYLE</a><nav aria-label="頁面導覽"><a href="#scenarios">觀察案例</a><a href="#technical">動作練習</a><a href="#abilities">能力地圖</a><a href="#guide">陪伴指南</a></nav></div>
   <div class="hero">
     <div class="hero-text">
       <div class="kicker">舞蹈實踐 × 教育心理 × Hip-hop 文化</div>
@@ -117,7 +197,6 @@ body:has(.practice[open]){overflow:hidden}
     <a class="scenario-link" href="#example" data-case="plateau"><strong>熟悉的歌跳得順，換歌就卡住</strong><span>換一首歌後，孩子停下來等提示。</span></a>
     <a class="scenario-link" href="#example" data-case="initiative"><strong>我想鼓勵孩子更 aggressive</strong><span>我想看到她更主動、把動作做充分，還是有更鮮明的表達？</span></a>
   </div>
-  <nav class="guide-links" aria-label="準備引導"><a href="#abilities">理解能力</a><a href="#methods">找練習方法</a><a href="#guide">找陪伴方式</a><a href="#entry">陪孩子選擇</a><a href="#technical" data-resource="technical">全部動作練習</a><a href="#possibilities">一個元素，多種可能</a></nav>
 </section>
 
 <section id="entry" aria-labelledby="entry-title">
@@ -144,41 +223,8 @@ body:has(.practice[open]){overflow:hidden}
   </div>
 </section>
 
-<section id="model" aria-labelledby="model-title">
-  <div class="heading"><h2 id="model-title">三條主軸，一次探索</h2></div>
-  <div class="three tracks">
-    <article><h3>舞蹈實踐</h3><p>建立 Groove、音樂感知與身體控制。用動作的重量、停頓、方向或質感表達感受。</p><p class="question">我聽到什麼？我想怎樣回應？</p></article>
-    <article><h3>教育心理</h3><p>從可見行為提出假設，調整難度、回饋與被觀看的情境，給孩子實際的選擇。</p><p class="question">什麼條件讓我願意試？我需要什麼支持？</p></article>
-    <article><h3>Hip-hop 文化</h3><p>從舞者、DJ、音樂與場合理解作品。透過觀看、致意、輪流和回應，體會 Freestyle 的交流。</p><p class="question">這段舞發生在哪裡？舞者在回應誰或什麼？</p></article>
-  </div>
-</section>
-
-<section id="loop" aria-labelledby="loop-title">
-  <div class="heading"><h2 id="loop-title">探索如何發展</h2><p>可以從任何一環開始。</p></div>
-  <ol class="cycle">
-    <li><strong>感知</strong><span>聽聲音，感受身體，觀察同伴。</span></li>
-    <li><strong>選擇</strong><span>決定想回應的聲音，或想改變的動作。</span></li>
-    <li><strong>實驗</strong><span>試兩種做法，比較它們帶來的感受。</span></li>
-    <li><strong>回看與交流</strong><span>看自己的變化，或聽同伴看見了什麼。</span></li>
-    <li><strong>調整與遷移</strong><span>保留、改變或放下。想再試時，可以換歌、換動作或換情境。</span></li>
-  </ol>
-  <div class="cycle-note"><span>卡住時，可以回到熟悉的動作，縮小任務，或改變環境再試。</span><a href="#entry" data-choose="music">回去只聽音樂 ↑</a></div>
-</section>
-
-<section id="growth" aria-labelledby="growth-title">
-  <div class="heading"><h2 id="growth-title">怎樣看見能力在發展</h2></div>
-  <p class="section-intro">同一個孩子在熟悉的歌裡可能能自行探索，換歌或進入新環境時又需要提示。看她在什麼條件下能做出自己想要的選擇。</p>
-  <div class="three tracks">
-    <article><h3>有提示時能試</h3><p>「你播兩次給我聽，我想試用同一個 Bounce 跟不同聲音。」</p><p class="question">給一個清楚起點，讓孩子知道可以怎樣開始。</p></article>
-    <article><h3>能自己比較和調整</h3><p>「我想留第二種跳法。換另一首歌，也許要把停頓縮短一點。」</p><p class="question">讓孩子挑選比較條件，再問她留意到什麼。</p></article>
-    <article><h3>能提出新的探索方向</h3><p>「我想知道同一個動作，換成回應同伴會變成什麼樣。」</p><p class="question">讓孩子發起下一次嘗試，也由她決定何時告一段落。</p></article>
-  </div>
-</section>
-
-<section id="abilities" aria-labelledby="abilities-title"><div class="heading"><h2 id="abilities-title">能力地圖</h2></div><p class="section-intro">選一項打開概念、例子與可以嘗試的方法。</p><div class="capabilities"><details><summary>音樂理解 <span>Musicality</span></summary><p><strong>我現在回應哪個聲音？</strong></p><p>聽穩定拍子，也聽鼓、低音、人聲和旋律；留意段落、情緒與能量如何變化。不同曲風是探索材料。</p><p>同一段音樂播兩次：第一次只用肩膀跟鼓；第二次試著回應人聲。</p><p>曲風：Funk、Hip-hop、R&amp;B、House；Boom bap 可放在 Hip-hop 之下。Chill 另作氛圍標籤。</p></details><details><summary>身體控制 <span>Body Control</span></summary><p><strong>身體能完成我的選擇嗎？</strong></p><p>讓支撐、移動和轉向有控制；時機安排也會影響能否順利接下一步。單腳 sliding 是應用練習，不只是平衡分類。</p><p>先不加手，只練踏步接四分之一轉，看看結束時能否穩定接下一步。</p><p>力量在身體部位之間傳遞的 energy flow，可在這裏觀察。</p></details><details><summary>基礎律動與動作 <span>Foundations &amp; Vocabulary</span></summary><p><strong>我有哪些熟悉的材料？</strong></p><p>保留老師教過的基本律動、步法與風格背景。Bounce、rock、skate、roll 先作你課堂中的用語，不強行分成互斥類別。</p><p>選一個熟悉步伐，先跳得舒服，再換一首歌，感受重心與動作感覺如何改變。</p><p>基礎動作是能反覆運用的材料；會很多名稱不等於能自然運用。</p></details><details><summary>變化與連接 <span>Variation &amp; Transitions</span></summary><p><strong>同一個動作，能有不同說法嗎？</strong></p><p>改變原有動作的節奏、力度或質感；也練習動作如何進入、完成和退出。</p><p>固定腳步，用同一個手部動作試出輕、重、延伸三種感覺；一次只改一項。</p><p>Change of rhythm 在這裏指動作節奏的改變；texture 在這裏指身體呈現的質感。</p></details><details><summary>即興選擇與發展 <span>Freestyle Choices</span></summary><p><strong>如何把幾個動作變成一段？</strong></p><p>從音樂中選一個想法，再發展它。可以重複、轉向、縮小或停住，不必每一步都換新招。</p><p>只用三個熟悉動作跳 20 秒，安排一次重複、一次變化和一個結尾。</p><p>一段舞由平靜推向強烈的 energy flow，可放在這裏；不必預編整段。</p></details><details><summary>表達與交流 <span>Expression &amp; Connection</span></summary><p><strong>我想讓別人感受到什麼？</strong></p><p>把動作選擇清楚地傳給人。對比、速度和力度是可用的表達方法，觀眾的反應也能成為下一個選擇。</p><p>對一個人跳 20 秒，讓他說最記得哪一刻，再比對自己原本想表達的重點。</p><p>舞台感染力不只靠大動作；安靜、停頓和清楚的方向也可以吸引注意。</p></details></div></section>
-
 <section class="case" id="example" aria-labelledby="case-title">
-  <div class="heading"><h2 id="case-title">把模型用在真實情境</h2><p>從一個看得見或聽得到的現象開始。</p></div>
+  <div class="heading"><h2 id="case-title">案例與引導</h2><p>從一個看得見或聽得到的現象開始。</p></div>
   <label for="case-select" class="section-intro" style="display:block">選擇案例</label>
   <select class="case-picker" id="case-select">
     <optgroup label="音樂、身體與交流"><option value="texture">同一個 Groove，怎樣改變重量感？</option>
@@ -301,6 +347,65 @@ body:has(.practice[open]){overflow:hidden}
   <noscript><div class="case-fallback"><p>用一個熟悉的 Groove 試兩種質感，每次只改變一項，例如停頓的長度。自己比較哪種感覺接近音樂，或請同伴描述他看見的變化。</p></div></noscript>
 </section>
 
+<section id="technical" aria-labelledby="technical-title"><div class="heading"><h2 id="technical-title">動作練習</h2></div><p class="section-intro">從已熟悉的動作開始，選一個想探索的細節。</p><section id="possibilities" class="exploration-group" aria-labelledby="possibilities-title">
+  <h3 id="possibilities-title">一個元素，多種可能</h3>
+  <p class="exploration-intro">屬於「變化與連接」與「即興選擇」。先找三種不同做法，再逐步收集十種；今天也可以只留下一種。</p><div class="resource-grid">
+    <article class="resource-card explore-card"><h4>轉圈的多種可能</h4><p>我可以怎樣開始、轉動和結束？</p><p>先用小幅轉向，保持平衡，暈眩就停下。</p><button class="cta explore-start" data-element="turn">一起試</button></article>
+    <article class="resource-card explore-card"><h4>手部流動的多種可能</h4><p>同一條路徑，可以有不同感覺嗎？</p><p>保持腳步簡單，讓注意力留在手部。</p><button class="cta explore-start" data-element="hands">一起試</button></article>
+    <article class="resource-card explore-card"><h4>用頭部回應節奏</h4><p>同一段節奏，可以怎樣回應？</p><p>保持小幅舒適，避免快速甩頭或勉強轉頸。無音樂時可先自己哼節奏。</p><button class="cta explore-start" data-element="head">一起試</button></article>
+  </div>
+  <details class="exploration-guide"><summary>給引導者的介入理由與調整</summary><p>當孩子想變化卻想不到其他做法，先增加可選的動作可能性。每輪只改一個條件，讓她比較差別。若已有想法卻擔心被看見，先處理觀看方式與安全感。</p><p>卡住時減至兩種、縮小動作或由你示範一種；容易時才加另一個條件。最後撤掉限制，讓她選擇是否用進 freestyle。無音樂時留意身體感覺；有音樂時只選一個聲音回應。</p><p>可以問「哪兩種差別最大？」再把喜歡的一種接進熟悉動作，或換歌試試。無須完成紀錄或湊滿十種。</p></details>
+  <p class="link-back"><a href="#example">返回案例</a></p>
+</section>
+<h3 class="drill-heading">技術練習</h3>
+<div class="capabilities"><details id="drill-relaxed-funk" class="resource-card"><summary>鬆弛的 funk steps</summary><div class="resource-body"><p>基礎律動 × 動作質感</p><h3>同一個步伐，能否有較放鬆的感覺？</h3><ol><li>選一個老師教過、已熟悉的步伐，用舒服的速度做。</li><li>同一小段分別用較收緊、較放鬆的方式跳，觀察肩膀、膝蓋和呼吸的差別。</li><li>換回原本音樂，保留你喜歡的感覺，不必增加新動作。</li></ol><p><strong>可以觀察</strong>　能說出身體哪個部位的感覺改變了。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-floor-transitions" class="resource-card"><summary>地面動作與連接</summary><div class="resource-body"><p>動作材料 × 過渡</p><h3>能否自然進入，也順利離開？</h3><ol><li>只選老師已教過的一個地面動作。</li><li>分開練一個進入方式和一個退出方式，先放慢。</li><li>接回熟悉的站姿步伐，觀察前後是否仍有律動。</li></ol><p><strong>可以觀察</strong>　進入和退出都有清楚路徑，不需要臨時找支撐。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-hand-transitions" class="resource-card"><summary>手部連接</summary><div class="resource-body"><p>協調 × 變化</p><h3>手部動作之間，還有其他路徑嗎？</h3><ol><li>固定一個簡單腳步，選兩個手部動作。</li><li>分別試直接、繞行、停一下再接三種方式。</li><li>配同一段音樂，選最符合聲音感覺的一種。</li></ol><p><strong>可以觀察</strong>　能指出自己選擇這條連接路徑的原因。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-turn-balance" class="resource-card"><summary>轉圈重心不穩</summary><div class="resource-body"><p>重心 × 轉向</p><h3>先把轉向的結束位置找清楚。</h3><ol><li>從四分之一圈開始，留意支撐腳與結束方向。</li><li>穩定後再試半圈，不急著加速度或圈數。</li><li>結束後接一個簡單步伐，看看是否需要額外小步才能站穩。</li></ol><p><strong>可以觀察</strong>　可以較穩定地結束轉向並接下一步。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-turns-on-beat" class="resource-card"><summary>左右急轉跟不到拍</summary><div class="resource-body"><p>時機 × 重心 × 節奏</p><h3>失拍是在哪個轉換發生的？</h3><ol><li>去掉手部動作，只保留踏步與左右轉向。</li><li>用較慢速度做同一小段，找出哪一步開始趕拍。</li><li>先練那個轉換，再放回音樂；必要時請老師檢查步法和重心。</li></ol><p><strong>可以觀察</strong>　能找到具體卡住的一步，而非只覺得整段很亂。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-expression" class="resource-card"><summary>表情與眼神</summary><div class="resource-body"><p>表演態度 × 交流</p><h3>我希望對方感受到什麼？</h3><ol><li>選俏皮、冷靜或強勢其中一種意圖。</li><li>用相同的熟悉動作跳 20 秒，讓眼神與朝向支持這個意圖。</li><li>請觀看者描述感受；不先告訴他標準答案。</li></ol><p><strong>可以觀察</strong>　觀看者能描述一個與你意圖接近的感覺。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-sharp-turns" class="resource-card"><summary>急轉的完成與銜接</summary><div class="resource-body"><p>身體控制 × 連接</p><h3>轉得清楚，比一開始就轉得快更重要。</h3><ol><li>選一個熟悉步伐，接一次小角度轉向。</li><li>先確認轉前與轉後的支撐位置，再逐步回到舒服速度。</li><li>加入下一個動作，觀察轉向是否打斷整段律動。</li></ol><p><strong>可以觀察</strong>　能完成轉向並接下一步，不只追求速度。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-single-foot-slide" class="resource-card"><summary>單腳 sliding</summary><div class="resource-body"><p>支撐 × 移動 × 控制</p><h3>支撐腳和移動腳的工作清楚嗎？</h3><ol><li>先請老師確認所練 sliding 的方式與適合地面。</li><li>依老師方法，分清承重與移動，先做小幅度。</li><li>接入一個熟悉步伐，觀察重心轉移是否清楚。</li></ol><p><strong>可以觀察</strong>　知道哪隻腳承重，並能有控制地轉換。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-same-move-new-song" class="resource-card"><summary>換歌，保留同一動作</summary><div class="resource-body"><p>音樂理解 × 即興選擇</p><h3>音樂換了，身體的感覺有沒有變？</h3><ol><li>選一個熟悉動作，配兩首感覺不同的歌曲。</li><li>每次只改一項：大小、重心高低或用力方式。</li><li>說出你聽到的差別，以及你選擇改變什麼。</li></ol><p><strong>可以觀察</strong>　能說明一個音樂差別和相應的動作選擇。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details></div></section>
+
+<section id="methods" aria-labelledby="methods-title">
+  <div class="heading"><h2 id="methods-title">練習方法</h2><a href="#technical">瀏覽動作練習 ↑</a></div>
+  <div class="capabilities methods">
+    <details><summary>一個動作，三種聲音</summary><p>用同一個 Bounce，分別回應鼓、低音或旋律。每次只選一層聲音。可以跟隨它，也可以用延遲、反差或停頓作回應。想再探索時，換一首歌，看看你會改選哪一層。</p><a href="#example" data-case="pulse">看脈動與鼓聲案例 ↑</a></details>
+    <details><summary>只用兩個動作跳一段</summary><p>用兩個熟悉的動作跳一小段。第二次只改一項，例如方向、大小、速度或連接方式。比較哪一下值得保留，再回到自由跳，看看你會不會自己用到它。</p><a href="#example" data-case="habit">看熟悉組合案例 ↑</a><a href="#constraints">看怎樣加一條限制 ↑</a></details>
+    <details><summary>熟悉歌與陌生歌的比較</summary><p>先預測自己換歌後哪一部分仍做得到，再用同一個 Groove 試兩段歌。若陌生歌卡住，可分別試聽、點頭和踏步。找出目前能穩定做到的條件，再決定要加哪一點挑戰。</p><a href="#example" data-case="plateau">看換歌與自檢案例 ↑</a></details>
+    <details><summary>接住、發展、發起</summary><p>輪到你時，可以先回應同伴的一個節奏，再保留它並加一處變化。想發起時，送出一個動作想法或一個停頓，留空間讓對方接。今天想看或聽，也可以。</p><a href="#example" data-case="cypher">看 Cypher 案例 ↑</a></details>
+    <details><summary>把生活片刻變成動作</summary><p>如果有個聲音、畫面或對話留在心裡，可以選它的速度、重量或停頓，用一個熟悉的動作做兩個版本。看哪個版本更貼近自己的感受，或哪個帶來意外的想法。</p><a href="#example" data-case="daily">看日常感受案例 ↑</a></details>
+    <details><summary>回看一次，決定下一個問題</summary><p>跳完後，可憑身體感受回想、請同伴描述，或自願比較兩段短片。問自己「我預期會發生什麼？實際有什麼不同？下次想改哪一項？」也可以就此結束。</p><a href="#example" data-case="confidence">看回饋與被觀看案例 ↑</a></details>
+  </div>
+</section>
+
+<section id="model" aria-labelledby="model-title">
+  <div class="heading"><h2 id="model-title">三條主軸，一次探索</h2></div>
+  <div class="three tracks">
+    <article><h3>舞蹈實踐</h3><p>建立 Groove、音樂感知與身體控制。用動作的重量、停頓、方向或質感表達感受。</p><p class="question">我聽到什麼？我想怎樣回應？</p></article>
+    <article><h3>教育心理</h3><p>從可見行為提出假設，調整難度、回饋與被觀看的情境，給孩子實際的選擇。</p><p class="question">什麼條件讓我願意試？我需要什麼支持？</p></article>
+    <article><h3>Hip-hop 文化</h3><p>從舞者、DJ、音樂與場合理解作品。透過觀看、致意、輪流和回應，體會 Freestyle 的交流。</p><p class="question">這段舞發生在哪裡？舞者在回應誰或什麼？</p></article>
+  </div>
+</section>
+
+<section id="loop" aria-labelledby="loop-title">
+  <div class="heading"><h2 id="loop-title">探索如何發展</h2><p>可以從任何一環開始。</p></div>
+  <ol class="cycle">
+    <li><strong>感知</strong><span>聽聲音，感受身體，觀察同伴。</span></li>
+    <li><strong>選擇</strong><span>決定想回應的聲音，或想改變的動作。</span></li>
+    <li><strong>實驗</strong><span>試兩種做法，比較它們帶來的感受。</span></li>
+    <li><strong>回看與交流</strong><span>看自己的變化，或聽同伴看見了什麼。</span></li>
+    <li><strong>調整與遷移</strong><span>保留、改變或放下。想再試時，可以換歌、換動作或換情境。</span></li>
+  </ol>
+  <div class="cycle-note"><span>卡住時，可以回到熟悉的動作，縮小任務，或改變環境再試。</span><a href="#entry" data-choose="music">回去只聽音樂 ↑</a></div>
+</section>
+
+<section id="growth" aria-labelledby="growth-title">
+  <div class="heading"><h2 id="growth-title">怎樣看見能力在發展</h2></div>
+  <p class="section-intro">同一個孩子在熟悉的歌裡可能能自行探索，換歌或進入新環境時又需要提示。看她在什麼條件下能做出自己想要的選擇。</p>
+  <div class="three tracks">
+    <article><h3>有提示時能試</h3><p>「你播兩次給我聽，我想試用同一個 Bounce 跟不同聲音。」</p><p class="question">給一個清楚起點，讓孩子知道可以怎樣開始。</p></article>
+    <article><h3>能自己比較和調整</h3><p>「我想留第二種跳法。換另一首歌，也許要把停頓縮短一點。」</p><p class="question">讓孩子挑選比較條件，再問她留意到什麼。</p></article>
+    <article><h3>能提出新的探索方向</h3><p>「我想知道同一個動作，換成回應同伴會變成什麼樣。」</p><p class="question">讓孩子發起下一次嘗試，也由她決定何時告一段落。</p></article>
+  </div>
+</section>
+
+<section id="abilities" aria-labelledby="abilities-title"><div class="heading"><h2 id="abilities-title">能力地圖</h2></div><p class="section-intro">選一項打開概念、例子與可以嘗試的方法。</p><div class="capabilities"><details><summary>音樂理解 <span>Musicality</span></summary><p><strong>我現在回應哪個聲音？</strong></p><p>聽穩定拍子，也聽鼓、低音、人聲和旋律；留意段落、情緒與能量如何變化。不同曲風是探索材料。</p><p>同一段音樂播兩次：第一次只用肩膀跟鼓；第二次試著回應人聲。</p><p>曲風：Funk、Hip-hop、R&amp;B、House；Boom bap 可放在 Hip-hop 之下。Chill 另作氛圍標籤。</p></details><details><summary>身體控制 <span>Body Control</span></summary><p><strong>身體能完成我的選擇嗎？</strong></p><p>讓支撐、移動和轉向有控制；時機安排也會影響能否順利接下一步。單腳 sliding 是應用練習，不只是平衡分類。</p><p>先不加手，只練踏步接四分之一轉，看看結束時能否穩定接下一步。</p><p>力量在身體部位之間傳遞的 energy flow，可在這裏觀察。</p></details><details><summary>基礎律動與動作 <span>Foundations &amp; Vocabulary</span></summary><p><strong>我有哪些熟悉的材料？</strong></p><p>保留老師教過的基本律動、步法與風格背景。Bounce、rock、skate、roll 先作你課堂中的用語，不強行分成互斥類別。</p><p>選一個熟悉步伐，先跳得舒服，再換一首歌，感受重心與動作感覺如何改變。</p><p>基礎動作是能反覆運用的材料；會很多名稱不等於能自然運用。</p></details><details><summary>變化與連接 <span>Variation &amp; Transitions</span></summary><p><strong>同一個動作，能有不同說法嗎？</strong></p><p>改變原有動作的節奏、力度或質感；也練習動作如何進入、完成和退出。</p><p>固定腳步，用同一個手部動作試出輕、重、延伸三種感覺；一次只改一項。</p><p>Change of rhythm 在這裏指動作節奏的改變；texture 在這裏指身體呈現的質感。</p></details><details><summary>即興選擇與發展 <span>Freestyle Choices</span></summary><p><strong>如何把幾個動作變成一段？</strong></p><p>從音樂中選一個想法，再發展它。可以重複、轉向、縮小或停住，不必每一步都換新招。</p><p>只用三個熟悉動作跳 20 秒，安排一次重複、一次變化和一個結尾。</p><p>一段舞由平靜推向強烈的 energy flow，可放在這裏；不必預編整段。</p></details><details><summary>表達與交流 <span>Expression &amp; Connection</span></summary><p><strong>我想讓別人感受到什麼？</strong></p><p>把動作選擇清楚地傳給人。對比、速度和力度是可用的表達方法，觀眾的反應也能成為下一個選擇。</p><p>對一個人跳 20 秒，讓他說最記得哪一刻，再比對自己原本想表達的重點。</p><p>舞台感染力不只靠大動作；安靜、停頓和清楚的方向也可以吸引注意。</p></details></div></section>
+
+
 <section id="bottlenecks" aria-labelledby="bottlenecks-title">
   <div class="heading"><h2 id="bottlenecks-title">卡住時，先判斷原因</h2></div>
   <p class="section-intro">同一個現象可能有不同原因。先聽孩子怎麼說，再改一個條件看看。回饋適合用來釐清差異，有時孩子更需要技術支持、選擇空間，或一段休息。</p>
@@ -342,20 +447,8 @@ body:has(.practice[open]){overflow:hidden}
   </div>
 </section>
 
-<section id="methods" aria-labelledby="methods-title">
-  <div class="heading"><h2 id="methods-title">練習方法</h2><a href="#drill-relaxed-funk" data-resource="drill-relaxed-funk">瀏覽全部動作練習 ↓</a></div>
-  <div class="capabilities methods">
-    <details><summary>一個動作，三種聲音</summary><p>用同一個 Bounce，分別回應鼓、低音或旋律。每次只選一層聲音。可以跟隨它，也可以用延遲、反差或停頓作回應。想再探索時，換一首歌，看看你會改選哪一層。</p><a href="#example" data-case="pulse">看脈動與鼓聲案例 ↑</a></details>
-    <details><summary>只用兩個動作跳一段</summary><p>用兩個熟悉的動作跳一小段。第二次只改一項，例如方向、大小、速度或連接方式。比較哪一下值得保留，再回到自由跳，看看你會不會自己用到它。</p><a href="#example" data-case="habit">看熟悉組合案例 ↑</a><a href="#constraints">看怎樣加一條限制 ↑</a></details>
-    <details><summary>熟悉歌與陌生歌的比較</summary><p>先預測自己換歌後哪一部分仍做得到，再用同一個 Groove 試兩段歌。若陌生歌卡住，可分別試聽、點頭和踏步。找出目前能穩定做到的條件，再決定要加哪一點挑戰。</p><a href="#example" data-case="plateau">看換歌與自檢案例 ↑</a></details>
-    <details><summary>接住、發展、發起</summary><p>輪到你時，可以先回應同伴的一個節奏，再保留它並加一處變化。想發起時，送出一個動作想法或一個停頓，留空間讓對方接。今天想看或聽，也可以。</p><a href="#example" data-case="cypher">看 Cypher 案例 ↑</a></details>
-    <details><summary>把生活片刻變成動作</summary><p>如果有個聲音、畫面或對話留在心裡，可以選它的速度、重量或停頓，用一個熟悉的動作做兩個版本。看哪個版本更貼近自己的感受，或哪個帶來意外的想法。</p><a href="#example" data-case="daily">看日常感受案例 ↑</a></details>
-    <details><summary>回看一次，決定下一個問題</summary><p>跳完後，可憑身體感受回想、請同伴描述，或自願比較兩段短片。問自己「我預期會發生什麼？實際有什麼不同？下次想改哪一項？」也可以就此結束。</p><a href="#example" data-case="confidence">看回饋與被觀看案例 ↑</a></details>
-  </div>
-</section>
 
-<section id="possibilities"><h2>一個元素，多種可能</h2><p>屬於「變化與連接」與「即興選擇」。先找三種不同做法，再逐步收集十種；今天也可以只留下一種。</p><div class="resource-grid"><article class="resource-card"><h3>轉圈的多種可能</h3><p>我可以怎樣開始、轉動和結束？</p><p>先用小幅轉向，保持平衡，暈眩就停下。</p><button class="cta explore-start" data-element="turn">一起試</button></article><article class="resource-card"><h3>手部流動的多種可能</h3><p>同一條路徑，可以有不同感覺嗎？</p><p>保持腳步簡單，讓注意力留在手部。</p><button class="cta explore-start" data-element="hands">一起試</button></article><article class="resource-card"><h3>用頭部回應節奏</h3><p>同一段節奏，可以怎樣回應？</p><p>保持小幅舒適，避免快速甩頭或勉強轉頸。無音樂時可先自己哼節奏。</p><button class="cta explore-start" data-element="head">一起試</button></article></div><details><summary>給引導者的介入理由與調整</summary><p>當孩子想變化卻想不到其他做法，先增加可選的動作可能性。每輪只改一個條件，讓她比較差別。若已有想法卻擔心被看見，先處理觀看方式與安全感。</p><p>卡住時減至兩種、縮小動作或由你示範一種；容易時才加另一個條件。最後撤掉限制，讓她選擇是否用進 freestyle。無音樂時留意身體感覺；有音樂時只選一個聲音回應。</p><p>可以問「哪兩種差別最大？」再把喜歡的一種接進熟悉動作，或換歌試試。無須完成紀錄或湊滿十種。</p></details><a href="#example">返回案例</a></section>
-<section id="technical" aria-labelledby="technical-title"><div class="heading"><h2 id="technical-title">動作練習</h2></div><p class="section-intro">從已熟悉的動作開始，選一個想探索的細節。</p><div class="capabilities"><details id="drill-relaxed-funk" class="resource-card"><summary>鬆弛的 funk steps</summary><div class="resource-body"><p>基礎律動 × 動作質感</p><h3>同一個步伐，能否有較放鬆的感覺？</h3><ol><li>選一個老師教過、已熟悉的步伐，用舒服的速度做。</li><li>同一小段分別用較收緊、較放鬆的方式跳，觀察肩膀、膝蓋和呼吸的差別。</li><li>換回原本音樂，保留你喜歡的感覺，不必增加新動作。</li></ol><p><strong>可以觀察</strong>　能說出身體哪個部位的感覺改變了。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-floor-transitions" class="resource-card"><summary>地面動作與連接</summary><div class="resource-body"><p>動作材料 × 過渡</p><h3>能否自然進入，也順利離開？</h3><ol><li>只選老師已教過的一個地面動作。</li><li>分開練一個進入方式和一個退出方式，先放慢。</li><li>接回熟悉的站姿步伐，觀察前後是否仍有律動。</li></ol><p><strong>可以觀察</strong>　進入和退出都有清楚路徑，不需要臨時找支撐。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-hand-transitions" class="resource-card"><summary>手部連接</summary><div class="resource-body"><p>協調 × 變化</p><h3>手部動作之間，還有其他路徑嗎？</h3><ol><li>固定一個簡單腳步，選兩個手部動作。</li><li>分別試直接、繞行、停一下再接三種方式。</li><li>配同一段音樂，選最符合聲音感覺的一種。</li></ol><p><strong>可以觀察</strong>　能指出自己選擇這條連接路徑的原因。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-turn-balance" class="resource-card"><summary>轉圈重心不穩</summary><div class="resource-body"><p>重心 × 轉向</p><h3>先把轉向的結束位置找清楚。</h3><ol><li>從四分之一圈開始，留意支撐腳與結束方向。</li><li>穩定後再試半圈，不急著加速度或圈數。</li><li>結束後接一個簡單步伐，看看是否需要額外小步才能站穩。</li></ol><p><strong>可以觀察</strong>　可以較穩定地結束轉向並接下一步。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-turns-on-beat" class="resource-card"><summary>左右急轉跟不到拍</summary><div class="resource-body"><p>時機 × 重心 × 節奏</p><h3>失拍是在哪個轉換發生的？</h3><ol><li>去掉手部動作，只保留踏步與左右轉向。</li><li>用較慢速度做同一小段，找出哪一步開始趕拍。</li><li>先練那個轉換，再放回音樂；必要時請老師檢查步法和重心。</li></ol><p><strong>可以觀察</strong>　能找到具體卡住的一步，而非只覺得整段很亂。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-expression" class="resource-card"><summary>表情與眼神</summary><div class="resource-body"><p>表演態度 × 交流</p><h3>我希望對方感受到什麼？</h3><ol><li>選俏皮、冷靜或強勢其中一種意圖。</li><li>用相同的熟悉動作跳 20 秒，讓眼神與朝向支持這個意圖。</li><li>請觀看者描述感受；不先告訴他標準答案。</li></ol><p><strong>可以觀察</strong>　觀看者能描述一個與你意圖接近的感覺。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-sharp-turns" class="resource-card"><summary>急轉的完成與銜接</summary><div class="resource-body"><p>身體控制 × 連接</p><h3>轉得清楚，比一開始就轉得快更重要。</h3><ol><li>選一個熟悉步伐，接一次小角度轉向。</li><li>先確認轉前與轉後的支撐位置，再逐步回到舒服速度。</li><li>加入下一個動作，觀察轉向是否打斷整段律動。</li></ol><p><strong>可以觀察</strong>　能完成轉向並接下一步，不只追求速度。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-single-foot-slide" class="resource-card"><summary>單腳 sliding</summary><div class="resource-body"><p>支撐 × 移動 × 控制</p><h3>支撐腳和移動腳的工作清楚嗎？</h3><ol><li>先請老師確認所練 sliding 的方式與適合地面。</li><li>依老師方法，分清承重與移動，先做小幅度。</li><li>接入一個熟悉步伐，觀察重心轉移是否清楚。</li></ol><p><strong>可以觀察</strong>　知道哪隻腳承重，並能有控制地轉換。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-same-move-new-song" class="resource-card"><summary>換歌，保留同一動作</summary><div class="resource-body"><p>音樂理解 × 即興選擇</p><h3>音樂換了，身體的感覺有沒有變？</h3><ol><li>選一個熟悉動作，配兩首感覺不同的歌曲。</li><li>每次只改一項：大小、重心高低或用力方式。</li><li>說出你聽到的差別，以及你選擇改變什麼。</li></ol><p><strong>可以觀察</strong>　能說明一個音樂差別和相應的動作選擇。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details></div></section><section id="concepts" aria-labelledby="concepts-title"><div class="heading"><h2 id="concepts-title">概念與用語</h2></div><div class="capabilities"><details id="beat-rhythm-timing" class="resource-card"><summary>拍子、節奏、時機</summary><div class="resource-body"><p>拍子是規律的時間參照；節奏是長短與疏密的安排；時機是你選擇何時開始、到位或停住。偏離某個鼓點不一定是錯，可能是另一種選擇。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="genre-mood" class="resource-card"><summary>曲風與氛圍</summary><div class="resource-body"><p>Funk、Hip-hop、R&amp;B、House 是探索入口；Boom bap 可歸在 Hip-hop 下。Chill 比較像氣氛描述。同一曲風也有不同速度、密度和情緒。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="sound-texture" class="resource-card"><summary>聲音質感 → 動作質感</summary><div class="resource-body"><p>Texture of sounds 是聽到的性質；movement texture 是身體呈現的性質。短促聲音可以用停頓回應，綿長聲音可以用延伸回應，但不是固定配對。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="energy-flow" class="resource-card"><summary>Energy flow 的兩個意思</summary><div class="resource-body"><p>身體內：力量和動作如何從腿傳到軀幹與手。整段舞：能量如何鋪墊、推高、回落。先說清自己要觀察哪一種。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="foundation-names" class="resource-card"><summary>Bounce / rock / skate / roll</summary><div class="resource-body"><p>保留老師的叫法，放在基礎律動與動作旁，各配一個示範或自己的描述。不同教學語境可能有不同用法，不必硬分成四種互斥的 state。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="dynamics" class="resource-card"><summary>Dynamics、力度與對比</summary><div class="resource-body"><p>Dynamics 可用來談動作的力度與能量質感。對比則是把不同選擇放在一起，例如輕與重、大與小、連續與停頓；速度只是其中一個維度。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="initiative-and-expression" class="resource-card"><summary>主動性、投入程度與表達方式</summary><div class="resource-body"><p>孩子可以主動選一項變化、把想做的動作做充分，或在交流中先出一個想法。強勢是可以選的表達方式，俏皮、冷靜和細小的動作也能有清楚的意圖。說到 aggressive 時，先問自己想看到哪種行為。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="fluency" class="resource-card"><summary>流暢與即興</summary><div class="resource-body"><p>流暢不是一直動，也不是沒有停頓；它可以包含有意識的停止與重新開始。即興也能重複一個想法，再發展它，不必不停換新招。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details></div></section>
+<section id="concepts" aria-labelledby="concepts-title"><div class="heading"><h2 id="concepts-title">概念與用語</h2></div><div class="capabilities"><details id="beat-rhythm-timing" class="resource-card"><summary>拍子、節奏、時機</summary><div class="resource-body"><p>拍子是規律的時間參照；節奏是長短與疏密的安排；時機是你選擇何時開始、到位或停住。偏離某個鼓點不一定是錯，可能是另一種選擇。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="genre-mood" class="resource-card"><summary>曲風與氛圍</summary><div class="resource-body"><p>Funk、Hip-hop、R&amp;B、House 是探索入口；Boom bap 可歸在 Hip-hop 下。Chill 比較像氣氛描述。同一曲風也有不同速度、密度和情緒。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="sound-texture" class="resource-card"><summary>聲音質感 → 動作質感</summary><div class="resource-body"><p>Texture of sounds 是聽到的性質；movement texture 是身體呈現的性質。短促聲音可以用停頓回應，綿長聲音可以用延伸回應，但不是固定配對。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="energy-flow" class="resource-card"><summary>Energy flow 的兩個意思</summary><div class="resource-body"><p>身體內：力量和動作如何從腿傳到軀幹與手。整段舞：能量如何鋪墊、推高、回落。先說清自己要觀察哪一種。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="foundation-names" class="resource-card"><summary>Bounce / rock / skate / roll</summary><div class="resource-body"><p>保留老師的叫法，放在基礎律動與動作旁，各配一個示範或自己的描述。不同教學語境可能有不同用法，不必硬分成四種互斥的 state。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="dynamics" class="resource-card"><summary>Dynamics、力度與對比</summary><div class="resource-body"><p>Dynamics 可用來談動作的力度與能量質感。對比則是把不同選擇放在一起，例如輕與重、大與小、連續與停頓；速度只是其中一個維度。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="initiative-and-expression" class="resource-card"><summary>主動性、投入程度與表達方式</summary><div class="resource-body"><p>孩子可以主動選一項變化、把想做的動作做充分，或在交流中先出一個想法。強勢是可以選的表達方式，俏皮、冷靜和細小的動作也能有清楚的意圖。說到 aggressive 時，先問自己想看到哪種行為。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="fluency" class="resource-card"><summary>流暢與即興</summary><div class="resource-body"><p>流暢不是一直動，也不是沒有停頓；它可以包含有意識的停止與重新開始。即興也能重複一個想法，再發展它，不必不停換新招。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details></div></section>
 <section id="guide" aria-labelledby="guide-title">
   <div class="heading"><h2 id="guide-title">大人怎樣陪伴探索</h2></div>
   <div class="adult">
@@ -656,6 +749,9 @@ const explorationDialog=document.getElementById('explore-dialog');let exploratio
 document.querySelectorAll('.explore-start').forEach(button=>button.addEventListener('click',()=>{explorationCurrent=explorationData.find(c=>c[0]===button.dataset.element);explorationIndex=0;document.getElementById('explore-title').textContent=explorationCurrent[1];document.getElementById('explore-question').textContent=explorationCurrent[2];document.getElementById('explore-hint').textContent=explorationCurrent[3][0];document.getElementById('explore-note').textContent=explorationCurrent[4];explorationDialog.showModal();}));
 document.getElementById('explore-next').addEventListener('click',()=>{explorationIndex=(explorationIndex+1)%explorationCurrent[3].length;document.getElementById('explore-hint').textContent=explorationCurrent[3][explorationIndex];});
 document.getElementById('explore-mode').addEventListener('change',event=>{document.getElementById('explore-context').textContent=event.target.value==='music'?'播放你選的音樂，挑一個聲音回應。也可用同一做法回應兩種聲音。':'先留意身體的感覺，找三種不同做法。';});
-document.getElementById('explore-listen').addEventListener('click',()=>{explorationDialog.close();location.hash='entry';});
+document.getElementById('explore-listen').addEventListener('click',()=>{explorationDialog.close();
+  chooseRoute("music");
+  document.querySelector("#entry").scrollIntoView();
+  document.querySelector('[data-route="music"]').focus({ preventScroll: true });});
 </script></body>
 </html>
