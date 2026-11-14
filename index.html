@@ -6,232 +6,12 @@
 <meta name="theme-color" content="#203a30">
 <meta name="description" content="從孩子的 Freestyle 表現出發，理解可能原因、選擇引導方法，再一起探索。">
 <title>探索能力發展模型｜Hip-hop Freestyle</title>
-<style>
-:root{color-scheme:light;--paper:#f8f5ed;--light:#fffcf6;--ink:#1b3229;--muted:#4b5b52;--edge:#d8dcd0;--forest:#203a30;--mint:#dfebd7;--sun:#f8d275;--rust:#a34434;--serif:"Noto Serif CJK TC","Songti TC","PMingLiU",serif;--sans:"Noto Sans CJK TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:1rem}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.75}h1,h2,h3,p{margin:0}button,input,select{font:inherit}button,summary,select{cursor:pointer}a{color:inherit;text-underline-offset:.22em}button:focus-visible,a:focus-visible,summary:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #a34434;outline-offset:4px}[hidden]{display:none!important}.wrap{width:min(1120px,calc(100% - 64px));margin-inline:auto}
-header{color:#fcf9ed;background:var(--forest)}.top{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:17px 0;border-bottom:1px solid #597268}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-size:.85rem;font-weight:800;letter-spacing:.065em}.mark{display:inline-grid;place-items:center;width:26px;height:26px;border:1px solid var(--sun);border-radius:50%;color:var(--sun);font-size:.9rem}.top nav{display:flex;gap:20px;font-size:.84rem;color:#e7eedd;flex-wrap:wrap}.top nav a{text-decoration:none}.top nav a:hover{text-decoration:underline}.hero{display:grid;grid-template-columns:1.32fr .8fr;align-items:center;gap:30px;padding:55px 0 62px}.kicker{color:var(--sun);letter-spacing:.11em;font-size:.74rem;font-weight:800}.hero h1{font-family:var(--serif);font-size:clamp(2.25rem,5.6vw,4.8rem);line-height:1.22;letter-spacing:-.055em;margin:11px 0 16px}.hero p{color:#e3eddc;max-width:34em;font-size:clamp(1rem,1.7vw,1.15rem)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.cta,.quiet{display:inline-flex;align-items:center;justify-content:center;gap:.6em;border-radius:7px;padding:.63em 1em;text-decoration:none;border:1px solid transparent;font-weight:750;font-size:.88rem;line-height:1.5}.cta{background:var(--sun);color:var(--ink)}.cta:hover{background:#fce3a8}.quiet{border-color:#8ba096;color:inherit;background:transparent}.hero :focus-visible{outline-color:var(--sun)}
-.record{width:min(100%,328px);aspect-ratio:1;justify-self:center;position:relative;display:grid;place-items:center;border-radius:50%;border:1px solid #82958a;background:repeating-radial-gradient(circle at center,#172d25 0 5px,#2c483c 6px 7px,#1c342a 8px 12px);box-shadow:10px 11px 0 #192e26}.record::before{content:"";position:absolute;inset:10%;border-radius:50%;border:1px dashed #688378}.record::after{content:"";position:absolute;inset:20%;border-radius:50%;border:1px solid #9db3a5}.label{z-index:1;width:51%;aspect-ratio:1;border-radius:50%;background:var(--sun);color:var(--ink);display:grid;place-content:center;text-align:center;font-weight:850;font-size:clamp(.85rem,1.9vw,1.25rem);line-height:1.4;box-shadow:0 0 0 7px #1c342a,0 0 0 8px #f8d275}.label small{display:block;font-weight:650;font-size:.62em;letter-spacing:.115em;margin-top:8px}.orbit{position:absolute;z-index:2;right:12%;top:13%;width:14px;height:14px;border-radius:50%;background:#d58b75;box-shadow:0 0 0 4px var(--forest)}
-main{padding:42px 0 60px}section+section{margin-top:58px}.heading{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-bottom:16px}.heading h2{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.35rem);letter-spacing:-.035em;line-height:1.35}.heading p,.section-intro{color:var(--muted);font-size:.9rem}.section-intro{max-width:48em;margin:-5px 0 18px}
-.choices,.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.choice{position:relative;text-align:left;min-width:0;min-height:114px;border-radius:10px;color:var(--ink);background:var(--light);border:1px solid var(--edge);display:grid;gap:4px;align-content:center;padding:14px 37px 14px 17px}.choice:hover{border-color:#64806f}.choice[aria-pressed=true]{border-color:#355844;box-shadow:inset 0 0 0 1px #355844;background:var(--mint)}.choice[data-route=music][aria-pressed=true]{background:#f9e6ae}.choice b{font-size:1rem;line-height:1.45}.choice small{font-size:.81rem;color:var(--muted);line-height:1.5}.choice .arrow{position:absolute;right:13px;top:14px;font-size:1.1rem}.path{margin-top:12px;border:1px solid var(--edge);border-radius:10px;background:var(--light);padding:17px 19px}.path p{color:var(--muted);font-size:.9rem}.path .path-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px}.path h3{font-size:1.08rem}.music-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 15px;margin-top:13px}.file-picker{font-size:.83rem;max-width:100%;color:var(--ink)}.file-picker::file-selector-button{background:var(--paper);color:var(--ink);border:1px solid #9aa99c;border-radius:6px;padding:4px 9px;font:inherit;margin-right:8px;cursor:pointer}audio{width:min(100%,370px);height:44px}.music-tip{margin-top:7px}.inline-link{display:inline-flex;font-size:.84rem;font-weight:750;white-space:nowrap}
-.tracks article{background:var(--light);border:1px solid var(--edge);border-radius:10px;padding:16px 17px 18px;border-top:4px solid #64806e}.tracks article:nth-child(2){border-top-color:#cfaa52}.tracks article:nth-child(3){border-top-color:#a75946}.tracks h3{font-size:1.02rem;margin-bottom:5px}.tracks p{font-size:.87rem;color:var(--muted)}.tracks .question{font-weight:700;color:var(--ink);margin-top:9px}
-.methods details a{display:inline-block;margin:0 15px 14px;font-size:.84rem;font-weight:750}.cycle{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;margin:0;padding:0;list-style:none;background:#cad5c7;border:1px solid #cad5c7;border-radius:10px;overflow:hidden}.cycle li{background:var(--light);padding:13px 12px}.cycle strong{display:block;font-size:.91rem}.cycle span{display:block;font-size:.78rem;color:var(--muted);margin-top:4px}.cycle-note{display:flex;gap:8px 22px;justify-content:space-between;flex-wrap:wrap;margin-top:10px;color:var(--muted);font-size:.85rem}.cycle-note a{color:var(--ink);font-weight:750}
-.capabilities{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.capabilities details,.adult details{background:var(--light);border:1px solid var(--edge);border-radius:9px}.capabilities summary,.adult summary{padding:13px 15px;font-weight:750}.capabilities summary span{font-weight:550;font-size:.76rem;color:var(--muted);margin-left:.55em;display:inline-block}.capabilities details p,.adult details p{padding:0 15px 14px;color:var(--muted);font-size:.88rem}
-.case{background:var(--forest);color:#fcf9ed;border-radius:13px;padding:23px 24px}.case .heading{margin-bottom:10px}.case .heading p{color:#dbe7d6}.case .section-intro{color:#e5edde;margin:0 0 14px}.case :focus-visible{outline-color:var(--sun)}.case-picker{border:1px solid #a6bca8;background:#f8f5ed;border-radius:7px;padding:6px 9px;color:var(--ink);width:min(100%,480px);font-size:.9rem}.case-panel{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.case-panel div{padding:12px 14px;background:#2a473a;border:1px solid #547263;border-radius:8px}.case-panel h3{font-size:.91rem;color:var(--sun);margin-bottom:4px}.case-panel p{font-size:.86rem;color:#f1f3e8}.case-panel div:first-child{grid-column:1/-1}.case-fallback{color:#f1f3e8;margin-top:15px}.case-fallback p+p{margin-top:6px}
-.adult{display:grid;grid-template-columns:1fr 1fr;gap:10px}.adult details p+p{padding-top:0}.link-back{margin-top:16px;font-size:.85rem}.footer{border-top:1px solid var(--edge);color:var(--muted);padding:18px 0 26px;font-size:.79rem}
-@media(max-width:740px){.wrap{width:calc(100% - 34px)}.hero{gap:20px;padding:36px 0 40px;grid-template-columns:1fr .46fr}.hero h1{font-size:clamp(2rem,6vw,3.3rem)}.heading{display:block}.heading p{margin-top:5px}.choices,.three{gap:8px}.choice{padding:11px 23px 11px 10px}.choice .arrow{right:7px;top:10px}.cycle{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:500px){.top{align-items:flex-start;flex-direction:column;gap:8px;padding:12px 0}.top nav{gap:16px}.hero{grid-template-columns:1fr;position:relative;overflow:hidden;padding:28px 0 30px}.hero-text{position:relative;z-index:1}.hero h1{font-size:clamp(1.85rem,8.25vw,2.8rem)}.hero p{max-width:24em}.record{display:none}main{padding:29px 0 36px}section+section{margin-top:38px}.choices,.three,.adult,.capabilities,.case-panel{grid-template-columns:1fr}.choice{min-height:0;padding:10px 28px 10px 13px;gap:2px}.cycle li{padding:9px 8px}.case{padding:17px}.case-panel div:first-child{grid-column:auto}.music-actions{align-items:flex-start}}
-.diagnosis-wrap{overflow-x:auto;border:1px solid var(--edge);border-radius:10px;background:var(--light)}
-.diagnosis{border-collapse:collapse;width:100%;font-size:.87rem;text-align:left}
-.diagnosis th,.diagnosis td{padding:12px 14px;vertical-align:top;border-bottom:1px solid var(--edge)}
-.diagnosis thead th{background:var(--mint);font-weight:800}
-.diagnosis tbody th{width:24%;font-weight:750}
-.diagnosis td{color:var(--muted)}
-.diagnosis tbody tr:last-child>*{border-bottom:0}
-.constraint-demo{margin-top:22px;padding:18px 19px;background:var(--light);border:1px solid var(--edge);border-radius:10px}
-.constraint-demo h3{font-size:1.12rem;margin-bottom:5px}
-.constraint-demo p,.constraint-demo li{font-size:.89rem;color:var(--muted)}
-.constraint-demo ol{margin:10px 0;padding-left:1.5em}
-.constraint-demo li{padding-left:.25em;margin:5px 0}
-.constraint-demo strong{color:var(--ink)}
-.constraint-list{margin-top:16px}
-.constraint-list h3{font-size:1.04rem;margin-bottom:8px}
-.constraint-list .music-note{margin-top:10px;font-size:.86rem;color:var(--muted)}
-@media(max-width:640px){.diagnosis{min-width:620px}}
-.scenario-links{gap:12px;grid-template-columns:repeat(4,minmax(0,1fr))}
-@media(max-width:900px){.scenario-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:500px){.scenario-links{grid-template-columns:1fr}}
-.practice-links{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:9px;font-size:.86rem}
-.practice-links a{font-weight:750;padding-block:5px}
-.guidance details{border:1px solid var(--edge);border-radius:7px;padding:9px 12px;margin-top:9px}
-.guidance summary{font-weight:750}
-.guidance details p{margin-top:6px}
-.practice-choice{display:grid;gap:5px;margin:12px 0}
-.practice-choice select{max-width:100%;padding:7px;color:var(--ink);background:var(--paper);border:1px solid #8ba096;border-radius:7px}
-.practice-choice p{min-height:2.5em}
-.practice-dialog-heading{margin-bottom:6px}
-.scenario-link{display:grid;align-content:start;gap:5px;padding:17px;border:1px solid var(--edge);border-top:4px solid #66816e;border-radius:9px;background:var(--light);text-decoration:none}
-.scenario-link:nth-child(2){border-top-color:#a75946}
-.scenario-link:nth-child(3){border-top-color:#bf9845}
-.scenario-link:hover{background:var(--mint)}
-.scenario-link strong{font-size:1rem}
-.scenario-link span{font-size:.87rem;color:var(--muted)}
-.guide-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:13px;font-size:.87rem}
-.guide-links a{padding-block:5px}
-.case-actions{margin-top:13px}
-.guidance{margin-top:14px;background:var(--light);color:var(--ink);border-radius:8px;padding:17px 19px}
-.guidance h3{font-size:1rem;margin-bottom:4px}
-.guidance p,.branches{font-size:.89rem;color:var(--muted)}
-.guidance :focus-visible{outline-color:var(--rust)}
-.branches{padding-left:1.3em;margin:10px 0 14px}
-.branches li+li{margin-top:6px}
-.branches strong{color:var(--ink)}
-.guidance p+h3{margin-top:12px}
-.case-lenses{margin-top:12px}
-.case-lenses summary{width:fit-content;padding:7px 0;font-size:.88rem}
-.music-controls{display:flex;align-items:center;flex-wrap:wrap;gap:9px 14px;min-width:0}
-.practice{padding:clamp(17px,4vw,32px);width:min(610px,calc(100% - 24px));max-height:calc(100% - 24px);border:1px solid var(--edge);border-radius:14px;background:var(--light);color:var(--ink);overscroll-behavior:contain}
-.practice::backdrop{background:#14271ee0}
-body:has(.practice[open]){overflow:hidden}
-.practice-top{display:flex;justify-content:flex-end;margin-bottom:8px}
-.plain-button{background:transparent;border:1px solid #8ba096;color:var(--ink);border-radius:7px;padding:5px 12px;font-size:.88rem;min-height:44px}
-.practice h2{font-family:var(--serif);font-size:clamp(1.45rem,4vw,2rem);line-height:1.4}
-.practice ol{padding-left:1.4em;margin:13px 0 9px}
-.practice li+li{margin-top:6px}
-.practice article p{color:var(--muted);font-size:.92rem}
-.practice-audio{margin:16px 0 13px;padding:9px 11px;border:1px solid var(--edge);border-radius:7px;font-size:.86rem}
-.practice-audio p{margin:6px 0;color:var(--muted)}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-@media print{body,header,.case,.case-panel div{background:white;color:#151515}.top nav,.actions,.music-actions,.record,.cycle-note a,.link-back{display:none}.hero{padding:14px 0;display:block}.hero p,.case .heading p,.case .section-intro,.case-panel p,.case-panel h3,.kicker{color:#151515}.hero h1{font-size:2.2rem}.wrap{width:100%}section{break-inside:avoid}section+section{margin-top:24px}}
-
-.resource-card{scroll-margin-top:20px}
-.resource-body{padding:0 15px 15px;font-size:.9rem}
-.resource-body h3{font-size:1rem}
-.resource-body p{padding:0!important;margin:8px 0}
-.resource-body ol{padding-left:1.3em}
-.resource-body li+li{margin-top:7px}
-.resource-return{display:inline-block;margin-top:9px;font-weight:750}
-
-/* Shared spacing and mobile layouts */
-.hero {
-  grid-template-columns: minmax(0, 1fr) auto;
-  padding-block: clamp(28px, 4vw, 48px);
-}
-.record { width: clamp(145px, 21vw, 235px); }
-.hero h1 { font-size: clamp(2rem, 5.6vw, 4rem); }
-main { padding-block: clamp(24px, 4vw, 44px) 56px; }
-main > section + section { margin-top: clamp(30px, 5vw, 54px); }
-.heading { row-gap: 5px; }
-.heading h2 { font-size: clamp(1.5rem, 3vw, 2.15rem); }
-.actions .cta, .actions .quiet, .explore-card .cta { min-height: 44px; }
-.scenario-link { padding: 14px 16px; }
-.path:focus-within { border-color: #809788; }
-
-.exploration-group { margin-block: 22px 26px; }
-.exploration-group > h3, .drill-heading { font-size: 1.15rem; }
-.exploration-intro { color: var(--muted); font-size: .91rem; margin-block: 4px 14px; }
-.resource-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-.explore-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 7px;
-  border: 1px solid var(--edge);
-  border-radius: 10px;
-  background: var(--light);
-  padding: 16px;
-}
-.explore-card h4 { margin: 0; font-size: 1rem; line-height: 1.4; }
-.explore-card p { color: var(--muted); font-size: .88rem; }
-.explore-card .cta { margin-top: auto; }
-.exploration-guide {
-  padding: 10px 14px;
-  margin-top: 12px;
-  border: 1px solid var(--edge);
-  background: var(--light);
-  border-radius: 8px;
-}
-.exploration-guide p { margin-top: 8px; font-size: .92rem; }
-.drill-heading { margin-bottom: 9px; }
-#explore-dialog { margin: auto; }
-#explore-dialog > p, #explore-dialog > details { margin-block: 8px 12px; }
-#explore-dialog label { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
-#explore-mode {
-  min-height: 44px;
-  max-width: 100%;
-  padding: 5px 8px;
-  border: 1px solid #8ba096;
-  border-radius: 7px;
-  color: var(--ink);
-  background: var(--paper);
-}
-#explore-hint {
-  border-inline-start: 3px solid #9d7a2e;
-  border-radius: 4px;
-  background: #f9eed0;
-  padding: 9px 12px;
-  font-weight: 700;
-}
-#explore-listen { margin-top: 4px; }
-
-@media (max-width: 640px) {
-  .resource-grid { grid-template-columns: 1fr; gap: 8px; }
-  .explore-card { padding: 13px; }
-  .explore-card .cta { margin-top: 2px; }
-}
-@media (max-width: 500px) {
-  .top nav { column-gap: 14px; row-gap: 2px; }
-  .top nav a { display: flex; min-height: 38px; align-items: center; }
-  .hero { grid-template-columns: 1fr; padding-block: 20px 24px; }
-  .hero h1 { font-size: clamp(1.65rem, 7.6vw, 2.5rem); }
-  .hero .actions { margin-top: 14px; }
-  .scenario-link { padding: 10px 12px; }
-}
-
-/* Homepage entrances and focused practice */
-.hero { display: block; padding-block: clamp(22px, 4vw, 44px) 20px; }
-.hero h1 { margin-bottom: 10px; }
-.home-entries {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  padding-bottom: clamp(22px, 4vw, 40px);
-}
-.home-entry {
-  display: grid;
-  align-content: start;
-  gap: 4px;
-  padding: 14px 16px;
-  min-height: 78px;
-  border: 1px solid #82968a;
-  border-radius: 8px;
-  background: #29463a;
-  color: #fff9ec;
-  text-decoration: none;
-}
-.home-entry:hover { background: #38574a; }
-.home-entry strong { font-size: 1.03rem; }
-.home-entry span { color: #e5edde; font-size: .86rem; }
-.home-entry-music { background: #f8d275; color: var(--ink); border-color: #f8d275; }
-.home-entry-music:hover { background: #fce3a8; }
-.home-entry-music span { color: #394a37; }
-.home-entry:focus-visible { outline-color: #fcf9ed; }
-.exploration-launch { margin-bottom: 14px; }
-#explore-panel > .explore-start { margin-top: 9px; }
-.practice-links { align-items: center; }
-.step-choices { display: grid; gap: 9px; margin-block: 12px; }
-.step-choices button { text-align: left; background: var(--paper); }
-.step-choices button:hover { background: var(--mint); }
-.explore-dialog h2:focus { outline: 0; }
-.explore-dialog [id^="explore-"] > p { margin-block: 7px 10px; }
-.explore-dialog #explore-hint { padding: 13px 15px; font-size: 1.12rem; }
-.explore-note { color: var(--muted); font-size: .85rem; }
-.explore-back {
-  display: block;
-  min-height: 44px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: var(--ink);
-  text-decoration: underline;
-  text-underline-offset: .22em;
-}
-#explore-listen { margin-top: 12px; }
-#explore-audio, #explore-compare { margin-block: 9px; }
-#explore-music { margin-top: 6px; }
-@media (max-width: 620px) {
-  .home-entries { grid-template-columns: 1fr; gap: 7px; }
-  .home-entry { padding: 8px 12px; min-height: 0; gap: 0; }
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body id="top">
 <header>
 <div class="wrap">
-  <div class="top"><a class="brand" href="#top"><span class="mark" aria-hidden="true">♪</span>HIP-HOP FREESTYLE</a><nav aria-label="頁面導覽"><a href="#scenarios">觀察案例</a><a href="#technical">動作練習</a><a href="#abilities">能力地圖</a><a href="#guide">陪伴指南</a></nav></div>
+  <div class="top"><a class="brand" href="#top"><span class="mark" aria-hidden="true">♪</span>HIP-HOP FREESTYLE</a><nav aria-label="頁面導覽"><a href="#scenarios">觀察案例</a><a href="possibilities.html">一個元素，多種可能</a><a href="#technical">動作練習</a><a href="#abilities">能力地圖</a><a href="#guide">陪伴指南</a></nav></div>
   <div class="hero">
     <div class="hero-text">
       <div class="kicker">舞蹈實踐 × 教育心理 × Hip-hop 文化</div>
@@ -242,7 +22,7 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
   </div>
   <nav class="home-entries" aria-label="選擇今天的入口">
     <a class="home-entry" href="#scenarios"><strong>我觀察到一個情況</strong><span>從正在發生的情境找引導方法。</span></a>
-    <a class="home-entry" href="#technical"><strong>我想挑個練習</strong><span>探索轉圈、手部流動或節奏。</span></a>
+    <a class="home-entry" href="possibilities.html"><strong>我想挑個練習</strong><span>用一個熟悉的元素，試出不同做法。</span></a>
     <a class="home-entry home-entry-music" href="#entry" data-choose="music"><strong>只想享受音樂</strong><span>播首喜歡的歌，按自己的方式聽。</span></a>
   </nav>
 </div>
@@ -321,7 +101,7 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
       <div class="practice-links">
         <button type="button" class="cta explore-start">選一個動作，一起試</button>
         <a href="#drill-hand-transitions" data-resource="drill-hand-transitions">練習卡：手部連接</a>
-        <a href="#possibilities">一個元素，多種可能</a>
+        <a href="possibilities.html">瀏覽完整探索練習</a>
       </div>
     </article>
 
@@ -410,17 +190,11 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
   <noscript><div class="case-fallback"><p>用一個熟悉的 Groove 試兩種質感，每次只改變一項，例如停頓的長度。自己比較哪種感覺接近音樂，或請同伴描述他看見的變化。</p></div></noscript>
 </section>
 
-<section id="technical" aria-labelledby="technical-title"><div class="heading"><h2 id="technical-title">動作練習</h2></div><p class="section-intro">從已熟悉的動作開始，選一個想探索的細節。</p><section id="possibilities" class="exploration-group" aria-labelledby="possibilities-title">
-  <h3 id="possibilities-title">一個元素，多種可能</h3>
-  <p class="exploration-intro">先找三種不同做法，再逐步收集十種；今天也可以只留下一種。</p>
-  <button type="button" class="cta explore-start exploration-launch">選一個動作，一起試</button><div class="resource-grid">
-    <article class="resource-card explore-card"><h4>轉圈的多種可能</h4><p>我可以怎樣開始、轉動和結束？</p><p>先用小幅轉向，保持平衡，暈眩就停下。</p><button class="cta explore-start" data-element="turn">一起試</button></article>
-    <article class="resource-card explore-card"><h4>手部流動的多種可能</h4><p>同一條路徑，可以有不同感覺嗎？</p><p>保持腳步簡單，讓注意力留在手部。</p><button class="cta explore-start" data-element="hands">一起試</button></article>
-    <article class="resource-card explore-card"><h4>用頭部回應節奏</h4><p>同一段節奏，可以怎樣回應？</p><p>保持小幅舒適，避免快速甩頭或勉強轉頸。無音樂時可先自己哼節奏。</p><button class="cta explore-start" data-element="head">一起試</button></article>
-  </div>
-  <details class="exploration-guide"><summary>給引導者的介入理由與調整</summary><p>當孩子想變化卻想不到其他做法，先增加可選的動作可能性。每輪只改一個條件，讓她比較差別。若已有想法卻擔心被看見，先處理觀看方式與安全感。</p><p>卡住時減至兩種、縮小動作或由你示範一種；容易時才加另一個條件。最後撤掉限制，讓她選擇是否用進 freestyle。無音樂時留意身體感覺；有音樂時只選一個聲音回應。</p><p>可以問「哪兩種差別最大？」再把喜歡的一種接進熟悉動作，或換歌試試。無須完成紀錄或湊滿十種。</p></details>
-  <p class="link-back"><a href="#example">返回案例</a></p>
-</section>
+<section id="technical" aria-labelledby="technical-title"><div class="heading"><h2 id="technical-title">動作練習</h2></div><p class="section-intro">從已熟悉的動作開始，選一個想探索的細節。</p><div class="exploration-teaser" id="possibilities">
+  <h3>一個元素，多種可能</h3>
+  <p>從熟悉的腳步、手勢或節奏開始，試試能有多少種跳法。</p>
+  <a href="possibilities.html">打開探索專頁</a>
+</div>
 <h3 class="drill-heading">技術練習</h3>
 <div class="capabilities"><details id="drill-relaxed-funk" class="resource-card"><summary>鬆弛的 funk steps</summary><div class="resource-body"><p>基礎律動 × 動作質感</p><h3>同一個步伐，能否有較放鬆的感覺？</h3><ol><li>選一個老師教過、已熟悉的步伐，用舒服的速度做。</li><li>同一小段分別用較收緊、較放鬆的方式跳，觀察肩膀、膝蓋和呼吸的差別。</li><li>換回原本音樂，保留你喜歡的感覺，不必增加新動作。</li></ol><p><strong>可以觀察</strong>　能說出身體哪個部位的感覺改變了。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-floor-transitions" class="resource-card"><summary>地面動作與連接</summary><div class="resource-body"><p>動作材料 × 過渡</p><h3>能否自然進入，也順利離開？</h3><ol><li>只選老師已教過的一個地面動作。</li><li>分開練一個進入方式和一個退出方式，先放慢。</li><li>接回熟悉的站姿步伐，觀察前後是否仍有律動。</li></ol><p><strong>可以觀察</strong>　進入和退出都有清楚路徑，不需要臨時找支撐。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-hand-transitions" class="resource-card"><summary>手部連接</summary><div class="resource-body"><p>協調 × 變化</p><h3>手部動作之間，還有其他路徑嗎？</h3><ol><li>固定一個簡單腳步，選兩個手部動作。</li><li>分別試直接、繞行、停一下再接三種方式。</li><li>配同一段音樂，選最符合聲音感覺的一種。</li></ol><p><strong>可以觀察</strong>　能指出自己選擇這條連接路徑的原因。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-turn-balance" class="resource-card"><summary>轉圈重心不穩</summary><div class="resource-body"><p>重心 × 轉向</p><h3>先把轉向的結束位置找清楚。</h3><ol><li>從四分之一圈開始，留意支撐腳與結束方向。</li><li>穩定後再試半圈，不急著加速度或圈數。</li><li>結束後接一個簡單步伐，看看是否需要額外小步才能站穩。</li></ol><p><strong>可以觀察</strong>　可以較穩定地結束轉向並接下一步。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-turns-on-beat" class="resource-card"><summary>左右急轉跟不到拍</summary><div class="resource-body"><p>時機 × 重心 × 節奏</p><h3>失拍是在哪個轉換發生的？</h3><ol><li>去掉手部動作，只保留踏步與左右轉向。</li><li>用較慢速度做同一小段，找出哪一步開始趕拍。</li><li>先練那個轉換，再放回音樂；必要時請老師檢查步法和重心。</li></ol><p><strong>可以觀察</strong>　能找到具體卡住的一步，而非只覺得整段很亂。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-expression" class="resource-card"><summary>表情與眼神</summary><div class="resource-body"><p>表演態度 × 交流</p><h3>我希望對方感受到什麼？</h3><ol><li>選俏皮、冷靜或強勢其中一種意圖。</li><li>用相同的熟悉動作跳 20 秒，讓眼神與朝向支持這個意圖。</li><li>請觀看者描述感受；不先告訴他標準答案。</li></ol><p><strong>可以觀察</strong>　觀看者能描述一個與你意圖接近的感覺。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-sharp-turns" class="resource-card"><summary>急轉的完成與銜接</summary><div class="resource-body"><p>身體控制 × 連接</p><h3>轉得清楚，比一開始就轉得快更重要。</h3><ol><li>選一個熟悉步伐，接一次小角度轉向。</li><li>先確認轉前與轉後的支撐位置，再逐步回到舒服速度。</li><li>加入下一個動作，觀察轉向是否打斷整段律動。</li></ol><p><strong>可以觀察</strong>　能完成轉向並接下一步，不只追求速度。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-single-foot-slide" class="resource-card"><summary>單腳 sliding</summary><div class="resource-body"><p>支撐 × 移動 × 控制</p><h3>支撐腳和移動腳的工作清楚嗎？</h3><ol><li>先請老師確認所練 sliding 的方式與適合地面。</li><li>依老師方法，分清承重與移動，先做小幅度。</li><li>接入一個熟悉步伐，觀察重心轉移是否清楚。</li></ol><p><strong>可以觀察</strong>　知道哪隻腳承重，並能有控制地轉換。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details><details id="drill-same-move-new-song" class="resource-card"><summary>換歌，保留同一動作</summary><div class="resource-body"><p>音樂理解 × 即興選擇</p><h3>音樂換了，身體的感覺有沒有變？</h3><ol><li>選一個熟悉動作，配兩首感覺不同的歌曲。</li><li>每次只改一項：大小、重心高低或用力方式。</li><li>說出你聽到的差別，以及你選擇改變什麼。</li></ol><p><strong>可以觀察</strong>　能說明一個音樂差別和相應的動作選擇。</p><p>試完可以回到自由跳，決定要保留哪個做法。</p><a href="#example" class="resource-return" hidden>回到剛才的案例 ↑</a></div></details></div></section>
 
@@ -683,6 +457,8 @@ for (const link of document.querySelectorAll("[data-choose]")) {
   link.addEventListener("click", () => chooseRoute(link.dataset.choose));
 }
 
+if (new URLSearchParams(location.search).get("listen") === "1") chooseRoute("music");
+
 song.addEventListener("change", () => {
   const file = song.files[0];
   if (!file) return;
@@ -806,169 +582,16 @@ document.querySelectorAll(".resource-return").forEach(link => {
 window.addEventListener("hashchange", () => revealResource(location.hash.slice(1)));
 revealResource(location.hash.slice(1));
 </script>
-<dialog class="practice explore-dialog" id="explore-dialog" aria-labelledby="explore-title">
-  <form method="dialog" class="practice-top"><button class="plain-button">今天到這裡</button></form>
-  <h2 id="explore-title" tabindex="-1"></h2>
-
-  <div id="explore-pick">
-    <div class="step-choices">
-      <button type="button" class="plain-button" data-pick-element="turn">轉圈的多種可能</button>
-      <button type="button" class="plain-button" data-pick-element="hands">手部流動的多種可能</button>
-      <button type="button" class="plain-button" data-pick-element="head">用頭部回應節奏</button>
-    </div>
-  </div>
-
-  <div id="explore-context-step" hidden>
-    <p id="explore-element"></p>
-    <div class="step-choices">
-      <button type="button" class="plain-button" data-explore-mode="silent">無音樂探索</button>
-      <button type="button" class="plain-button" data-explore-mode="music">跟音樂探索</button>
-    </div>
-    <button type="button" class="explore-back" data-explore-back="pick">返回選動作</button>
-  </div>
-
-  <div id="explore-round" hidden>
-    <p id="explore-question"></p>
-    <p id="explore-context"></p>
-    <p id="explore-hint" aria-live="polite"></p>
-    <button type="button" id="explore-next" class="cta">換一個提示，再試</button>
-    <p id="explore-note" class="explore-note"></p>
-    <details id="explore-compare">
-      <summary>想再往前一步</summary>
-      <p>選兩種比較差別，把喜歡的一種接進熟悉動作。也可以換歌試試，逐步收集十種，不必一次完成。</p>
-    </details>
-    <details id="explore-audio" hidden>
-      <summary>選擇本機音樂</summary>
-      <div id="explore-music"></div>
-    </details>
-    <button type="button" class="explore-back" data-explore-back="context">返回選音樂情境</button>
-  </div>
-
-  <button type="button" class="plain-button" id="explore-listen">只想享受音樂</button>
-</dialog>
+<script src="element-exploration.js"></script>
 <script>
-const explorationData = {
-  "turn": {
-    "title": "轉圈的多種可能",
-    "question": "我可以怎樣開始、轉動和結束？",
-    "hints": [
-      "改變轉動方向",
-      "改變起始姿勢與結束姿勢",
-      "用不同部位帶動",
-      "加入一次停頓"
-    ],
-    "note": "先用小幅轉向，保持平衡，暈眩就停下。"
-  },
-  "hands": {
-    "title": "手部流動的多種可能",
-    "question": "同一條路徑，可以有不同感覺嗎？",
-    "hints": [
-      "直線換成曲線",
-      "單手換成雙手",
-      "連續換成斷續",
-      "輕柔換成有重量"
-    ],
-    "note": "保持腳步簡單，讓注意力留在手部。"
-  },
-  "head": {
-    "title": "用頭部回應節奏",
-    "question": "同一段節奏，可以怎樣回應？",
-    "hints": [
-      "點頭或輕微側傾",
-      "加入停頓",
-      "只回應其中一個拍點",
-      "用同一動作選不同拍點"
-    ],
-    "note": "保持小幅舒適，避免快速甩頭或勉強轉頸。無音樂時可先自己哼節奏。"
-  }
-};
-const explorationDialog = document.getElementById("explore-dialog");
-const explorationTitle = document.getElementById("explore-title");
-const explorationSteps = {
-  pick: document.getElementById("explore-pick"),
-  context: document.getElementById("explore-context-step"),
-  round: document.getElementById("explore-round")
-};
-const explorationHint = document.getElementById("explore-hint");
-const explorationAudio = document.getElementById("explore-audio");
-let currentExploration;
-let currentHintIndex = 0;
-
-function showExplorationStep(step, title) {
-  for (const [name, panel] of Object.entries(explorationSteps)) {
-    panel.hidden = name !== step;
-  }
-  explorationTitle.textContent = title;
-  explorationTitle.focus();
-}
-
-function pickExploration(element) {
-  currentExploration = explorationData[element];
-  document.getElementById("explore-element").textContent = currentExploration.title;
-  showExplorationStep("context", "選擇音樂情境");
-}
-
-function startExplorationRound(mode) {
-  currentHintIndex = 0;
-  document.getElementById("explore-question").textContent = currentExploration.question;
-  document.getElementById("explore-context").textContent = mode === "music"
-    ? "播你選的音樂，挑一個聲音回應。"
-    : "留意身體感覺，試出幾種不同做法。";
-  explorationHint.textContent = currentExploration.hints[0];
-  document.getElementById("explore-note").textContent = currentExploration.note;
-  document.getElementById("explore-compare").open = false;
-  explorationAudio.hidden = mode !== "music";
-  explorationAudio.open = Boolean(audioUrl) && mode === "music";
-  if (mode === "music") {
-    document.getElementById("explore-music").append(musicControls);
-  } else {
-    player.pause();
-    musicHome.append(musicControls);
-  }
-  showExplorationStep("round", currentExploration.title);
-}
-
-for (const button of document.querySelectorAll(".explore-start")) {
-  button.addEventListener("click", () => {
-    explorationDialog.showModal();
-    if (button.dataset.element) {
-      pickExploration(button.dataset.element);
-    } else {
-      showExplorationStep("pick", "你想探索哪一個動作？");
-    }
-  });
-}
-for (const button of explorationDialog.querySelectorAll("[data-pick-element]")) {
-  button.addEventListener("click", () => pickExploration(button.dataset.pickElement));
-}
-for (const button of explorationDialog.querySelectorAll("[data-explore-mode]")) {
-  button.addEventListener("click", () => startExplorationRound(button.dataset.exploreMode));
-}
-for (const button of explorationDialog.querySelectorAll("[data-explore-back]")) {
-  button.addEventListener("click", () => {
-    player.pause();
-    const step = button.dataset.exploreBack;
-    const title = step === "pick" ? "你想探索哪一個動作？" : "選擇音樂情境";
-    showExplorationStep(step, title);
-  });
-}
-document.getElementById("explore-next").addEventListener("click", () => {
-  currentHintIndex = (currentHintIndex + 1) % currentExploration.hints.length;
-  explorationHint.textContent = currentExploration.hints[currentHintIndex];
-});
-document.getElementById("explore-listen").addEventListener("click", () => {
-  explorationDialog.close("listen");
-});
-explorationDialog.addEventListener("close", () => {
-  const listening = explorationDialog.returnValue === "listen";
-  explorationDialog.returnValue = "";
-  musicHome.append(musicControls);
-  if (listening) {
+setupElementExploration({
+  controls: musicControls,
+  audioHome: musicHome,
+  player,
+  listen: () => {
     chooseRoute("music");
     document.querySelector("#entry").scrollIntoView();
     document.querySelector('[data-route="music"]').focus({ preventScroll: true });
-  } else {
-    player.pause();
   }
 });
 </script>
