@@ -244,3 +244,46 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
 @media (max-width: 440px) {
   .step-choices-elements { grid-template-columns: 1fr; }
 }
+
+
+/* Musical decision-making */
+.decision-subtitle { display: block; font: 700 .95rem/1.6 var(--sans); color: var(--muted); }
+.decision-intro { max-width: 45em; }
+.decision-grid, .decision-fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.decision-grid { margin: 16px 0; }
+.decision-grid article, .decision-practice {
+  background: var(--light);
+  border: 1px solid var(--edge);
+  border-radius: 9px;
+  padding: 14px 16px;
+}
+.decision-grid h3 { font-size: 1rem; }
+.decision-grid p, .decision-details p { color: var(--muted); margin-top: 5px; }
+.decision-fields {
+  margin: 12px 0;
+  padding: 8px 0 0;
+  min-width: 0;
+  border: 0;
+}
+.decision-fields legend, .decision-details summary { font-weight: 750; }
+.decision-fields label { display: grid; gap: 4px; font-size: .9rem; }
+.decision-fields select {
+  width: 100%;
+  min-height: 44px;
+  padding: 4px 8px;
+  background: var(--paper);
+  border: 1px solid #82968a;
+  border-radius: 6px;
+  color: var(--ink);
+}
+#decision-rounds { padding: 10px 15px 10px 33px; margin: 12px 0; background: var(--mint); border-radius: 6px; }
+.decision-battle { margin-top: 10px; padding: 10px 14px; border: 1px solid var(--edge); border-radius: 8px; }
+.decision-links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; font-size: .9rem; }
+.decision-links a { padding-block: 4px; }
+@media (max-width: 620px) {
+  .decision-grid, .decision-fields { grid-template-columns: 1fr; gap: 8px; }
+}
