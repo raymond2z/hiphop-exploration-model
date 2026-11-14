@@ -170,6 +170,62 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
   .hero .actions { margin-top: 14px; }
   .scenario-link { padding: 10px 12px; }
 }
+
+/* Homepage entrances and focused practice */
+.hero { display: block; padding-block: clamp(22px, 4vw, 44px) 20px; }
+.hero h1 { margin-bottom: 10px; }
+.home-entries {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding-bottom: clamp(22px, 4vw, 40px);
+}
+.home-entry {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 14px 16px;
+  min-height: 78px;
+  border: 1px solid #82968a;
+  border-radius: 8px;
+  background: #29463a;
+  color: #fff9ec;
+  text-decoration: none;
+}
+.home-entry:hover { background: #38574a; }
+.home-entry strong { font-size: 1.03rem; }
+.home-entry span { color: #e5edde; font-size: .86rem; }
+.home-entry-music { background: #f8d275; color: var(--ink); border-color: #f8d275; }
+.home-entry-music:hover { background: #fce3a8; }
+.home-entry-music span { color: #394a37; }
+.home-entry:focus-visible { outline-color: #fcf9ed; }
+.exploration-launch { margin-bottom: 14px; }
+#explore-panel > .explore-start { margin-top: 9px; }
+.practice-links { align-items: center; }
+.step-choices { display: grid; gap: 9px; margin-block: 12px; }
+.step-choices button { text-align: left; background: var(--paper); }
+.step-choices button:hover { background: var(--mint); }
+.explore-dialog h2:focus { outline: 0; }
+.explore-dialog [id^="explore-"] > p { margin-block: 7px 10px; }
+.explore-dialog #explore-hint { padding: 13px 15px; font-size: 1.12rem; }
+.explore-note { color: var(--muted); font-size: .85rem; }
+.explore-back {
+  display: block;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: .22em;
+}
+#explore-listen { margin-top: 12px; }
+#explore-audio, #explore-compare { margin-block: 9px; }
+#explore-music { margin-top: 6px; }
+@media (max-width: 620px) {
+  .home-entries { grid-template-columns: 1fr; gap: 7px; }
+  .home-entry { padding: 8px 12px; min-height: 0; gap: 0; }
+}
 </style>
 </head>
 <body id="top">
@@ -181,10 +237,14 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
       <div class="kicker">舞蹈實踐 × 教育心理 × Hip-hop 文化</div>
       <h1>探索能力發展模型</h1>
       <p>從孩子的 Freestyle 表現出發，找出值得試的下一步，再把選擇慢慢交還給孩子。</p>
-      <div class="actions"><a class="cta" href="#scenarios">從觀察到的情況開始 <span aria-hidden="true">↓</span></a><a class="quiet" href="#entry" data-choose="music">只想享受音樂 <span aria-hidden="true">♪</span></a></div>
+
     </div>
-    <div class="record" aria-hidden="true"><div class="label">聽見・感受<br>選擇・改變<small>FREESTYLE</small></div><span class="orbit"></span></div>
   </div>
+  <nav class="home-entries" aria-label="選擇今天的入口">
+    <a class="home-entry" href="#scenarios"><strong>我觀察到一個情況</strong><span>從正在發生的情境找引導方法。</span></a>
+    <a class="home-entry" href="#technical"><strong>我想挑個練習</strong><span>探索轉圈、手部流動或節奏。</span></a>
+    <a class="home-entry home-entry-music" href="#entry" data-choose="music"><strong>只想享受音樂</strong><span>播首喜歡的歌，按自己的方式聽。</span></a>
+  </nav>
 </div>
 </header>
 
@@ -216,6 +276,7 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
   <div class="path" id="explore-panel" hidden>
     <div class="path-head"><h3>選一件你想改變的事。</h3><a class="inline-link" href="#example" data-case="texture">看聲音與質感案例 ↓</a></div>
     <p>用同一個熟悉的 Groove 跳兩次。你可以改停頓、方向或力道，選一項就夠。試完由你決定保留、再試或停下來。</p>
+    <button type="button" class="cta explore-start">選一個動作，一起試</button>
   </div>
   <div class="path" id="share-panel" hidden>
     <div class="path-head"><h3>看看動作可以怎樣接下去。</h3><a class="inline-link" href="#example" data-case="cypher">看交流案例 ↓</a></div>
@@ -258,7 +319,9 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
       <h3>想練這一步</h3>
       <p>若孩子想換接法，可以先保留原本的腳步，拿兩個熟悉的手部動作試三種連接。</p>
       <div class="practice-links">
-        <a href="#drill-hand-transitions" data-resource="drill-hand-transitions">練習卡：手部連接</a><a href="#possibilities">一個元素，多種可能</a>
+        <button type="button" class="cta explore-start">選一個動作，一起試</button>
+        <a href="#drill-hand-transitions" data-resource="drill-hand-transitions">練習卡：手部連接</a>
+        <a href="#possibilities">一個元素，多種可能</a>
       </div>
     </article>
 
@@ -349,7 +412,8 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
 
 <section id="technical" aria-labelledby="technical-title"><div class="heading"><h2 id="technical-title">動作練習</h2></div><p class="section-intro">從已熟悉的動作開始，選一個想探索的細節。</p><section id="possibilities" class="exploration-group" aria-labelledby="possibilities-title">
   <h3 id="possibilities-title">一個元素，多種可能</h3>
-  <p class="exploration-intro">屬於「變化與連接」與「即興選擇」。先找三種不同做法，再逐步收集十種；今天也可以只留下一種。</p><div class="resource-grid">
+  <p class="exploration-intro">先找三種不同做法，再逐步收集十種；今天也可以只留下一種。</p>
+  <button type="button" class="cta explore-start exploration-launch">選一個動作，一起試</button><div class="resource-grid">
     <article class="resource-card explore-card"><h4>轉圈的多種可能</h4><p>我可以怎樣開始、轉動和結束？</p><p>先用小幅轉向，保持平衡，暈眩就停下。</p><button class="cta explore-start" data-element="turn">一起試</button></article>
     <article class="resource-card explore-card"><h4>手部流動的多種可能</h4><p>同一條路徑，可以有不同感覺嗎？</p><p>保持腳步簡單，讓注意力留在手部。</p><button class="cta explore-start" data-element="hands">一起試</button></article>
     <article class="resource-card explore-card"><h4>用頭部回應節奏</h4><p>同一段節奏，可以怎樣回應？</p><p>保持小幅舒適，避免快速甩頭或勉強轉頸。無音樂時可先自己哼節奏。</p><button class="cta explore-start" data-element="head">一起試</button></article>
@@ -742,16 +806,171 @@ document.querySelectorAll(".resource-return").forEach(link => {
 window.addEventListener("hashchange", () => revealResource(location.hash.slice(1)));
 revealResource(location.hash.slice(1));
 </script>
-<dialog class="practice" id="explore-dialog" aria-labelledby="explore-title"><form method="dialog" class="practice-top"><button class="plain-button">今天到這裡</button></form><h2 id="explore-title"></h2><p id="explore-question"></p><label>今天的情境 <select id="explore-mode"><option value="silent">無音樂探索</option><option value="music">跟音樂探索</option></select></label><p id="explore-context">先留意身體的感覺，找三種不同做法。</p><p id="explore-hint" aria-live="polite"></p><button id="explore-next" class="cta">換一個提示，再試</button><p id="explore-note"></p><details><summary>想再往前一步</summary><p>選兩種比較差別，把喜歡的一種接進熟悉動作。也可以換歌試試，逐步收集十種，不必一次完成。</p></details><button class="plain-button" id="explore-listen">只想享受音樂</button></dialog>
+<dialog class="practice explore-dialog" id="explore-dialog" aria-labelledby="explore-title">
+  <form method="dialog" class="practice-top"><button class="plain-button">今天到這裡</button></form>
+  <h2 id="explore-title" tabindex="-1"></h2>
+
+  <div id="explore-pick">
+    <div class="step-choices">
+      <button type="button" class="plain-button" data-pick-element="turn">轉圈的多種可能</button>
+      <button type="button" class="plain-button" data-pick-element="hands">手部流動的多種可能</button>
+      <button type="button" class="plain-button" data-pick-element="head">用頭部回應節奏</button>
+    </div>
+  </div>
+
+  <div id="explore-context-step" hidden>
+    <p id="explore-element"></p>
+    <div class="step-choices">
+      <button type="button" class="plain-button" data-explore-mode="silent">無音樂探索</button>
+      <button type="button" class="plain-button" data-explore-mode="music">跟音樂探索</button>
+    </div>
+    <button type="button" class="explore-back" data-explore-back="pick">返回選動作</button>
+  </div>
+
+  <div id="explore-round" hidden>
+    <p id="explore-question"></p>
+    <p id="explore-context"></p>
+    <p id="explore-hint" aria-live="polite"></p>
+    <button type="button" id="explore-next" class="cta">換一個提示，再試</button>
+    <p id="explore-note" class="explore-note"></p>
+    <details id="explore-compare">
+      <summary>想再往前一步</summary>
+      <p>選兩種比較差別，把喜歡的一種接進熟悉動作。也可以換歌試試，逐步收集十種，不必一次完成。</p>
+    </details>
+    <details id="explore-audio" hidden>
+      <summary>選擇本機音樂</summary>
+      <div id="explore-music"></div>
+    </details>
+    <button type="button" class="explore-back" data-explore-back="context">返回選音樂情境</button>
+  </div>
+
+  <button type="button" class="plain-button" id="explore-listen">只想享受音樂</button>
+</dialog>
 <script>
-const explorationData=[["turn", "轉圈的多種可能", "我可以怎樣開始、轉動和結束？", ["改變轉動方向", "改變起始姿勢與結束姿勢", "用不同部位帶動", "加入一次停頓"], "先用小幅轉向，保持平衡，暈眩就停下。"], ["hands", "手部流動的多種可能", "同一條路徑，可以有不同感覺嗎？", ["直線換成曲線", "單手換成雙手", "連續換成斷續", "輕柔換成有重量"], "保持腳步簡單，讓注意力留在手部。"], ["head", "用頭部回應節奏", "同一段節奏，可以怎樣回應？", ["點頭或輕微側傾", "加入停頓", "只回應其中一個拍點", "用同一動作選不同拍點"], "保持小幅舒適，避免快速甩頭或勉強轉頸。無音樂時可先自己哼節奏。"]];
-const explorationDialog=document.getElementById('explore-dialog');let explorationCurrent, explorationIndex=0;
-document.querySelectorAll('.explore-start').forEach(button=>button.addEventListener('click',()=>{explorationCurrent=explorationData.find(c=>c[0]===button.dataset.element);explorationIndex=0;document.getElementById('explore-title').textContent=explorationCurrent[1];document.getElementById('explore-question').textContent=explorationCurrent[2];document.getElementById('explore-hint').textContent=explorationCurrent[3][0];document.getElementById('explore-note').textContent=explorationCurrent[4];explorationDialog.showModal();}));
-document.getElementById('explore-next').addEventListener('click',()=>{explorationIndex=(explorationIndex+1)%explorationCurrent[3].length;document.getElementById('explore-hint').textContent=explorationCurrent[3][explorationIndex];});
-document.getElementById('explore-mode').addEventListener('change',event=>{document.getElementById('explore-context').textContent=event.target.value==='music'?'播放你選的音樂，挑一個聲音回應。也可用同一做法回應兩種聲音。':'先留意身體的感覺，找三種不同做法。';});
-document.getElementById('explore-listen').addEventListener('click',()=>{explorationDialog.close();
-  chooseRoute("music");
-  document.querySelector("#entry").scrollIntoView();
-  document.querySelector('[data-route="music"]').focus({ preventScroll: true });});
-</script></body>
+const explorationData = {
+  "turn": {
+    "title": "轉圈的多種可能",
+    "question": "我可以怎樣開始、轉動和結束？",
+    "hints": [
+      "改變轉動方向",
+      "改變起始姿勢與結束姿勢",
+      "用不同部位帶動",
+      "加入一次停頓"
+    ],
+    "note": "先用小幅轉向，保持平衡，暈眩就停下。"
+  },
+  "hands": {
+    "title": "手部流動的多種可能",
+    "question": "同一條路徑，可以有不同感覺嗎？",
+    "hints": [
+      "直線換成曲線",
+      "單手換成雙手",
+      "連續換成斷續",
+      "輕柔換成有重量"
+    ],
+    "note": "保持腳步簡單，讓注意力留在手部。"
+  },
+  "head": {
+    "title": "用頭部回應節奏",
+    "question": "同一段節奏，可以怎樣回應？",
+    "hints": [
+      "點頭或輕微側傾",
+      "加入停頓",
+      "只回應其中一個拍點",
+      "用同一動作選不同拍點"
+    ],
+    "note": "保持小幅舒適，避免快速甩頭或勉強轉頸。無音樂時可先自己哼節奏。"
+  }
+};
+const explorationDialog = document.getElementById("explore-dialog");
+const explorationTitle = document.getElementById("explore-title");
+const explorationSteps = {
+  pick: document.getElementById("explore-pick"),
+  context: document.getElementById("explore-context-step"),
+  round: document.getElementById("explore-round")
+};
+const explorationHint = document.getElementById("explore-hint");
+const explorationAudio = document.getElementById("explore-audio");
+let currentExploration;
+let currentHintIndex = 0;
+
+function showExplorationStep(step, title) {
+  for (const [name, panel] of Object.entries(explorationSteps)) {
+    panel.hidden = name !== step;
+  }
+  explorationTitle.textContent = title;
+  explorationTitle.focus();
+}
+
+function pickExploration(element) {
+  currentExploration = explorationData[element];
+  document.getElementById("explore-element").textContent = currentExploration.title;
+  showExplorationStep("context", "選擇音樂情境");
+}
+
+function startExplorationRound(mode) {
+  currentHintIndex = 0;
+  document.getElementById("explore-question").textContent = currentExploration.question;
+  document.getElementById("explore-context").textContent = mode === "music"
+    ? "播你選的音樂，挑一個聲音回應。"
+    : "留意身體感覺，試出幾種不同做法。";
+  explorationHint.textContent = currentExploration.hints[0];
+  document.getElementById("explore-note").textContent = currentExploration.note;
+  document.getElementById("explore-compare").open = false;
+  explorationAudio.hidden = mode !== "music";
+  explorationAudio.open = Boolean(audioUrl) && mode === "music";
+  if (mode === "music") {
+    document.getElementById("explore-music").append(musicControls);
+  } else {
+    player.pause();
+    musicHome.append(musicControls);
+  }
+  showExplorationStep("round", currentExploration.title);
+}
+
+for (const button of document.querySelectorAll(".explore-start")) {
+  button.addEventListener("click", () => {
+    explorationDialog.showModal();
+    if (button.dataset.element) {
+      pickExploration(button.dataset.element);
+    } else {
+      showExplorationStep("pick", "你想探索哪一個動作？");
+    }
+  });
+}
+for (const button of explorationDialog.querySelectorAll("[data-pick-element]")) {
+  button.addEventListener("click", () => pickExploration(button.dataset.pickElement));
+}
+for (const button of explorationDialog.querySelectorAll("[data-explore-mode]")) {
+  button.addEventListener("click", () => startExplorationRound(button.dataset.exploreMode));
+}
+for (const button of explorationDialog.querySelectorAll("[data-explore-back]")) {
+  button.addEventListener("click", () => {
+    player.pause();
+    const step = button.dataset.exploreBack;
+    const title = step === "pick" ? "你想探索哪一個動作？" : "選擇音樂情境";
+    showExplorationStep(step, title);
+  });
+}
+document.getElementById("explore-next").addEventListener("click", () => {
+  currentHintIndex = (currentHintIndex + 1) % currentExploration.hints.length;
+  explorationHint.textContent = currentExploration.hints[currentHintIndex];
+});
+document.getElementById("explore-listen").addEventListener("click", () => {
+  explorationDialog.close("listen");
+});
+explorationDialog.addEventListener("close", () => {
+  const listening = explorationDialog.returnValue === "listen";
+  explorationDialog.returnValue = "";
+  musicHome.append(musicControls);
+  if (listening) {
+    chooseRoute("music");
+    document.querySelector("#entry").scrollIntoView();
+    document.querySelector('[data-route="music"]').focus({ preventScroll: true });
+  } else {
+    player.pause();
+  }
+});
+</script>
+</body>
 </html>
