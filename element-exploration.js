@@ -214,7 +214,7 @@ function setupElementExploration({ controls, audioHome, player, listen }) {
   const hint = document.getElementById("explore-hint");
   const audio = document.getElementById("explore-audio");
   const backingPanel = document.getElementById("explore-backing");
-  const backing = setupPracticeBacking(backingPanel);
+  const backing = HipHopAudio.setupPracticeBacking(backingPanel);
   const compare = document.getElementById("explore-compare");
   const picker = document.getElementById("explore-pick");
   const context = document.getElementById("explore-context-step");
@@ -259,7 +259,7 @@ function setupElementExploration({ controls, audioHome, player, listen }) {
 
   for (const button of document.querySelectorAll(".explore-start")) {
     button.addEventListener("click", () => {
-      stopPracticeBacking();
+      HipHopAudio.stopPracticeBacking();
       player.pause();
       if (button.dataset.element) {
         pickElement(button.dataset.element);

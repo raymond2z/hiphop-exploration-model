@@ -1,4 +1,21 @@
-const clipMixerTracks = [
+import type { DrumPattern } from "./beat-pattern";
+import {
+  backingTone, playPracticeBacking, practiceBackingVolume, scheduleDrumStep, stopPracticeBacking,
+  updatePracticeBackingVolume, type ClipPlaybackOwner
+} from "./engine";
+import { requireElement } from "./dom";
+
+type PitchedLayer = "bass" | "chords" | "melody";
+type Layer = "drums" | PitchedLayer;
+type DrumClip = { name: string; pattern: DrumPattern };
+type ClipNote = [step: number, beats: number, ...pitches: number[]];
+type PitchedClip = { name: string; notes: ClipNote[] };
+type Clip = DrumClip | PitchedClip;
+type ClipTrack =
+  | { id: "drums"; label: string; clips: DrumClip[] }
+  | { id: PitchedLayer; label: string; clips: PitchedClip[]; volume: number; type: OscillatorType };
+
+const clipMixerTracks: ClipTrack[] = [
   { id: "drums", label: "鼓", clips: [
     { name: "穩拍", pattern: { kick: [0, 8], snare: [4, 12], hat: [0, 4, 8, 12] } },
     { name: "錯落", pattern: { kick: [0, 6, 10], snare: [4, 12], hat: [0, 2, 4, 6, 8, 10, 12, 14] } },
@@ -25,7 +42,7 @@ const clipMixerTracks = [
   ] }
 ];
 
-function setupClipMixer(container) {
+export function setupClipMixer(container: HTMLElement) {
   container.innerHTML = `
     <p class="beat-instruction">點一張卡開始，也可以逐層疊加。播放中換卡會在下一小節生效。</p>
     <div class="clip-banks" aria-label="可疊加的音樂片段"></div>
@@ -42,14 +59,14 @@ function setupClipMixer(container) {
     </div>
     <p class="beat-status" role="status"></p>`;
 
-  const banks = container.querySelector(".clip-banks");
-  const stop = container.querySelector("[data-clip-stop]");
-  const tempo = container.querySelector("[data-clip-tempo]");
-  const volume = container.querySelector("[data-clip-volume]");
-  const status = container.querySelector(".beat-status");
-  const playingClips = new Map();
-  const queuedClips = new Map();
-  const pads = [];
+  const banks = requireElement<HTMLElement>(container, ".clip-banks");
+  const stop = requireElement<HTMLButtonElement>(container, "[data-clip-stop]");
+  const tempo = requireElement<HTMLInputElement>(container, "[data-clip-tempo]");
+  const volume = requireElement<HTMLInputElement>(container, "[data-clip-volume]");
+  const status = requireElement<HTMLElement>(container, ".beat-status");
+  const playingClips = new Map<Layer, { clip: Clip; start: number }>();
+  const queuedClips = new Map<Layer, Clip | null>();
+  const pads: { button: HTMLButtonElement; caption: HTMLSpanElement; track: ClipTrack; clip: Clip }[] = [];
   let playing = false;
 
   function render() {
@@ -63,8 +80,9 @@ function setupClipMixer(container) {
     }
   }
 
-  const owner = {
-    stepCount: 32,
+  const sceneSteps = 32;
+  const owner: ClipPlaybackOwner = {
+    stepCount: sceneSteps,
     bpm: () => tempo.valueAsNumber,
     outputGain: () => practiceBackingVolume(volume.valueAsNumber),
     drumsOn: () => true,
@@ -93,11 +111,12 @@ function setupClipMixer(container) {
       for (const track of clipMixerTracks) {
         const active = playingClips.get(track.id);
         if (!active) continue;
-        const offset = (step - active.start + owner.stepCount) % owner.stepCount;
-        if (track.id === "drums") {
+        const offset = (step - active.start + sceneSteps) % sceneSteps;
+        if ("pattern" in active.clip) {
           scheduleDrumStep(playback.drums, active.clip.pattern, offset % 16, time, stepSeconds);
           continue;
         }
+        if (track.id === "drums") continue;
         const output = track.id === "bass" ? playback.bass : playback.output;
         for (const [at, beats, ...pitches] of active.clip.notes) {
           if (at !== offset) continue;
@@ -152,10 +171,10 @@ function setupClipMixer(container) {
   render();
   stop.addEventListener("click", () => stopPracticeBacking(owner));
   tempo.addEventListener("input", () => {
-    container.querySelector("[data-clip-bpm]").value = tempo.value;
+    requireElement<HTMLOutputElement>(container, "[data-clip-bpm]").value = tempo.value;
   });
   volume.addEventListener("input", () => {
-    container.querySelector("[data-clip-volume-label]").value = volume.value;
+    requireElement<HTMLOutputElement>(container, "[data-clip-volume-label]").value = volume.value;
     updatePracticeBackingVolume(owner);
   });
   const panel = container.closest("details");
@@ -164,5 +183,3 @@ function setupClipMixer(container) {
   });
   if (panel && location.hash === `#${panel.id}`) panel.open = true;
 }
-
-document.querySelectorAll("[data-clip-mixer]").forEach(setupClipMixer);

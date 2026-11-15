@@ -458,9 +458,7 @@
 
 <footer class="wrap footer">探索能力發展模型 · Hip-hop Freestyle 學習框架</footer>
 
-<script src="practice-backing.js?v=clip-mixer"></script>
-<script src="beat-editor.js?v=2" defer></script>
-<script src="clip-mixer.js?v=1" defer></script>
+<script src="assets/audio/site-audio.js?v=typescript-1"></script>
 <script>
 const cases = {
   texture: [
@@ -546,11 +544,11 @@ const routes = [...document.querySelectorAll("[data-route]")];
 const player = document.querySelector("#player");
 const song = document.querySelector("#song");
 const musicStatus = document.querySelector("#music-status");
-setupPracticeBacking(document.getElementById("listen-backing"));
+HipHopAudio.setupPracticeBacking(document.getElementById("listen-backing"));
 let audioUrl;
 
 function chooseRoute(name) {
-  stopPracticeBacking();
+  HipHopAudio.stopPracticeBacking();
   for (const button of routes) {
     const selected = button.dataset.route === name;
     button.setAttribute("aria-pressed", String(selected));
@@ -565,7 +563,7 @@ const switchMoment = document.getElementById("decision-when");
 const decisionSource = document.getElementById("decision-source");
 const decisionBackingPanel = document.getElementById("decision-backing-panel");
 const decisionOwnNote = document.getElementById("decision-own-note");
-const decisionBacking = setupPracticeBacking(document.getElementById("decision-backing"));
+const decisionBacking = HipHopAudio.setupPracticeBacking(document.getElementById("decision-backing"));
 
 function showDecisionOptions(field, available) {
   for (const option of field.options) {
@@ -662,7 +660,7 @@ openPractice.addEventListener("click", () => {
   const practiceArticle = document.getElementById("practice-" + caseSelect.value);
   if (!practiceArticle) return;
 
-  stopPracticeBacking();
+  HipHopAudio.stopPracticeBacking();
   for (const article of practiceArticles) article.hidden = article !== practiceArticle;
   const title = practiceArticle.querySelector("h2");
   practice.setAttribute("aria-labelledby", title.id);
@@ -740,7 +738,7 @@ document.querySelectorAll(".resource-return").forEach(link => {
 window.addEventListener("hashchange", () => revealResource(location.hash.slice(1)));
 revealResource(location.hash.slice(1));
 </script>
-<script src="element-exploration.js?v=practice-backing"></script>
+<script src="element-exploration.js?v=typescript-1"></script>
 <script>
 setupElementExploration({
   controls: musicControls,

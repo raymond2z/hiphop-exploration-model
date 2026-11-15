@@ -1,39 +1,14 @@
-const beatEditorTracks = [
-  { id: "kick", label: "踢鼓" },
-  { id: "snare", label: "小鼓" },
-  { id: "hat", label: "Hi-hat" }
-];
-const beatEditorSteps = 16;
-const beatEditorBpm = { min: 60, max: 130 };
-const beatEditorStorageKey = "hiphop-exploration.my-beat.v1";
+import {
+  beatEditorBpm, beatEditorSteps, defaultPracticeVolume, drumTracks, makePracticeDrumPattern,
+  readSavedPracticeBeat, savePracticeBeat, type DrumTrack
+} from "./beat-pattern";
+import {
+  backingPatterns, playPracticeBacking, practiceBackingVolume, stopPracticeBacking,
+  updatePracticeBackingVolume, type DrumPlaybackOwner
+} from "./engine";
+import { requireElement } from "./dom";
 
-function makePracticeDrumPattern(usePreset) {
-  return Object.fromEntries(beatEditorTracks.map(({ id }) => [
-    id,
-    usePreset ? drumSteps[id].filter(step => step < beatEditorSteps) : []
-  ]));
-}
-
-function readSavedPracticeBeat() {
-  try {
-    const stored = JSON.parse(localStorage.getItem(beatEditorStorageKey));
-    if (!stored || !Number.isInteger(stored.bpm)
-      || stored.bpm < beatEditorBpm.min || stored.bpm > beatEditorBpm.max) return null;
-    const tracks = beatEditorTracks.map(({ id }) => stored.pattern?.[id]);
-    const valid = tracks.every(steps => Array.isArray(steps)
-      && steps.every(step => Number.isInteger(step) && step >= 0 && step < beatEditorSteps));
-    if (!valid) return null;
-    return {
-      bpm: stored.bpm,
-      volume: Number.isInteger(stored.volume) && stored.volume >= 0 && stored.volume <= 100 ? stored.volume : 80,
-      pattern: Object.fromEntries(beatEditorTracks.map(({ id }, index) => [id, [...new Set(tracks[index])]]))
-    };
-  } catch {
-    return null;
-  }
-}
-
-function setupBeatEditor(container) {
+export function setupBeatEditor(container: HTMLElement) {
   container.innerHTML = `
     <p class="beat-instruction">點格子加減鼓點，再播放看看同一個動作怎樣回應。每拍四格，共四拍。</p>
     <div class="beat-grid" role="group" aria-label="節拍編輯格"></div>
@@ -53,28 +28,28 @@ function setupBeatEditor(container) {
     </div>
     <p class="beat-status" role="status"></p>`;
 
-  const board = container.querySelector(".beat-grid");
-  const play = container.querySelector("[data-beat-play]");
-  const tempo = container.querySelector('input[type="range"]');
-  const readout = container.querySelector("output");
-  const volume = container.querySelector("[data-beat-volume]");
-  const volumeReadout = container.querySelector("[data-beat-volume-label]");
-  const status = container.querySelector(".beat-status");
+  const board = requireElement<HTMLElement>(container, ".beat-grid");
+  const play = requireElement<HTMLButtonElement>(container, "[data-beat-play]");
+  const tempo = requireElement<HTMLInputElement>(container, 'input[type="range"]');
+  const readout = requireElement<HTMLOutputElement>(container, "output");
+  const volume = requireElement<HTMLInputElement>(container, "[data-beat-volume]");
+  const volumeReadout = requireElement<HTMLOutputElement>(container, "[data-beat-volume-label]");
+  const status = requireElement<HTMLElement>(container, ".beat-status");
   const saved = readSavedPracticeBeat();
   let pattern = saved?.pattern ?? makePracticeDrumPattern(true);
   let playing = false;
   let currentStep = -1;
-  let playheadTimer;
+  let playheadTimer: number | undefined;
 
-  const cells = [];
-  const columns = Array.from({ length: beatEditorSteps }, () => []);
+  const cells: { button: HTMLButtonElement; id: DrumTrack; step: number }[] = [];
+  const columns = Array.from({ length: beatEditorSteps }, (): HTMLButtonElement[] => []);
   for (let beat = 0; beat < beatEditorSteps / 4; beat++) {
     const group = document.createElement("fieldset");
     group.className = "beat-group";
     const legend = document.createElement("legend");
     legend.textContent = `第 ${beat + 1} 拍`;
     group.append(legend);
-    for (const { id, label } of beatEditorTracks) {
+    for (const { id, label } of drumTracks) {
       const row = document.createElement("div");
       row.className = "beat-track";
       row.dataset.track = id;
@@ -110,18 +85,18 @@ function setupBeatEditor(container) {
     }
   }
 
-  function setTempo(bpm) {
-    tempo.value = bpm;
+  function setTempo(bpm: number) {
+    tempo.value = String(bpm);
     readout.value = tempo.value;
   }
 
-  function markStep(step) {
+  function markStep(step: number) {
     columns[currentStep]?.forEach(button => button.classList.remove("is-current"));
     columns[step]?.forEach(button => button.classList.add("is-current"));
     currentStep = step;
   }
 
-  const owner = {
+  const owner: DrumPlaybackOwner = {
     stepCount: beatEditorSteps,
     preset: () => "drums",
     pattern: () => pattern,
@@ -162,26 +137,20 @@ function setupBeatEditor(container) {
       playPracticeBacking(owner);
     }
   });
-  container.querySelector("[data-beat-preset]").addEventListener("click", () => {
+  requireElement<HTMLButtonElement>(container, "[data-beat-preset]").addEventListener("click", () => {
     pattern = makePracticeDrumPattern(true);
     setTempo(backingPatterns.drums.bpm);
     drawCells();
     status.textContent = "已還原 Hip-hop 預設鼓型。";
   });
-  container.querySelector("[data-beat-clear]").addEventListener("click", () => {
+  requireElement<HTMLButtonElement>(container, "[data-beat-clear]").addEventListener("click", () => {
     pattern = makePracticeDrumPattern(false);
     drawCells();
     status.textContent = "已清空鼓點。";
   });
-  container.querySelector("[data-beat-save]").addEventListener("click", () => {
-    try {
-      localStorage.setItem(beatEditorStorageKey, JSON.stringify({
-        bpm: tempo.valueAsNumber, volume: volume.valueAsNumber, pattern
-      }));
-      status.textContent = "已儲存到這個瀏覽器的「我的節拍」。";
-    } catch {
-      status.textContent = "這個瀏覽器無法儲存節拍。";
-    }
+  requireElement<HTMLButtonElement>(container, "[data-beat-save]").addEventListener("click", () => {
+    const saved = savePracticeBeat({ bpm: tempo.valueAsNumber, volume: volume.valueAsNumber, pattern });
+    status.textContent = saved ? "已儲存到這個瀏覽器的「我的節拍」。" : "這個瀏覽器無法儲存節拍。";
   });
 
   const panel = container.closest("details");
@@ -190,10 +159,8 @@ function setupBeatEditor(container) {
   });
   if (panel && location.hash === `#${panel.id}`) panel.open = true;
   setTempo(saved?.bpm ?? backingPatterns.drums.bpm);
-  volume.value = saved?.volume ?? 80;
+  volume.value = String(saved?.volume ?? defaultPracticeVolume);
   volumeReadout.value = volume.value;
   drawCells();
   if (saved) status.textContent = "已載入「我的節拍」。";
 }
-
-document.querySelectorAll("[data-beat-editor]").forEach(setupBeatEditor);
