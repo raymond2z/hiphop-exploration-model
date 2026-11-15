@@ -485,3 +485,44 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
 .beat-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 7px 12px; }
 .beat-status { color: var(--muted); font-size: .85rem; }
 .beat-status:empty { display: none; }
+
+.clip-banks {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-block: 10px 12px;
+}
+.clip-bank {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+  min-width: 0;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid var(--edge);
+  border-radius: 7px;
+  --clip-color: #dfebd7;
+}
+.clip-bank[data-layer="bass"] { --clip-color: #f6e1ad; }
+.clip-bank[data-layer="chords"] { --clip-color: #f2d6c9; }
+.clip-bank[data-layer="melody"] { --clip-color: #d9e0ef; }
+.clip-bank legend { padding-inline: 4px; font-size: .88rem; font-weight: 750; }
+.clip-pad {
+  display: grid;
+  align-content: center;
+  min-height: 54px;
+  padding: 5px;
+  border: 1px solid #a7b5a7;
+  border-radius: 6px;
+  background: var(--light);
+  color: var(--ink);
+  font-size: .88rem;
+  font-weight: 700;
+}
+.clip-pad span { font-size: .69rem; font-weight: 600; min-height: 1.1em; }
+.clip-pad[aria-pressed="true"], .clip-pad.is-queued { background: var(--clip-color); border-color: var(--forest); }
+.clip-pad.is-queued { border-style: dashed; }
+.clip-pad:hover { border-color: var(--forest); }
+@media (max-width: 700px) {
+  .clip-banks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

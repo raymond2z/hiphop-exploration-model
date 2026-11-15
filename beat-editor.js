@@ -25,6 +25,7 @@ function readSavedPracticeBeat() {
     if (!valid) return null;
     return {
       bpm: stored.bpm,
+      volume: Number.isInteger(stored.volume) && stored.volume >= 0 && stored.volume <= 100 ? stored.volume : 80,
       pattern: Object.fromEntries(beatEditorTracks.map(({ id }, index) => [id, [...new Set(tracks[index])]]))
     };
   } catch {
@@ -42,6 +43,10 @@ function setupBeatEditor(container) {
         <span>速度 <b><output></output> BPM</b></span>
         <input type="range" min="${beatEditorBpm.min}" max="${beatEditorBpm.max}" step="1" aria-label="節拍速度（BPM）">
       </label>
+      <label class="backing-tempo">
+        <span>音量 <b><output data-beat-volume-label>80</output>%</b></span>
+        <input type="range" min="0" max="100" step="1" value="80" data-beat-volume aria-label="節拍音量">
+      </label>
       <button type="button" class="plain-button" data-beat-preset>還原預設</button>
       <button type="button" class="plain-button" data-beat-clear>清空</button>
       <button type="button" class="plain-button" data-beat-save>存成我的節拍</button>
@@ -52,6 +57,8 @@ function setupBeatEditor(container) {
   const play = container.querySelector("[data-beat-play]");
   const tempo = container.querySelector('input[type="range"]');
   const readout = container.querySelector("output");
+  const volume = container.querySelector("[data-beat-volume]");
+  const volumeReadout = container.querySelector("[data-beat-volume-label]");
   const status = container.querySelector(".beat-status");
   const saved = readSavedPracticeBeat();
   let pattern = saved?.pattern ?? makePracticeDrumPattern(true);
@@ -119,6 +126,7 @@ function setupBeatEditor(container) {
     preset: () => "drums",
     pattern: () => pattern,
     bpm: () => tempo.valueAsNumber,
+    outputGain: () => practiceBackingVolume(volume.valueAsNumber),
     drumsOn: () => true,
     bassOn: () => false,
     schedulePlayhead(step, delay) {
@@ -143,6 +151,10 @@ function setupBeatEditor(container) {
     readout.value = tempo.value;
     status.textContent = "";
   });
+  volume.addEventListener("input", () => {
+    volumeReadout.value = volume.value;
+    updatePracticeBackingVolume(owner);
+  });
   play.addEventListener("click", () => {
     if (playing) stopPracticeBacking(owner);
     else {
@@ -163,7 +175,9 @@ function setupBeatEditor(container) {
   });
   container.querySelector("[data-beat-save]").addEventListener("click", () => {
     try {
-      localStorage.setItem(beatEditorStorageKey, JSON.stringify({ bpm: tempo.valueAsNumber, pattern }));
+      localStorage.setItem(beatEditorStorageKey, JSON.stringify({
+        bpm: tempo.valueAsNumber, volume: volume.valueAsNumber, pattern
+      }));
       status.textContent = "已儲存到這個瀏覽器的「我的節拍」。";
     } catch {
       status.textContent = "這個瀏覽器無法儲存節拍。";
@@ -176,6 +190,8 @@ function setupBeatEditor(container) {
   });
   if (panel && location.hash === `#${panel.id}`) panel.open = true;
   setTempo(saved?.bpm ?? backingPatterns.drums.bpm);
+  volume.value = saved?.volume ?? 80;
+  volumeReadout.value = volume.value;
   drawCells();
   if (saved) status.textContent = "已載入「我的節拍」。";
 }

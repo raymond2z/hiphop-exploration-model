@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#203a30">
 <meta name="description" content="從孩子的 Freestyle 表現出發，理解可能原因、選擇引導方法，再一起探索。">
 <title>探索能力發展模型｜Hip-hop Freestyle</title>
-<link rel="stylesheet" href="style.css?v=beat-editor">
+<link rel="stylesheet" href="style.css?v=clip-mixer">
 </head>
 <body id="top">
 <header>
@@ -282,6 +282,10 @@
     <a href="possibilities.html#element-sound">練習卡｜同一個動作，換聲音回應</a>
     <a href="#example" data-case="cypher">看 Cypher 案例</a>
   </div>
+  <details class="decision-details decision-battle" id="clip-mixer">
+    <summary>疊加音樂片段</summary>
+    <div data-clip-mixer></div>
+  </details>
   <details class="decision-details decision-battle" id="beat-editor">
     <summary>編輯練習節拍</summary>
     <div data-beat-editor></div>
@@ -454,8 +458,9 @@
 
 <footer class="wrap footer">探索能力發展模型 · Hip-hop Freestyle 學習框架</footer>
 
-<script src="practice-backing.js?v=beat-editor"></script>
-<script src="beat-editor.js?v=1" defer></script>
+<script src="practice-backing.js?v=clip-mixer"></script>
+<script src="beat-editor.js?v=2" defer></script>
+<script src="clip-mixer.js?v=1" defer></script>
 <script>
 const cases = {
   texture: [

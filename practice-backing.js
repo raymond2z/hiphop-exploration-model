@@ -26,6 +26,7 @@ function stopPracticeBacking(owner) {
   activeBacking = null;
   clearInterval(playback.timer);
   playback.output?.disconnect();
+  playback.limiter?.disconnect();
   playback.owner.setPlaying(false);
 }
 
@@ -59,18 +60,7 @@ function backingPercussion(output, time, { frequency, duration, volume, type }) 
   source.stop(time + duration + 0.01);
 }
 
-function scheduleBackingStep(playback, step, time, stepSeconds) {
-  const { owner, drums, bass } = playback;
-  const drumPattern = owner.pattern?.() ?? drumSteps;
-  if (owner.preset() === "pulse") {
-    if (step % 4 === 0) {
-      backingTone(drums, time, {
-        frequency: step % 16 === 0 ? 1000 : 750, duration: 0.055, volume: 0.25, type: "sine"
-      });
-    }
-    return;
-  }
-
+function scheduleDrumStep(drums, drumPattern, step, time, stepSeconds) {
   if (drumPattern.kick.includes(step)) {
     backingTone(drums, time, { frequency: 141, endFrequency: 46, duration: 0.21, volume: 0.72, type: "sine" });
   }
@@ -85,6 +75,23 @@ function scheduleBackingStep(playback, step, time, stepSeconds) {
       frequency: 6500, duration: onBeat ? 0.055 : 0.035, volume: onBeat ? 0.14 : 0.095, type: "highpass"
     });
   }
+}
+
+function scheduleBackingStep(playback, step, time, stepSeconds) {
+  const { owner, drums, bass } = playback;
+  if (owner.scheduleClipStep) {
+    owner.scheduleClipStep(playback, step, time, stepSeconds);
+    return;
+  }
+  if (owner.preset() === "pulse") {
+    if (step % 4 === 0) {
+      backingTone(drums, time, {
+        frequency: step % 16 === 0 ? 1000 : 750, duration: 0.055, volume: 0.25, type: "sine"
+      });
+    }
+    return;
+  }
+  scheduleDrumStep(drums, owner.pattern?.() ?? drumSteps, step, time, stepSeconds);
   const note = bassNotes.get(step);
   if (owner.preset() === "layers" && note) {
     backingTone(bass, time, { frequency: note.frequency, duration: note.beats * stepSeconds * 4, volume: 0.52, type: "triangle" });
@@ -95,6 +102,15 @@ function updateBackingMix({ owner, drums, bass }) {
   const time = drums.context.currentTime;
   drums.gain.setTargetAtTime(Number(owner.drumsOn()), time, 0.012);
   bass.gain.setTargetAtTime(Number(owner.bassOn()), time, 0.012);
+}
+
+function practiceBackingVolume(percent) {
+  return percent / 100 * 1.35;
+}
+
+function updatePracticeBackingVolume(owner) {
+  const output = activeBacking?.owner === owner && activeBacking.output;
+  if (output) output.gain.setTargetAtTime(owner.outputGain(), output.context.currentTime, 0.012);
 }
 
 async function playPracticeBacking(owner) {
@@ -119,8 +135,19 @@ async function playPracticeBacking(owner) {
     }
 
     playback.output = context.createGain();
-    playback.output.gain.value = 0.56;
-    playback.output.connect(context.destination);
+    playback.output.gain.value = owner.outputGain?.() ?? 0.56;
+    if (owner.outputGain) {
+      const limiter = context.createDynamicsCompressor();
+      limiter.threshold.value = -7;
+      limiter.knee.value = 6;
+      limiter.ratio.value = 10;
+      limiter.attack.value = 0.003;
+      limiter.release.value = 0.12;
+      playback.output.connect(limiter).connect(context.destination);
+      playback.limiter = limiter;
+    } else {
+      playback.output.connect(context.destination);
+    }
     playback.drums = context.createGain();
     playback.drums.gain.value = Number(owner.drumsOn());
     playback.drums.connect(playback.output);
