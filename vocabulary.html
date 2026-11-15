@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#203a30">
-<meta name="description" content="Henry Link 校內 Workshop 課堂筆記的動作清單。">
+<meta name="description" content="查找課堂動作，抽一個動作和一個條件，試出自己的 Freestyle 變化。">
 <title>動作詞庫｜Henry Link Workshop</title>
-<link rel="stylesheet" href="style.css?v=vocabulary-list">
+<link rel="stylesheet" href="style.css?v=vocabulary-draw">
 </head>
 <body class="element-page">
 <header>
@@ -15,6 +15,8 @@
       <a class="brand" href="index.html"><span class="mark" aria-hidden="true">♪</span>HIP-HOP FREESTYLE</a>
       <nav aria-label="頁面導覽">
         <a href="index.html#technical">動作練習</a>
+        <a href="#card-practice">抽卡練習</a>
+        <a href="#word-list">動作清單</a>
         <a href="possibilities.html">一個元素，多種可能</a>
       </nav>
     </div>
@@ -26,12 +28,77 @@
 </header>
 
 <main class="wrap">
-  <div class="vocabulary-search" hidden>
-    <label for="step-search">搜尋動作名稱</label>
-    <input id="step-search" type="search" placeholder="例如 Smurf" autocomplete="off">
-    <p id="step-count" class="vocabulary-count" role="status"></p>
-  </div>
-  <ul class="vocabulary-steps" aria-label="Workshop 動作名稱">
+  <section id="card-practice" aria-labelledby="card-practice-title" hidden>
+    <div class="heading"><h2 id="card-practice-title">抽卡練習</h2></div>
+    <p>先跳一次你記得的版本，再用同一個動作試一項新條件。</p>
+
+    <div class="draw-grid">
+      <article class="draw-card">
+        <h3>先抽動作</h3>
+        <p id="draw-move-name" class="draw-result" role="status">準備好就抽一張。</p>
+        <div class="draw-actions">
+          <button type="button" class="cta" id="draw-move">抽動作</button>
+          <p class="vocabulary-count" id="draw-progress">一輪內不重複。</p>
+        </div>
+        <form id="move-observation" hidden>
+          <fieldset class="draw-checks">
+            <legend>原來的版本</legend>
+            <label><input type="radio" name="recall" value="independent"> 能獨立跳</label>
+            <label><input type="radio" name="recall" value="prompted"> 提示後能跳</label>
+            <label><input type="radio" name="recall" value="review"> 想先複習</label>
+          </fieldset>
+        </form>
+      </article>
+
+      <article class="draw-card">
+        <h3>再加條件</h3>
+        <p id="draw-condition" class="draw-result draw-condition" role="status" aria-atomic="true">
+          <strong id="draw-condition-title">先抽一個動作。</strong>
+          <span id="draw-condition-cue"></span>
+        </p>
+        <div id="draw-controls" hidden>
+          <div class="draw-actions">
+            <label class="draw-select" for="condition-category">條件類型
+              <select id="condition-category">
+                <option value="all">混合抽卡</option>
+                <option value="constraint">限制</option>
+                <option value="style">風格／質感</option>
+                <option value="body">身體部位</option>
+                <option value="level">高低層次</option>
+              </select>
+            </label>
+            <button type="button" class="plain-button" id="draw-condition-button">抽條件</button>
+          </div>
+          <details id="condition-chooser">
+            <summary>直接指定條件</summary>
+            <div class="draw-actions">
+              <label class="draw-select" for="condition-option">選一張卡
+                <select id="condition-option"></select>
+              </label>
+              <button type="button" class="plain-button" id="apply-condition">使用這張卡</button>
+            </div>
+          </details>
+        </div>
+        <form id="variation-observation" hidden>
+          <fieldset class="draw-checks">
+            <legend>跳完變化後</legend>
+            <label><input type="checkbox" name="recognizable"> 還認得出原動作</label>
+            <label><input type="checkbox" name="condition"> 有做到這次的條件</label>
+          </fieldset>
+          <p class="vocabulary-count">再想一想，你最想把哪個變化帶進 Freestyle？</p>
+        </form>
+      </article>
+    </div>
+  </section>
+
+  <section id="word-list" aria-labelledby="word-list-title">
+    <div class="heading"><h2 id="word-list-title">動作清單</h2></div>
+    <div class="vocabulary-search" hidden>
+      <label for="step-search">搜尋動作名稱</label>
+      <input id="step-search" type="search" placeholder="例如 Smurf" autocomplete="off">
+      <p id="step-count" class="vocabulary-count" role="status"></p>
+    </div>
+    <ul class="vocabulary-steps" aria-label="Workshop 動作名稱">
       <li>Walk it Out</li>
       <li>Smurf</li>
       <li>Harlem Shake</li>
@@ -73,7 +140,8 @@
       <li>Smurf Yeek Style</li>
       <li>Party Machine</li>
       <li>Diddy Dance</li>
-  </ul>
+    </ul>
+  </section>
 </main>
 
 <footer class="wrap footer">探索能力發展模型 · Hip-hop Freestyle</footer>
@@ -99,5 +167,6 @@ search.addEventListener("input", filterSteps);
 document.querySelector(".vocabulary-search").hidden = false;
 filterSteps();
 </script>
+<script src="vocabulary-practice.js?v=1"></script>
 </body>
 </html>

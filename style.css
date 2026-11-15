@@ -369,6 +369,70 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
   padding: 8px 2px;
   border-bottom: 1px solid var(--edge);
 }
+.draw-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+.draw-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 16px;
+  background: var(--light);
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+}
+.draw-result {
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  min-height: 74px;
+  padding: 11px 13px;
+  background: var(--mint);
+  border-radius: 7px;
+  font-size: 1.12rem;
+  font-weight: 750;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.draw-condition span { font-size: .9rem; font-weight: 400; }
+.draw-condition span:empty { display: none; }
+.draw-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 10px;
+}
+.draw-actions .cta { min-height: 44px; }
+.draw-actions .vocabulary-count { align-self: center; }
+.draw-select { display: grid; gap: 4px; font-size: .9rem; width: min(100%, 16rem); }
+.draw-select select {
+  width: 100%;
+  min-height: 44px;
+  padding: 5px 9px;
+  border: 1px solid #82968a;
+  border-radius: 6px;
+  color: var(--ink);
+  background: var(--light);
+}
+#condition-chooser { margin-top: 9px; }
+#condition-chooser summary { padding-block: 6px; font-size: .9rem; }
+#condition-chooser .draw-actions { margin-top: 4px; }
+.draw-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin: 0 0 4px;
+  padding: 4px 9px;
+  border: 1px solid var(--edge);
+  border-radius: 7px;
+  font-size: .86rem;
+}
+.draw-checks legend { padding-inline: 3px; font-weight: 700; }
+.draw-checks label { display: inline-flex; gap: 4px; align-items: center; min-height: 36px; cursor: pointer; }
+.draw-checks input { accent-color: var(--forest); }
 @media (max-width: 620px) {
-  .practice-entry-grid { grid-template-columns: 1fr; }
+  .practice-entry-grid, .draw-grid { grid-template-columns: 1fr; }
 }
