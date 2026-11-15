@@ -9,8 +9,7 @@
     "typecheck": "tsc --noEmit",
     "build": "npm run typecheck && vite build",
     "dev": "vite",
-    "preview": "vite preview",
-    "stage:pages": "npm run build && node scripts/stage-pages.mjs"
+    "preview": "vite preview"
   },
   "devDependencies": {
     "typescript": "5.9.3",
