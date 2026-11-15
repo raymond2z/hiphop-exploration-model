@@ -2,7 +2,7 @@ import {
   backingPatterns, isPracticeBackingActive, playPracticeBacking, stopPracticeBacking, updateBackingMix,
   type BackingPreset, type DrumPlaybackOwner
 } from "./engine";
-import { requireElement } from "./dom";
+import { requireElement } from "../dom";
 
 function readPreset(value: string | undefined): BackingPreset {
   return value === "pulse" || value === "layers" ? value : "drums";

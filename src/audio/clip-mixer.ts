@@ -3,7 +3,7 @@ import {
   backingTone, playPracticeBacking, practiceBackingVolume, scheduleDrumStep, stopPracticeBacking,
   updatePracticeBackingVolume, type ClipPlaybackOwner
 } from "./engine";
-import { requireElement } from "./dom";
+import { requireElement } from "../dom";
 
 type PitchedLayer = "bass" | "chords" | "melody";
 type Layer = "drums" | PitchedLayer;

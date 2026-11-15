@@ -6,7 +6,7 @@ import {
   backingPatterns, playPracticeBacking, practiceBackingVolume, stopPracticeBacking,
   updatePracticeBackingVolume, type DrumPlaybackOwner
 } from "./engine";
-import { requireElement } from "./dom";
+import { requireElement } from "../dom";
 
 export function setupBeatEditor(container: HTMLElement) {
   container.innerHTML = `

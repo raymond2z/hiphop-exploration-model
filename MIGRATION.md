@@ -1,46 +1,46 @@
-# TypeScript + Vite 遷移計劃
+# TypeScript + Vite 維護與發布
 
-## 第一批｜音訊功能
+## 現況
 
-共用 Web Audio 引擎、練習伴奏控制、節拍編輯器與儲存、四軌音樂片段及小節切換已轉到 `src/audio/`。三個網站頁面載入同一份音訊建置結果。「我的節拍」繼續使用同一個瀏覽器儲存鍵，舊資料缺少音量設定時會用預設值。
+三個頁面已接入 Vite 多頁建置。HTML 和 CSS 來源放在 `src/`。首頁、探索練習及動作詞庫各有一個 TypeScript 入口，共用音訊引擎與相關模組。節拍資料、抽卡條件及探索流程均納入嚴格型別檢查。
 
-本階段沿用 GitHub Pages 現有的分支發布來源。Vite 將音訊模組打包到 `assets/audio/site-audio.js`，其餘頁面沿用原有的靜態檔案。
+| 維護範圍 | 來源 |
+| --- | --- |
+| 首頁、案例及音樂中的選擇 | `src/index.html`、`src/pages/home.ts` |
+| 探索頁及兩頁共用的練習步驟 | `src/possibilities.html`、`src/pages/possibilities.ts`、`src/practice/element-exploration.ts` |
+| 動作清單、搜尋及抽卡 | `src/vocabulary.html`、`src/pages/vocabulary.ts`、`src/practice/vocabulary-practice.ts` |
+| 伴奏、節拍編輯及疊加片段 | `src/audio/` |
 
-### 本機開發與發布
+## 開發與驗收
 
 使用 Node.js 22.12 以上的 22.x 版本，或 Node.js 24 以上版本。
 
 ```sh
 npm ci
-npm run build
 npm run dev
+npm run build
+npm run preview
 ```
 
-`npm run build` 先執行 TypeScript 型別檢查，再產生音訊檔。修改音訊時，應編輯 `src/audio/` 下的來源。發布時把來源和重新建置的音訊檔放在同一個提交內，並同步更新三個 HTML 的音訊檔版本參數。GitHub Pages 會使用提交中的靜態檔案。
+`npm run build` 先做 TypeScript 型別檢查，再產生 `dist/` 中的三個頁面及共用資源。修改請從 `src/` 開始。用 `npm run preview` 檢查建置結果。
 
-### 驗收條件
+- 首頁測試切換案例、音樂來源、四軌播放及「只想享受音樂」。
+- 探索頁測試有音樂及無音樂的練習、換提示與關閉伴奏。
+- 詞庫測試搜尋、同輪抽卡、指定條件及節拍編輯。
+- 使用已儲存的「我的節拍」驗證相容性，並確認舊網址和頁內連結可以開啟。
 
-- 三頁載入共用音訊檔，舊網址和頁內錨點可以開啟。
-- 「練習伴奏」可換預設、調速度及開關鼓聲或低音。
-- 「節拍編輯器」可邊播邊改、清空及還原。新版可讀取有音量及沒有音量欄位的舊節拍。
-- 「疊加音樂片段」可四軌同播、在小節邊界切換、調音量及停止。切換到其他播放器時，共用引擎會先停止當前播放。
+## 目前的 GitHub Pages 發布方式
 
-## 下一批｜練習功能
+```sh
+npm run stage:pages
+```
 
-| 順序 | 遷移範圍 | 驗收條件 |
-| --- | --- | --- |
-| 1 | 將 `vocabulary-practice.js` 的動作抽卡和條件資料轉成 TypeScript。 | 41 個動作一輪內無重複。指定部位或層次可以照常使用。換條件保留原動作，換動作時重置自檢。 |
-| 2 | 將 `element-exploration.js` 的探索步驟與面板狀態轉成 TypeScript。 | 從首頁及探索專頁進入時，情境、提示、無音樂模式與結束按鈕都正常。離開練習時會停止專屬伴奏。 |
-| 3 | 將 `index.html` 的案例操作與「音樂中的選擇」腳本移到頁面入口模組。 | 案例和動作入口、先選聆聽焦點再切換、自選音樂及「只想享受音樂」均通過實測。 |
+這個指令先建置，再把三個發布用 HTML 及 `assets/site/` 放到現有 Pages 發布分支的根目錄。發布時將來源和這些產物放在同一個提交。Vite 為資源產生帶雜湊的檔名，頁面會自動引用相符版本。
 
-每批先核對目前的使用流程，再轉資料與事件處理。改動較大的功能用同一份操作記錄對照遷移前後，尤其留意兩個頁面共用的功能。
+## 改用 GitHub Actions 時
 
-## 後續｜全站改用 Vite 多頁建置
+由具備 Pages 管理權限的帳戶選擇 GitHub Actions 作為發布來源。工作流程以 `npm ci` 安裝依賴、`npm run build` 檢查及建置，並發布 `dist/`。首次自動發布成功後，再從版本庫根目錄移除分支發布用的產物和 `stage:pages` 步驟。
 
-1. 將三個 HTML 設為 Vite 多頁入口，改用模組匯入共用程式，再由建置自動產生帶雜湊的資源檔名。
-2. 以 `/hiphop-exploration-model/` 為 GitHub Pages 的基底路徑，先驗證完整 `dist/` 的首頁、探索頁、動作詞庫、舊深層連結和舊瀏覽器資料。
-3. 讓 GitHub Actions 執行安裝、型別檢查和建置。確認這套流程產出的網站通過驗收後，再將 Pages 發布來源切換到 Actions。切換前的發布保留在 Git 歷史，便於回復。
+發布變更前先檢查三頁與舊深層連結。需要回復時，可把發布來源切回原本的分支，並發布最近一個已驗證的產物。
 
-全站建置驗收以現有三頁的公開網址、主要互動和儲存相容性為準。一批驗收完成後再合併下一批。
-
-參考 [Vite 建置選項](https://vite.dev/config/build-options) 與 [GitHub Pages 發布指南](https://vite.dev/guide/static-deploy#github-pages)。
+參考 [Vite 多頁建置](https://v7.vite.dev/guide/build.html#multi-page-app) 和 [GitHub Pages 發布指南](https://vite.dev/guide/static-deploy#github-pages)。

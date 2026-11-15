@@ -1,4 +1,25 @@
-const explorationData = {
+import { stopPracticeBacking, type BackingPreset } from "../audio/engine";
+import { setupPracticeBacking } from "../audio/practice-backing";
+import { requireElement } from "../dom";
+
+interface ExplorationExercise {
+  title: string;
+  base: string;
+  question: string;
+  hints: string[];
+  compare: string;
+  note: string;
+  backingPreset?: BackingPreset;
+}
+
+interface ExplorationOptions {
+  controls: HTMLElement;
+  audioHome: HTMLElement;
+  player: HTMLAudioElement;
+  listen(): void;
+}
+
+const explorationData: Record<string, ExplorationExercise> = {
   "turn": {
     "title": "轉圈",
     "base": "選一個能穩定做的小幅轉向，先照平常的方式轉一次。",
@@ -207,59 +228,61 @@ const explorationMarkup = `<dialog class="practice explore-dialog" id="explore-d
   <button type="button" class="plain-button" id="explore-listen">只想享受音樂</button>
 </dialog>`;
 
-function setupElementExploration({ controls, audioHome, player, listen }) {
+export function setupElementExploration({ controls, audioHome, player, listen }: ExplorationOptions) {
   document.body.insertAdjacentHTML("beforeend", explorationMarkup);
-  const dialog = document.getElementById("explore-dialog");
-  const title = document.getElementById("explore-title");
-  const hint = document.getElementById("explore-hint");
-  const audio = document.getElementById("explore-audio");
-  const backingPanel = document.getElementById("explore-backing");
-  const backing = HipHopAudio.setupPracticeBacking(backingPanel);
-  const compare = document.getElementById("explore-compare");
-  const picker = document.getElementById("explore-pick");
-  const context = document.getElementById("explore-context-step");
-  const round = document.getElementById("explore-round");
-  let current;
-  let hintIndex;
+  const dialog = requireElement<HTMLDialogElement>(document, "#explore-dialog");
+  const title = requireElement<HTMLHeadingElement>(document, "#explore-title");
+  const hint = requireElement<HTMLElement>(document, "#explore-hint");
+  const audio = requireElement<HTMLDetailsElement>(document, "#explore-audio");
+  const backingPanel = requireElement<HTMLElement>(document, "#explore-backing");
+  const backing = setupPracticeBacking(backingPanel);
+  const compare = requireElement<HTMLDetailsElement>(document, "#explore-compare");
+  const picker = requireElement<HTMLElement>(document, "#explore-pick");
+  const context = requireElement<HTMLElement>(document, "#explore-context-step");
+  const round = requireElement<HTMLElement>(document, "#explore-round");
+  let current: ExplorationExercise | undefined;
+  let hintIndex = 0;
 
-  function showStep(panel, heading) {
+  function showStep(panel: HTMLElement, heading: string) {
     for (const step of [picker, context, round]) step.hidden = step !== panel;
     title.textContent = heading;
     if (dialog.open) title.focus();
   }
 
-  function pickElement(element) {
+  function pickElement(element: string | undefined) {
+    if (!element || !Object.hasOwn(explorationData, element)) return;
     current = explorationData[element];
-    document.getElementById("explore-element").textContent = current.title;
-    document.getElementById("explore-base").textContent = current.base;
+    requireElement<HTMLElement>(document, "#explore-element").textContent = current.title;
+    requireElement<HTMLElement>(document, "#explore-base").textContent = current.base;
     showStep(context, "選擇音樂情境");
   }
 
-  function startRound(mode) {
+  function startRound(mode: string | undefined) {
+    if (!current) return;
     const withMusic = mode === "music";
     hintIndex = 0;
-    document.getElementById("explore-question").textContent = current.question;
-    document.getElementById("explore-constant").textContent = current.base;
-    document.getElementById("explore-context").textContent = withMusic
+    requireElement<HTMLElement>(document, "#explore-question").textContent = current.question;
+    requireElement<HTMLElement>(document, "#explore-constant").textContent = current.base;
+    requireElement<HTMLElement>(document, "#explore-context").textContent = withMusic
       ? "播同一小段音樂，比較兩種做法。"
       : "留意身體感覺，或用輕拍和哼唱帶出節奏。";
     hint.textContent = current.hints[0];
-    document.getElementById("explore-note").textContent = current.note;
-    document.getElementById("explore-compare-question").textContent = current.compare;
+    requireElement<HTMLElement>(document, "#explore-note").textContent = current.note;
+    requireElement<HTMLElement>(document, "#explore-compare-question").textContent = current.compare;
     compare.open = false;
     audio.hidden = !withMusic;
     audio.open = withMusic && Boolean(player.getAttribute("src"));
     backingPanel.hidden = !withMusic;
     if (withMusic) {
       backing.setPreset(current.backingPreset ?? "pulse");
-      document.getElementById("explore-music").append(controls);
+      requireElement<HTMLElement>(document, "#explore-music").append(controls);
     }
     showStep(round, current.title);
   }
 
-  for (const button of document.querySelectorAll(".explore-start")) {
+  for (const button of document.querySelectorAll<HTMLButtonElement>(".explore-start")) {
     button.addEventListener("click", () => {
-      HipHopAudio.stopPracticeBacking();
+      stopPracticeBacking();
       player.pause();
       if (button.dataset.element) {
         pickElement(button.dataset.element);
@@ -270,29 +293,30 @@ function setupElementExploration({ controls, audioHome, player, listen }) {
       title.focus();
     });
   }
-  for (const button of dialog.querySelectorAll("[data-pick-element]")) {
+  for (const button of dialog.querySelectorAll<HTMLButtonElement>("[data-pick-element]")) {
     button.addEventListener("click", () => pickElement(button.dataset.pickElement));
   }
-  for (const button of dialog.querySelectorAll("[data-explore-mode]")) {
+  for (const button of dialog.querySelectorAll<HTMLButtonElement>("[data-explore-mode]")) {
     button.addEventListener("click", () => startRound(button.dataset.exploreMode));
   }
-  dialog.querySelector('[data-explore-back="pick"]').addEventListener("click", () => {
+  requireElement<HTMLButtonElement>(dialog, '[data-explore-back="pick"]').addEventListener("click", () => {
     showStep(picker, "你想探索哪一個元素？");
   });
-  dialog.querySelector('[data-explore-back="context"]').addEventListener("click", () => {
+  requireElement<HTMLButtonElement>(dialog, '[data-explore-back="context"]').addEventListener("click", () => {
     backing.stop();
     player.pause();
     audioHome.append(controls);
     showStep(context, "選擇音樂情境");
   });
-  document.getElementById("explore-next").addEventListener("click", () => {
+  requireElement<HTMLButtonElement>(document, "#explore-next").addEventListener("click", () => {
+    if (!current) return;
     hintIndex = (hintIndex + 1) % current.hints.length;
     hint.textContent = current.hints[hintIndex];
   });
-  document.getElementById("explore-own").addEventListener("click", () => {
+  requireElement<HTMLButtonElement>(document, "#explore-own").addEventListener("click", () => {
     hint.textContent = "保留這個元素，由你決定想改哪一項。可以用你自己的想法試兩次。";
   });
-  document.getElementById("explore-listen").addEventListener("click", () => {
+  requireElement<HTMLButtonElement>(document, "#explore-listen").addEventListener("click", () => {
     dialog.close("listen");
   });
   dialog.addEventListener("close", () => {

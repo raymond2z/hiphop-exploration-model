@@ -6,7 +6,10 @@
 <meta name="theme-color" content="#203a30">
 <meta name="description" content="從一個熟悉的動作開始，每次只改一個條件，找出更多 Hip-hop Freestyle 的選擇。">
 <title>一個元素，多種可能｜探索能力發展模型</title>
-<link rel="stylesheet" href="style.css?v=vocabulary-list">
+  <script type="module" crossorigin src="./assets/site/possibilities-BpgskS6L.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/site/dom-C5ZcHTEK.js">
+  <link rel="modulepreload" crossorigin href="./assets/site/element-exploration-oTfaiv4Z.js">
+  <link rel="stylesheet" crossorigin href="./assets/site/dom-BXao5gtB.css">
 </head>
 <body class="element-page">
 <header>
@@ -118,33 +121,5 @@
   </div>
 </div>
 <footer class="footer"><div class="wrap">探索能力發展模型 · Hip-hop Freestyle</div></footer>
-<script src="assets/audio/site-audio.js?v=typescript-1"></script>
-<script src="element-exploration.js?v=typescript-1"></script>
-<script>
-const workshopPlayer = document.getElementById("workshop-player");
-const workshopSong = document.getElementById("workshop-song");
-const workshopAudioStatus = document.getElementById("workshop-audio-status");
-let workshopUrl;
-
-workshopSong.addEventListener("change", () => {
-  const file = workshopSong.files[0];
-  if (!file) return;
-  workshopPlayer.pause();
-  if (workshopUrl) URL.revokeObjectURL(workshopUrl);
-  workshopUrl = URL.createObjectURL(file);
-  workshopPlayer.src = workshopUrl;
-  workshopPlayer.hidden = false;
-  workshopAudioStatus.textContent = "已選擇音樂。想聽時按播放。";
-});
-workshopPlayer.addEventListener("error", () => {
-  workshopAudioStatus.textContent = "瀏覽器無法播放這個檔案，可以換另一個音樂檔。";
-});
-setupElementExploration({
-  controls: document.getElementById("workshop-audio-controls"),
-  audioHome: document.getElementById("workshop-audio-home"),
-  player: workshopPlayer,
-  listen: () => { location.href = "index.html?listen=1#entry"; }
-});
-</script>
 </body>
 </html>

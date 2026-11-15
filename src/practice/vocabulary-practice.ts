@@ -1,6 +1,8 @@
-function makeStepDeck(names) {
-  let remaining = [];
-  let last;
+import { requireElement } from "../dom";
+
+function makeStepDeck(names: string[]) {
+  let remaining: string[] = [];
+  let last: string | undefined;
 
   return function drawStep() {
     if (!remaining.length) {
@@ -48,21 +50,22 @@ const conditionCards = Object.entries({
   category, title, cue, id: `${category}-${index}`
 })));
 
-const moveNames = [...document.querySelectorAll(".vocabulary-steps li")].map(item => item.textContent.trim());
+const moveNames = [...document.querySelectorAll(".vocabulary-steps li")].map(item => (item.textContent ?? "").trim());
 const drawStep = makeStepDeck(moveNames);
-const drawMove = document.getElementById("draw-move");
-const moveName = document.getElementById("draw-move-name");
-const drawProgress = document.getElementById("draw-progress");
-const moveObservation = document.getElementById("move-observation");
-const variationObservation = document.getElementById("variation-observation");
-const drawControls = document.getElementById("draw-controls");
-const conditionChooser = document.getElementById("condition-chooser");
-const categorySelect = document.getElementById("condition-category");
-const cardSelect = document.getElementById("condition-option");
-const conditionTitle = document.getElementById("draw-condition-title");
-const conditionCue = document.getElementById("draw-condition-cue");
+const drawMove = requireElement<HTMLButtonElement>(document, "#draw-move");
+const moveName = requireElement<HTMLElement>(document, "#draw-move-name");
+const drawProgress = requireElement<HTMLElement>(document, "#draw-progress");
+const moveObservation = requireElement<HTMLFormElement>(document, "#move-observation");
+const variationObservation = requireElement<HTMLFormElement>(document, "#variation-observation");
+const drawControls = requireElement<HTMLElement>(document, "#draw-controls");
+const conditionChooser = requireElement<HTMLDetailsElement>(document, "#condition-chooser");
+const categorySelect = requireElement<HTMLSelectElement>(document, "#condition-category");
+const cardSelect = requireElement<HTMLSelectElement>(document, "#condition-option");
+const conditionTitle = requireElement<HTMLElement>(document, "#draw-condition-title");
+const conditionCue = requireElement<HTMLElement>(document, "#draw-condition-cue");
 const categoryLabels = new Map([...categorySelect.options].map(option => [option.value, option.text]));
-let currentCondition;
+type ConditionCard = (typeof conditionCards)[number];
+let currentCondition: ConditionCard | undefined;
 
 function availableCards() {
   return categorySelect.value === "all"
@@ -76,7 +79,7 @@ function updateCardChoices() {
   ));
 }
 
-function showCondition(card) {
+function showCondition(card: ConditionCard) {
   currentCondition = card;
   conditionTitle.textContent = `${categoryLabels.get(card.category)} · ${card.title}`;
   conditionCue.textContent = card.cue;
@@ -86,6 +89,7 @@ function showCondition(card) {
 
 drawMove.addEventListener("click", () => {
   const { name, drawn, total } = drawStep();
+  if (!name) return;
   moveName.textContent = name;
   drawMove.textContent = "抽下一個動作";
   drawProgress.textContent = drawn === total ? "本輪抽完，下次重新洗牌。" : `本輪已抽 ${drawn}／${total}`;
@@ -101,14 +105,14 @@ drawMove.addEventListener("click", () => {
 });
 
 categorySelect.addEventListener("change", updateCardChoices);
-document.getElementById("draw-condition-button").addEventListener("click", () => {
+requireElement<HTMLButtonElement>(document, "#draw-condition-button").addEventListener("click", () => {
   const candidates = availableCards().filter(card => card !== currentCondition);
-  showCondition(candidates[Math.floor(Math.random() * candidates.length)]);
+  if (candidates.length) showCondition(candidates[Math.floor(Math.random() * candidates.length)]);
 });
-document.getElementById("apply-condition").addEventListener("click", () => {
+requireElement<HTMLButtonElement>(document, "#apply-condition").addEventListener("click", () => {
   const card = conditionCards.find(card => card.id === cardSelect.value);
   if (card) showCondition(card);
 });
 
 updateCardChoices();
-document.getElementById("card-practice").hidden = !moveNames.length;
+requireElement<HTMLElement>(document, "#card-practice").hidden = !moveNames.length;

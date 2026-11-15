@@ -6,7 +6,10 @@
 <meta name="theme-color" content="#203a30">
 <meta name="description" content="查找課堂動作，抽一個動作和一個條件，試出自己的 Freestyle 變化。">
 <title>動作詞庫｜Henry Link Workshop</title>
-<link rel="stylesheet" href="style.css?v=clip-mixer">
+  <script type="module" crossorigin src="./assets/site/vocabulary-PgD-KwL-.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/site/dom-C5ZcHTEK.js">
+  <link rel="modulepreload" crossorigin href="./assets/site/index-Fnvles9-.js">
+  <link rel="stylesheet" crossorigin href="./assets/site/dom-BXao5gtB.css">
 </head>
 <body class="element-page">
 <header>
@@ -153,29 +156,5 @@
 </main>
 
 <footer class="wrap footer">探索能力發展模型 · Hip-hop Freestyle</footer>
-<script>
-const search = document.getElementById("step-search");
-const count = document.getElementById("step-count");
-const steps = document.querySelectorAll(".vocabulary-steps li");
-const normalizeStep = value => value.toLowerCase().replace(/[\s-]+/g, "");
-
-function filterSteps() {
-  const term = normalizeStep(search.value);
-  let matches = 0;
-  for (const step of steps) {
-    const names = [step.textContent, step.dataset.alternate ?? ""];
-    const visible = names.some(name => normalizeStep(name).includes(term));
-    step.hidden = !visible;
-    if (visible) matches++;
-  }
-  count.textContent = matches ? `${matches} 個動作` : "找不到符合的動作。";
-}
-
-search.addEventListener("input", filterSteps);
-document.querySelector(".vocabulary-search").hidden = false;
-filterSteps();
-</script>
-<script src="vocabulary-practice.js?v=1"></script>
-<script src="assets/audio/site-audio.js?v=typescript-1"></script>
 </body>
 </html>
