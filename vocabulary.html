@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#203a30">
 <meta name="description" content="查找課堂動作，抽一個動作和一個條件，試出自己的 Freestyle 變化。">
 <title>動作詞庫｜Henry Link Workshop</title>
-<link rel="stylesheet" href="style.css?v=vocabulary-draw">
+<link rel="stylesheet" href="style.css?v=beat-editor">
 </head>
 <body class="element-page">
 <header>
@@ -89,6 +89,10 @@
         </form>
       </article>
     </div>
+    <details class="decision-details decision-battle" id="beat-editor">
+      <summary>編輯練習節拍</summary>
+      <div data-beat-editor></div>
+    </details>
   </section>
 
   <section id="word-list" aria-labelledby="word-list-title">
@@ -168,5 +172,7 @@ document.querySelector(".vocabulary-search").hidden = false;
 filterSteps();
 </script>
 <script src="vocabulary-practice.js?v=1"></script>
+<script src="practice-backing.js?v=beat-editor"></script>
+<script src="beat-editor.js?v=1" defer></script>
 </body>
 </html>

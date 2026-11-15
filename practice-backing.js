@@ -61,6 +61,7 @@ function backingPercussion(output, time, { frequency, duration, volume, type }) 
 
 function scheduleBackingStep(playback, step, time, stepSeconds) {
   const { owner, drums, bass } = playback;
+  const drumPattern = owner.pattern?.() ?? drumSteps;
   if (owner.preset() === "pulse") {
     if (step % 4 === 0) {
       backingTone(drums, time, {
@@ -70,14 +71,14 @@ function scheduleBackingStep(playback, step, time, stepSeconds) {
     return;
   }
 
-  if (drumSteps.kick.includes(step)) {
+  if (drumPattern.kick.includes(step)) {
     backingTone(drums, time, { frequency: 141, endFrequency: 46, duration: 0.21, volume: 0.72, type: "sine" });
   }
-  if (drumSteps.snare.includes(step)) {
+  if (drumPattern.snare.includes(step)) {
     backingPercussion(drums, time, { frequency: 1700, duration: 0.14, volume: 0.55, type: "bandpass" });
     backingTone(drums, time, { frequency: 182, endFrequency: 120, duration: 0.085, volume: 0.19, type: "triangle" });
   }
-  if (drumSteps.hat.includes(step)) {
+  if (drumPattern.hat.includes(step)) {
     const onBeat = step % 4 === 0;
     const swing = step % 2 === 0 ? 0 : stepSeconds * 0.15;
     backingPercussion(drums, time + swing, {
@@ -128,6 +129,7 @@ async function playPracticeBacking(owner) {
     playback.bass.connect(playback.output);
 
     let step = 0;
+    const stepCount = owner.stepCount ?? 32;
     let nextTime = context.currentTime + 0.04;
     function schedule() {
       const now = context.currentTime;
@@ -135,7 +137,8 @@ async function playPracticeBacking(owner) {
       while (nextTime < now + 0.1) {
         const stepSeconds = 15 / owner.bpm();
         scheduleBackingStep(playback, step, nextTime, stepSeconds);
-        step = (step + 1) % 32;
+        owner.schedulePlayhead?.(step, nextTime - now);
+        step = (step + 1) % stepCount;
         nextTime += stepSeconds;
       }
     }
