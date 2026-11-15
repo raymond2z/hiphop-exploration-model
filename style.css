@@ -340,23 +340,14 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
   margin: 18px 0 24px;
 }
 .practice-entry-grid .exploration-teaser { margin: 0; }
-.vocabulary-filters, .vocabulary-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: end;
-  gap: 8px 16px;
-  margin-top: 14px;
-}
-.vocabulary-actions { align-items: center; }
-.vocabulary-filters label {
+.vocabulary-search {
   display: grid;
-  flex: 1 1 9rem;
-  gap: 4px;
-  max-width: 13rem;
+  gap: 5px;
+  max-width: 23rem;
+  margin-bottom: 14px;
   font-size: .9rem;
 }
-.vocabulary-filters label:first-child { max-width: 21rem; }
-.vocabulary-filters input, .vocabulary-filters select {
+.vocabulary-search input {
   width: 100%;
   min-height: 44px;
   padding: 5px 9px;
@@ -365,31 +356,19 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
   color: var(--ink);
   background: var(--light);
 }
-.vocabulary-count, .vocabulary-note { margin-top: 9px; color: var(--muted); font-size: .85rem; }
-.vocabulary-days { display: grid; gap: 12px; margin-top: 8px; }
-.vocabulary-day, .vocabulary-modules article {
-  padding: 12px 15px;
-  border: 1px solid var(--edge);
-  border-radius: 8px;
-  background: var(--light);
+.vocabulary-count { color: var(--muted); font-size: .85rem; }
+.vocabulary-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+  gap: 0 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-.vocabulary-steps { display: flex; flex-wrap: wrap; gap: 7px; padding: 0; margin: 8px 0 0; list-style: none; }
-.vocabulary-steps a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 4px 10px;
-  border: 1px solid #adbbac;
-  border-radius: 7px;
-  font-size: .9rem;
-  text-decoration: none;
+.vocabulary-steps li {
+  padding: 8px 2px;
+  border-bottom: 1px solid var(--edge);
 }
-.vocabulary-steps a:hover { background: var(--mint); border-color: var(--forest); }
-.vocabulary-modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: 9px; margin-top: 12px; }
-.vocabulary-modules h3 { margin-bottom: 5px; font-size: 1rem; }
-.vocabulary-modules h3 span { font-size: .84rem; color: var(--muted); font-weight: 600; }
-.vocabulary-modules article p { font-size: .9rem; }
-#workshop-step { margin-top: 0; }
 @media (max-width: 620px) {
   .practice-entry-grid { grid-template-columns: 1fr; }
 }
