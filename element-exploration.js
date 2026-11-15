@@ -207,7 +207,25 @@ const explorationMarkup = `<dialog class="practice explore-dialog" id="explore-d
   <button type="button" class="plain-button" id="explore-listen">只想享受音樂</button>
 </dialog>`;
 
-function setupElementExploration({ controls, audioHome, player, listen }) {
+function setupElementExploration({ controls, audioHome, player, workshopStep, listen }) {
+  const exercises = { ...explorationData };
+  if (workshopStep) {
+    exercises.workshop = {
+      title: workshopStep.name,
+      backingPreset: "drums",
+      base: "先照課堂的跳法做一次。第二次保留同一個 Step，只改提示選的那一項。",
+      question: "這個 Step 還可以怎樣跳？",
+      hints: [
+        "保留動作和速度。第一次照原來的時機跳，第二次把其中一下提早或延後半拍。",
+        "保留節奏。先用平常的幅度，再挑一下做小一點。",
+        "保留動作和順序。一次照原來的方式結束，一次在結尾多留一拍。",
+        "保留步法和時機。跳兩次，第二次挑一下改用輕一點或重一點的力道。"
+      ],
+      compare: "哪一項改變讓你最有感覺？試著用喜歡的版本接回一小段 Freestyle。",
+      note: "記不起原來的跳法時，可以先回想課堂示範，或回詞庫選一個更熟悉的 Step。"
+    };
+  }
+
   document.body.insertAdjacentHTML("beforeend", explorationMarkup);
   const dialog = document.getElementById("explore-dialog");
   const title = document.getElementById("explore-title");
@@ -229,7 +247,7 @@ function setupElementExploration({ controls, audioHome, player, listen }) {
   }
 
   function pickElement(element) {
-    current = explorationData[element];
+    current = exercises[element];
     document.getElementById("explore-element").textContent = current.title;
     document.getElementById("explore-base").textContent = current.base;
     showStep(context, "選擇音樂情境");

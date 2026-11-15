@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#203a30">
 <meta name="description" content="從一個熟悉的動作開始，每次只改一個條件，找出更多 Hip-hop Freestyle 的選擇。">
 <title>一個元素，多種可能｜探索能力發展模型</title>
-<link rel="stylesheet" href="style.css?v=practice-backing">
+<link rel="stylesheet" href="style.css?v=workshop-vocabulary">
 </head>
 <body class="element-page">
 <header>
@@ -27,6 +27,15 @@
   </div>
 </header>
 <main class="wrap">
+  <section id="workshop-step" class="exploration-teaser" aria-labelledby="workshop-step-title" hidden>
+    <p id="workshop-step-day" class="workshop-tag"></p>
+    <h2 id="workshop-step-title"></h2>
+    <p>先照課堂的跳法做一次，再只改一項。</p>
+    <div class="vocabulary-actions">
+      <button type="button" class="cta explore-start" data-element="workshop">一起試</button>
+      <a id="workshop-step-return" href="vocabulary.html">回到動作詞庫</a>
+    </div>
+  </section>
   <section class="workshop-intro" aria-labelledby="workshop-start">
     <div class="heading"><h2 id="workshop-start">怎樣開始</h2></div>
     <p>先照平常的方式做一次。選一個提示，<strong>試兩個版本</strong>。例如保留同一個手勢的起點和終點，一次走直線，一次繞弧線。</p>
@@ -35,6 +44,7 @@
       <a href="#footwork">腳步與重心</a>
       <a href="#expression">上半身與表達</a>
       <a href="#musicality">律動與音樂</a>
+      <a href="vocabulary.html">從動作詞庫選 Step</a>
     </nav>
     <details class="exploration-guide">
       <summary>給引導者的提示</summary>
@@ -118,7 +128,8 @@
 </div>
 <footer class="footer"><div class="wrap">探索能力發展模型 · Hip-hop Freestyle</div></footer>
 <script src="practice-backing.js"></script>
-<script src="element-exploration.js?v=practice-backing"></script>
+<script src="workshop-vocabulary.js"></script>
+<script src="element-exploration.js?v=workshop-vocabulary"></script>
 <script>
 const workshopPlayer = document.getElementById("workshop-player");
 const workshopSong = document.getElementById("workshop-song");
@@ -138,10 +149,21 @@ workshopSong.addEventListener("change", () => {
 workshopPlayer.addEventListener("error", () => {
   workshopAudioStatus.textContent = "瀏覽器無法播放這個檔案，可以換另一個音樂檔。";
 });
+
+const requestedStep = new URLSearchParams(location.search).get("step");
+const workshopStep = workshopVocabulary.find(step => step.name === requestedStep);
+if (workshopStep) {
+  document.getElementById("workshop-step-title").textContent = workshopStep.name;
+  document.getElementById("workshop-step-day").textContent = `Henry Link Workshop · Day ${workshopStep.day}`;
+  document.getElementById("workshop-step-return").href = `vocabulary.html#day-${workshopStep.day}`;
+  document.getElementById("workshop-step").hidden = false;
+}
+
 setupElementExploration({
   controls: document.getElementById("workshop-audio-controls"),
   audioHome: document.getElementById("workshop-audio-home"),
   player: workshopPlayer,
+  workshopStep,
   listen: () => { location.href = "index.html?listen=1#entry"; }
 });
 </script>

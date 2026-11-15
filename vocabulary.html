@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#203a30">
+<meta name="description" content="Henry Link 校內 Workshop 動作詞庫與五個學習模塊。">
+<title>動作詞庫｜Henry Link Workshop</title>
+<link rel="stylesheet" href="style.css?v=workshop-vocabulary">
+</head>
+<body class="element-page vocabulary-page">
+<header>
+  <div class="wrap">
+    <div class="top">
+      <a class="brand" href="index.html"><span class="mark" aria-hidden="true">♪</span>HIP-HOP FREESTYLE</a>
+      <nav aria-label="頁面導覽">
+        <a href="index.html#technical">動作練習</a>
+        <a href="possibilities.html">一個元素，多種可能</a>
+        <a href="#learning-modules">五個學習模塊</a>
+      </nav>
+    </div>
+    <div class="hero">
+      <h1>動作詞庫</h1>
+      <p>找一個在課堂學過的 Step，試一個變化，再把喜歡的版本帶進 Freestyle。</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section aria-labelledby="workshop-vocabulary-title">
+    <div class="heading"><h2 id="workshop-vocabulary-title">Henry Link Workshop</h2></div>
+    <p>依校內 Workshop 的課堂筆記整理。按一個動作名稱，就能用它開始練習。</p>
+    <div class="vocabulary-filters" hidden>
+      <label for="step-search">搜尋動作名稱
+        <input id="step-search" type="search" placeholder="例如 Smurf" autocomplete="off">
+      </label>
+      <label for="step-day">Workshop 日程
+        <select id="step-day">
+          <option value="">全部</option>
+          <option value="1">Day 1</option>
+          <option value="2">Day 2</option>
+          <option value="3">Day 3</option>
+        </select>
+      </label>
+    </div>
+    <p id="step-count" class="vocabulary-count" role="status"></p>
+    <div class="vocabulary-days">
+      <div id="day-1" class="vocabulary-day" role="group" aria-labelledby="day-1-title" hidden>
+        <h3 id="day-1-title">Day 1</h3>
+        <ul class="vocabulary-steps"></ul>
+      </div>
+      <div id="day-2" class="vocabulary-day" role="group" aria-labelledby="day-2-title" hidden>
+        <h3 id="day-2-title">Day 2</h3>
+        <ul class="vocabulary-steps"></ul>
+        <p class="vocabulary-note">課堂筆記裡，Day 2 更新版寫 Bernnie，前一版寫 Bennie。</p>
+      </div>
+      <div id="day-3" class="vocabulary-day" role="group" aria-labelledby="day-3-title" hidden>
+        <h3 id="day-3-title">Day 3</h3>
+        <ul class="vocabulary-steps"></ul>
+      </div>
+    </div>
+    <noscript><p>啟用 JavaScript 即可瀏覽與搜尋動作名稱。</p></noscript>
+  </section>
+
+  <section id="learning-modules" aria-labelledby="learning-modules-title">
+    <div class="heading"><h2 id="learning-modules-title">Link 的五個學習模塊</h2></div>
+    <p>用這五個角度，回看同一個熟悉的 Step。以下問題用於本站的練習。</p>
+    <div class="vocabulary-modules">
+      <article>
+        <h3>Musicality <span>音樂性</span></h3>
+        <p>跳同一個 Step 時，我想回應哪一層聲音？什麼時候想換焦點？</p>
+      </article>
+      <article>
+        <h3>Sound <span>聲音</span></h3>
+        <p>我聽到的聲音是短促、綿長，還是有重量？我會怎樣用身體回應？</p>
+      </article>
+      <article>
+        <h3>Rhythm <span>節奏</span></h3>
+        <p>保留同一個 Step，改一次落點或停頓，整個節奏會怎樣變？</p>
+      </article>
+      <article>
+        <h3>Balance <span>平衡</span></h3>
+        <p>重量在哪一隻腳上？做完這一下，我能順利接下一步嗎？</p>
+      </article>
+      <article>
+        <h3>Foundations <span>基礎</span></h3>
+        <p>先回想課堂示範。試出自己的版本後，我還能回到原來的跳法嗎？</p>
+      </article>
+    </div>
+    <p class="vocabulary-note">課堂筆記的拼法為 musically、sound、rythium、balance、foundations。</p>
+  </section>
+</main>
+
+<footer class="wrap footer">探索能力發展模型 · Hip-hop Freestyle</footer>
+<script src="workshop-vocabulary.js"></script>
+<script>
+const search = document.getElementById("step-search");
+const dayFilter = document.getElementById("step-day");
+const count = document.getElementById("step-count");
+const days = [1, 2, 3].map(day => document.getElementById("day-" + day));
+const normalizeStep = value => value.toLowerCase().replace(/[\s-]+/g, "");
+
+const entries = workshopVocabulary.map(step => {
+  const item = document.createElement("li");
+  const link = document.createElement("a");
+  link.lang = "en";
+  link.textContent = step.name;
+  link.href = "possibilities.html?" + new URLSearchParams({ step: step.name }) + "#workshop-step";
+  item.append(link);
+  days[step.day - 1].querySelector("ul").append(item);
+  const terms = [step.name, step.alternate ?? ""].map(normalizeStep);
+  return { day: step.day, item, terms };
+});
+
+function filterSteps() {
+  const term = normalizeStep(search.value);
+  const matchingDays = new Set();
+  let visibleCount = 0;
+  for (const { day, item, terms } of entries) {
+    const matches = (!dayFilter.value || day === Number(dayFilter.value)) && terms.some(name => name.includes(term));
+    item.hidden = !matches;
+    if (matches) {
+      visibleCount++;
+      matchingDays.add(day);
+    }
+  }
+  for (const [index, group] of days.entries()) group.hidden = !matchingDays.has(index + 1);
+  count.textContent = visibleCount ? `${visibleCount} 個動作` : "找不到符合的動作。試試縮短關鍵字或改選其他日子。";
+}
+
+search.addEventListener("input", filterSteps);
+dayFilter.addEventListener("change", filterSteps);
+document.querySelector(".vocabulary-filters").hidden = false;
+filterSteps();
+</script>
+</body>
+</html>
