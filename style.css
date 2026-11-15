@@ -270,8 +270,9 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
   border: 0;
 }
 .decision-fields legend, .decision-details summary { font-weight: 750; }
-.decision-fields label { display: grid; gap: 4px; font-size: .9rem; }
-.decision-fields select {
+.decision-fields label, .decision-source { display: grid; gap: 4px; font-size: .9rem; }
+.decision-source { width: max-content; max-width: 100%; margin-top: 12px; }
+.decision-fields select, .decision-source select, .backing-preset select {
   width: 100%;
   min-height: 44px;
   padding: 4px 8px;
@@ -284,6 +285,49 @@ main > section + section { margin-top: clamp(30px, 5vw, 54px); }
 .decision-battle { margin-top: 10px; padding: 10px 14px; border: 1px solid var(--edge); border-radius: 8px; }
 .decision-links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 10px; font-size: .9rem; }
 .decision-links a { padding-block: 4px; }
+.decision-source-note { font-size: .85rem; color: var(--muted); margin-top: 6px; }
 @media (max-width: 620px) {
   .decision-grid, .decision-fields { grid-template-columns: 1fr; gap: 8px; }
 }
+
+.backing-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding: 10px 12px;
+  margin: 9px 0;
+  background: var(--paper);
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  font-size: .85rem;
+}
+.backing-play {
+  min-height: 44px;
+  padding: 4px 13px;
+  border: 1px solid var(--forest);
+  border-radius: 7px;
+  background: var(--forest);
+  color: var(--light);
+  white-space: nowrap;
+  font-weight: 750;
+}
+.backing-play.is-playing { background: var(--mint); color: var(--ink); }
+.backing-preset, .backing-tempo { display: flex; align-items: center; flex-wrap: wrap; gap: 5px 8px; }
+.backing-preset select { width: auto; max-width: 100%; }
+.backing-tempo input { accent-color: var(--forest); width: min(8rem, 100%); }
+.backing-tempo b { font-variant-numeric: tabular-nums; }
+.backing-layers { display: flex; flex-wrap: wrap; gap: 5px 12px; }
+.backing-layers label {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 8px;
+  border-radius: 6px;
+  border: 1px solid var(--edge);
+  background: var(--light);
+  cursor: pointer;
+}
+.backing-layers input { accent-color: var(--forest); margin: 0; }
+.backing-controls .backing-error { width: 100%; color: var(--rust); font-size: .85rem; }

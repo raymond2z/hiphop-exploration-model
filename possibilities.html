@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#203a30">
 <meta name="description" content="從一個熟悉的動作開始，每次只改一個條件，找出更多 Hip-hop Freestyle 的選擇。">
 <title>一個元素，多種可能｜探索能力發展模型</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=practice-backing">
 </head>
 <body class="element-page">
 <header>
@@ -101,7 +101,7 @@
         <button type="button" class="cta explore-start" data-element="pause" aria-label="一起試：在同一個動作裡停一下">一起試</button>
       </article>
       <article class="explore-card" id="element-sound">
-        <h3>同一個動作，換聲音回應</h3><p class="workshop-tag">音樂選擇</p><p>保留一個熟悉的 Groove 和同一段歌。無歌可用輕拍和哼唱做兩種聲音。</p>
+        <h3>同一個動作，換聲音回應</h3><p class="workshop-tag">音樂選擇</p><p>保留一個熟悉的 Groove 和同一段聲音。可以試站內伴奏的鼓點和低音。</p>
         <button type="button" class="cta explore-start" data-element="sound" aria-label="一起試：同一個動作，換聲音回應">一起試</button>
       </article>
     </div>
@@ -112,12 +112,13 @@
 <div id="workshop-audio-home" hidden>
   <div id="workshop-audio-controls" class="music-controls">
     <input id="workshop-song" class="file-picker" type="file" accept="audio/*" aria-label="選擇本機音樂檔">
-    <audio id="workshop-player" controls hidden aria-label="音樂播放器"></audio>
+    <audio id="workshop-player" data-practice-audio controls hidden aria-label="音樂播放器"></audio>
     <p id="workshop-audio-status" role="status"></p>
   </div>
 </div>
 <footer class="footer"><div class="wrap">探索能力發展模型 · Hip-hop Freestyle</div></footer>
-<script src="element-exploration.js"></script>
+<script src="practice-backing.js"></script>
+<script src="element-exploration.js?v=practice-backing"></script>
 <script>
 const workshopPlayer = document.getElementById("workshop-player");
 const workshopSong = document.getElementById("workshop-song");

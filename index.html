@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#203a30">
 <meta name="description" content="從孩子的 Freestyle 表現出發，理解可能原因、選擇引導方法，再一起探索。">
 <title>探索能力發展模型｜Hip-hop Freestyle</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=practice-backing">
 </head>
 <body id="top">
 <header>
@@ -23,7 +23,7 @@
   <nav class="home-entries" aria-label="選擇今天的入口">
     <a class="home-entry" href="#scenarios"><strong>我觀察到一個情況</strong><span>從正在發生的情境找引導方法。</span></a>
     <a class="home-entry" href="possibilities.html"><strong>我想挑個練習</strong><span>用一個熟悉的元素，試出不同做法。</span></a>
-    <a class="home-entry home-entry-music" href="#entry" data-choose="music"><strong>只想享受音樂</strong><span>播首喜歡的歌，按自己的方式聽。</span></a>
+    <a class="home-entry home-entry-music" href="#entry" data-choose="music"><strong>只想享受音樂</strong><span>播一段伴奏或喜歡的歌，按自己的方式聽。</span></a>
   </nav>
 </div>
 </header>
@@ -42,15 +42,16 @@
 <section id="entry" aria-labelledby="entry-title">
   <div class="heading"><h2 id="entry-title">陪孩子選擇</h2><p>今天想聽歌、試一個變化，還是和別人交流？</p></div>
   <div class="choices" role="group" aria-label="參與方式">
-    <button type="button" class="choice" data-route="music" aria-pressed="false" aria-controls="music-panel"><span class="arrow" aria-hidden="true">♪</span><b>只想享受音樂</b><small>播一首喜歡的歌，按自己的方式聽。</small></button>
+    <button type="button" class="choice" data-route="music" aria-pressed="false" aria-controls="music-panel"><span class="arrow" aria-hidden="true">♪</span><b>只想享受音樂</b><small>播一段伴奏或喜歡的歌。</small></button>
     <button type="button" class="choice" data-route="explore" aria-pressed="false" aria-controls="explore-panel"><span class="arrow" aria-hidden="true">↗</span><b>想試一個變化</b><small>選一個聲音或動作，試試兩種做法。</small></button>
     <button type="button" class="choice" data-route="share" aria-pressed="false" aria-controls="share-panel"><span class="arrow" aria-hidden="true">↔</span><b>想和別人交流</b><small>可以旁觀，也可以用動作回應。</small></button>
   </div>
   <noscript><p class="path">啟用 JavaScript 即可切換參與方式與案例。你也可以直接用喜歡的播放器聽歌，或閱讀下方的能力模型。</p></noscript>
   <div class="path" id="music-panel" hidden>
-    <div class="path-head"><h3>這段時間，你可以只聽歌。</h3></div>
+    <div class="path-head"><h3>這段時間，你可以只聽音樂。</h3></div>
     <p>坐著聽、點頭、隨意動一動都可以。不用找拍子、練動作、分享感受或留下紀錄。聽到想停的時候就停。</p>
-    <div class="music-actions" id="music-home"><div id="music-controls" class="music-controls"><input class="file-picker" type="file" accept="audio/*" id="song" aria-label="選擇本機音樂檔"><audio id="player" controls hidden aria-label="音樂播放器"></audio></div></div>
+    <div id="listen-backing" data-preset="drums"></div>
+    <div class="music-actions" id="music-home"><div id="music-controls" class="music-controls"><input class="file-picker" type="file" accept="audio/*" id="song" aria-label="選擇本機音樂檔"><audio id="player" data-practice-audio controls hidden aria-label="音樂播放器"></audio></div></div>
     <p class="music-tip" id="music-status" role="status">可選本機音樂檔播放，檔案留在裝置上。也可以照常用自己喜歡的播放器。</p>
   </div>
   <div class="path" id="explore-panel" hidden>
@@ -218,29 +219,41 @@
   </div>
 
   <div class="decision-practice">
-    <h3>一起試｜同一段歌，兩種選擇</h3>
-    <p>用自己的播放器重播同一小段歌，兩輪都保留同一個熟悉的 Groove。第一輪保持原來的焦點，第二輪試在一個聽得見的時刻換焦點。</p>
+    <h3>一起試｜同一段聲音，兩種選擇</h3>
+    <p>兩輪都用同一段聲音和同一個 Groove。第一輪選一層聲音，第二輪試著換焦點。</p>
+    <label class="decision-source">聲音來源
+      <select id="decision-source">
+        <option value="backing">站內伴奏｜鼓＋低音</option>
+        <option value="own">用自己的音樂</option>
+      </select>
+    </label>
+    <div id="decision-backing-panel">
+      <div id="decision-backing" data-preset="layers" data-fixed></div>
+      <p class="decision-source-note">低音在第 5 拍進來。可以先單獨聽鼓聲和低音，做兩輪時把兩層都打開。</p>
+    </div>
+    <p id="decision-own-note" class="decision-source-note" hidden>用自己的播放器重播同一小段歌，再選裡面聽得到的聲音。</p>
     <fieldset class="decision-fields">
       <legend>選這一輪想試的做法</legend>
       <label for="decision-first">先聽哪一個聲音
         <select id="decision-first">
-          <option value="drum">鼓點</option><option value="bass">低音</option><option value="melody">旋律</option><option value="voice">人聲</option>
+          <option value="drum">鼓點</option><option value="bass">低音</option><option value="melody" data-own-track>旋律</option><option value="voice" data-own-track>人聲</option>
         </select>
       </label>
       <label for="decision-next">再換到哪一個聲音
         <select id="decision-next">
-          <option value="bass">低音</option><option value="melody">旋律</option><option value="voice">人聲</option><option value="drum">鼓點</option>
+          <option value="bass">低音</option><option value="melody" data-own-track>旋律</option><option value="voice" data-own-track>人聲</option><option value="drum">鼓點</option>
         </select>
       </label>
       <label for="decision-when">想在哪個時刻換
         <select id="decision-when">
-          <option>一句音樂結束時</option><option>另一個聲音進來時</option><option>原本跟著的聲音停下時</option><option>你自己選的一拍</option>
+          <option data-backing="bass">第 5 拍低音進來時</option><option data-backing="any">下一輪第 1 拍</option>
+          <option data-own-track>一句音樂結束時</option><option data-own-track>另一個聲音進來時</option><option data-own-track>原本跟著的聲音停下時</option><option>你自己選的一拍</option>
         </select>
       </label>
     </fieldset>
     <ol id="decision-rounds" aria-live="polite">
       <li id="decision-a">第一輪只用這個 Groove 回應鼓點。</li>
-      <li id="decision-b">第二輪先回應鼓點，在一句音樂結束時改聽低音。腳步可以保持不變。</li>
+      <li id="decision-b">第二輪先回應鼓點，在第 5 拍低音進來時改聽低音。腳步可以保持不變。</li>
     </ol>
     <details class="decision-details">
       <summary>試完可以比較什麼？</summary>
@@ -258,6 +271,14 @@
     <a href="possibilities.html#element-sound">練習卡｜同一個動作，換聲音回應</a>
     <a href="#example" data-case="cypher">看 Cypher 案例</a>
   </div>
+  <details class="decision-details decision-battle">
+    <summary>自己編一段節奏</summary>
+    <div class="decision-links">
+      <a href="https://learningmusic.ableton.com/the-playground">Ableton Learning Music｜疊加鼓、低音和旋律</a>
+      <a href="https://apps.musedlab.org/groovepizza/">Groove Pizza｜把鼓點移個位置</a>
+      <a href="https://musiclab.chromeexperiments.com/Song-Maker/">Chrome Music Lab｜做一段旋律</a>
+    </div>
+  </details>
 </section>
 
 <section id="methods" aria-labelledby="methods-title">
@@ -418,6 +439,7 @@
 
 <footer class="wrap footer">探索能力發展模型 · Hip-hop Freestyle 學習框架</footer>
 
+<script src="practice-backing.js"></script>
 <script>
 const cases = {
   texture: [
@@ -503,9 +525,11 @@ const routes = [...document.querySelectorAll("[data-route]")];
 const player = document.querySelector("#player");
 const song = document.querySelector("#song");
 const musicStatus = document.querySelector("#music-status");
+setupPracticeBacking(document.getElementById("listen-backing"));
 let audioUrl;
 
 function chooseRoute(name) {
+  stopPracticeBacking();
   for (const button of routes) {
     const selected = button.dataset.route === name;
     button.setAttribute("aria-pressed", String(selected));
@@ -517,13 +541,30 @@ function chooseRoute(name) {
 const firstSound = document.getElementById("decision-first");
 const nextSound = document.getElementById("decision-next");
 const switchMoment = document.getElementById("decision-when");
+const decisionSource = document.getElementById("decision-source");
+const decisionBackingPanel = document.getElementById("decision-backing-panel");
+const decisionOwnNote = document.getElementById("decision-own-note");
+const decisionBacking = setupPracticeBacking(document.getElementById("decision-backing"));
+
+function showDecisionOptions(field, available) {
+  for (const option of field.options) {
+    option.hidden = option.disabled = !available(option);
+  }
+  if (field.selectedOptions[0]?.disabled ?? true) {
+    field.value = [...field.options].find(option => !option.disabled).value;
+  }
+}
+
 function updateDecisionPractice() {
-  for (const option of nextSound.options) {
-    option.disabled = option.value === firstSound.value;
-  }
-  if (nextSound.value === firstSound.value) {
-    nextSound.value = [...nextSound.options].find(option => !option.disabled).value;
-  }
+  const useBacking = decisionSource.value === "backing";
+  const soundAvailable = option => !useBacking || !option.hasAttribute("data-own-track");
+  showDecisionOptions(firstSound, soundAvailable);
+  showDecisionOptions(nextSound, option => soundAvailable(option) && option.value !== firstSound.value);
+  showDecisionOptions(switchMoment, option => {
+    const cue = option.dataset.backing;
+    if (cue) return useBacking && (cue === "any" || cue === nextSound.value);
+    return soundAvailable(option);
+  });
 
   const first = firstSound.selectedOptions[0].text;
   const next = nextSound.selectedOptions[0].text;
@@ -531,10 +572,21 @@ function updateDecisionPractice() {
   document.getElementById("decision-b").textContent =
     `第二輪先回應${first}，在${switchMoment.value}改聽${next}。腳步可以保持不變。`;
 }
+
+function updateDecisionSource() {
+  const useBacking = decisionSource.value === "backing";
+  decisionBackingPanel.hidden = !useBacking;
+  decisionOwnNote.hidden = useBacking;
+  if (!useBacking) decisionBacking.stop();
+  switchMoment.selectedIndex = useBacking ? 0 : 2;
+  updateDecisionPractice();
+}
+
 for (const field of [firstSound, nextSound, switchMoment]) {
   field.addEventListener("change", updateDecisionPractice);
 }
-updateDecisionPractice();
+decisionSource.addEventListener("change", updateDecisionSource);
+updateDecisionSource();
 
 for (const button of routes) button.addEventListener("click", () => chooseRoute(button.dataset.route));
 for (const link of document.querySelectorAll("[data-choose]")) {
@@ -589,6 +641,7 @@ openPractice.addEventListener("click", () => {
   const practiceArticle = document.getElementById("practice-" + caseSelect.value);
   if (!practiceArticle) return;
 
+  stopPracticeBacking();
   for (const article of practiceArticles) article.hidden = article !== practiceArticle;
   const title = practiceArticle.querySelector("h2");
   practice.setAttribute("aria-labelledby", title.id);
@@ -666,7 +719,7 @@ document.querySelectorAll(".resource-return").forEach(link => {
 window.addEventListener("hashchange", () => revealResource(location.hash.slice(1)));
 revealResource(location.hash.slice(1));
 </script>
-<script src="element-exploration.js"></script>
+<script src="element-exploration.js?v=practice-backing"></script>
 <script>
 setupElementExploration({
   controls: musicControls,

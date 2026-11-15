@@ -50,6 +50,7 @@ const explorationData = {
   },
   "hands": {
     "title": "手部流動",
+    "backingPreset": "layers",
     "base": "選一個熟悉的手勢，固定手的起點、終點和簡單腳步。",
     "question": "同一個起點和終點，中間可以怎麼走？",
     "hints": [
@@ -99,6 +100,7 @@ const explorationData = {
   },
   "head": {
     "title": "用頭部回應節奏",
+    "backingPreset": "drums",
     "base": "選一段短節奏和一個舒服的小點頭。有歌可聽鼓點，無歌可自己輕拍。",
     "question": "同一段節奏，可以回應哪一下？",
     "hints": [
@@ -111,6 +113,7 @@ const explorationData = {
   },
   "bounce": {
     "title": "同一個 Bounce",
+    "backingPreset": "drums",
     "base": "先做自己舒服的 Bounce。每輪保留基本拍子和腳位。",
     "question": "這個 Bounce 可以有幾種感覺？",
     "hints": [
@@ -135,10 +138,11 @@ const explorationData = {
   },
   "sound": {
     "title": "同一個動作，換聲音回應",
-    "base": "保留一個熟悉的 Groove 和同一段歌。無歌可用輕拍和哼唱做兩種聲音。",
+    "backingPreset": "layers",
+    "base": "保留一個熟悉的 Groove 和同一段聲音。可以用鼓和低音，也可以自己輕拍和哼唱。",
     "question": "換一個聆聽對象，身體會做出什麼選擇？",
     "hints": [
-      "保留腳步和同一段聲音。先回應鼓聲或輕拍，再試回應旋律或哼唱。",
+      "保留腳步和同一段聲音。先回應鼓聲或輕拍，再試回應低音、旋律或哼唱。",
       "用同一個 Groove 回應同一種聲音。試在聲音來時做，再試聽過才做。",
       "保留回應的聲音。試每次都回應，再試只挑一句裡最想回應的一下。"
     ],
@@ -187,13 +191,14 @@ const explorationMarkup = `<dialog class="practice explore-dialog" id="explore-d
       <button type="button" id="explore-own" class="plain-button">自己想一種</button>
     </div>
     <p id="explore-note" class="explore-note"></p>
+    <div id="explore-backing" data-preset="pulse" hidden></div>
     <details id="explore-compare">
       <summary>比較剛才的兩個版本</summary>
       <p id="explore-compare-question"></p>
       <p>想的話，把喜歡的一種放回一小段 Freestyle，或換個情境再試。也可以到這裡就好。</p>
     </details>
     <details id="explore-audio" hidden>
-      <summary>選擇本機音樂</summary>
+      <summary>用自己的音樂</summary>
       <div id="explore-music"></div>
     </details>
     <button type="button" class="explore-back" data-explore-back="context">返回選音樂情境</button>
@@ -208,6 +213,8 @@ function setupElementExploration({ controls, audioHome, player, listen }) {
   const title = document.getElementById("explore-title");
   const hint = document.getElementById("explore-hint");
   const audio = document.getElementById("explore-audio");
+  const backingPanel = document.getElementById("explore-backing");
+  const backing = setupPracticeBacking(backingPanel);
   const compare = document.getElementById("explore-compare");
   const picker = document.getElementById("explore-pick");
   const context = document.getElementById("explore-context-step");
@@ -242,12 +249,18 @@ function setupElementExploration({ controls, audioHome, player, listen }) {
     compare.open = false;
     audio.hidden = !withMusic;
     audio.open = withMusic && Boolean(player.getAttribute("src"));
-    if (withMusic) document.getElementById("explore-music").append(controls);
+    backingPanel.hidden = !withMusic;
+    if (withMusic) {
+      backing.setPreset(current.backingPreset ?? "pulse");
+      document.getElementById("explore-music").append(controls);
+    }
     showStep(round, current.title);
   }
 
   for (const button of document.querySelectorAll(".explore-start")) {
     button.addEventListener("click", () => {
+      stopPracticeBacking();
+      player.pause();
       if (button.dataset.element) {
         pickElement(button.dataset.element);
       } else {
@@ -267,6 +280,7 @@ function setupElementExploration({ controls, audioHome, player, listen }) {
     showStep(picker, "你想探索哪一個元素？");
   });
   dialog.querySelector('[data-explore-back="context"]').addEventListener("click", () => {
+    backing.stop();
     player.pause();
     audioHome.append(controls);
     showStep(context, "選擇音樂情境");
@@ -282,6 +296,7 @@ function setupElementExploration({ controls, audioHome, player, listen }) {
     dialog.close("listen");
   });
   dialog.addEventListener("close", () => {
+    backing.stop();
     const listening = dialog.returnValue === "listen";
     dialog.returnValue = "";
     audioHome.append(controls);
